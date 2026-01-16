@@ -1,0 +1,28 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: "img"
+public_folder: "/img"
+
+collections:
+  - name: "products"
+    label: "Ürünler"
+    folder: "data"
+    create: true
+    format: "json"
+    fields:
+      - { label: "Ürün Adı", name: "name", widget: "string" }
+      - { label: "Açıklama", name: "description", widget: "text" }
+      - label: "Kategori"
+        name: "category"
+        widget: "select"
+        options:
+          - "Metal Çakmak"
+          - "Plastik Çakmak"
+          - "Promosyon Çakmak"
+          - "Diğer Modeller"
+      - { label: "Ürün Görseli", name: "image", widget: "image" }
+      - { label: "Popüler", name: "popular", widget: "boolean", default: false }
