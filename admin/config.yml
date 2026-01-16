@@ -10,7 +10,6 @@ collections:
     label: "Ürünler"
     folder: "data"
     create: true
-    slug: "products"
     format: "json"
     fields:
       - { label: "Ürün Adı", name: "name", widget: "string" }
