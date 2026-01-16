@@ -2,12 +2,35 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Ürünler</title>
+  <title>Ürün Kataloğu</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <div id="product-list" class="product-grid"></div>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html">
+        <img src="img/logo.jpg" alt="Logo" class="logo">
+      </a>
+
+      <input type="text" id="search" placeholder="Ürün ara...">
+    </div>
+
+    <a href="#contact" class="contact-btn">İletişim</a>
+  </header>
+
+  <!-- POPÜLER MODELLER -->
+  <section class="popular">
+    <h2>Popüler Modellerimiz</h2>
+    <div class="product-grid" id="popular-products"></div>
+  </section>
+
+  <!-- KATEGORİLER -->
+  <section class="categories">
+    <h2>Kategoriler</h2>
+    <div class="category-grid" id="category-list"></div>
+  </section>
 
   <script src="js/product.js"></script>
 </body>

@@ -1,20 +1,18 @@
 [
-{
+  {
     "id": 1,
-    "name":" Metal Cakmak",
-    "description": "uzun ömürlü gövde ",
-    "image":"img/cakmak.jpg",
-    "category":"premium"
-},
-
-    {
+    "name": "Metal Çakmak",
+    "description": "Uzun ömürlü gövde",
+    "image": "img/cakmak.jpg",
+    "category": "Premium",
+    "popular": true
+  },
+  {
     "id": 2,
     "name": "Plastik Çakmak",
     "description": "Hafif ve ekonomik",
-    "image": "img/metalcakmak.jpg",
-    "category": "Ekonomik"
+    "image": "img/cakmak.jpg",
+    "category": "Ekonomik",
+    "popular": true
   }
-
-
-
 ]

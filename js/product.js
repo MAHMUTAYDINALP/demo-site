@@ -1,20 +1,27 @@
-fetch("data/product.json")
+fetch("data/products.json")
   .then(res => res.json())
   .then(data => {
-    const container = document.getElementById("product-list");
+    const popularContainer = document.getElementById("popular-products");
+    const categoryContainer = document.getElementById("category-list");
 
-    data.forEach(product => {
-      const card = document.createElement("div");
-      card.className = "product-card";
-
-      card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <span>${product.category}</span>
+    // POPÜLER ÜRÜNLER
+    data.filter(p => p.popular).forEach(product => {
+      popularContainer.innerHTML += `
+        <div class="product-card">
+          <img src="${product.image}">
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+        </div>
       `;
-
-      container.appendChild(card);
     });
-  })
-  .catch(err => console.error("JSON okunamadı", err));
+
+    // KATEGORİLER (tekrar etmeyecek)
+    const categories = [...new Set(data.map(p => p.category))];
+    categories.forEach(cat => {
+      categoryContainer.innerHTML += `
+        <div class="category-card">
+          <h4>${cat}</h4>
+        </div>
+      `;
+    });
+  });
