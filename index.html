@@ -1,13 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <title>Admin</title>
-
-
+  <meta charset="UTF-8">
+  <title>Ürün Kataloğu</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- SADECE BUNLAR -->
-  <script src="https://unpkg.com/netlify-cms@latest/dist/netlify-cms.js"></script>  
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html">
+        <img src="img/logo.jpg" alt="Logo" class="logo">
+      </a>
+
+      <input type="text" id="search" placeholder="Ürün ara...">
+    </div>
+
+    <a href="#contact" class="contact-btn">İletişim</a>
+  </header>
+
+  <!-- POPÜLER MODELLER -->
+  <section class="popular">
+    <h2>Popüler Modellerimiz</h2>
+    <div class="product-grid" id="popular-products"></div>
+  </section>
+
+  <!-- KATEGORİLER -->
+  <section class="categories">
+    <h2>Kategoriler</h2>
+    <div class="category-grid" id="category-list"></div>
+  </section>
+
+  <script src="js/product.js"></script>
+  <!-- SADECE ANA SAYFADA -->
+<script src="js/products.js"></script>
+<script src="js/index.js"></script>
+
+
 </body>
 </html>
