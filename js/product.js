@@ -1,27 +1,28 @@
-fetch("data/products.json")
+if (!document.getElementById("product-list")) return;
+
+fetch("data/products-index.json")
   .then(res => res.json())
-  .then(data => {
-    const popularContainer = document.getElementById("popular-products");
-    const categoryContainer = document.getElementById("category-list");
+  .then(files => {
+    return Promise.all(
+      files.map(file =>
+        fetch(`data/${file}`).then(res => res.json())
+      )
+    );
+  })
+  .then(products => {
+    const container = document.getElementById("product-list");
 
-    // POPÜLER ÜRÜNLER
-    data.filter(p => p.popular).forEach(product => {
-      popularContainer.innerHTML += `
-        <div class="product-card">
-          <img src="${product.image}">
-          <h3>${product.name}</h3>
-          <p>${product.description}</p>
-        </div>
-      `;
-    });
+    products.forEach(product => {
+      const card = document.createElement("div");
+      card.className = "product-card";
 
-    // KATEGORİLER (tekrar etmeyecek)
-    const categories = [...new Set(data.map(p => p.category))];
-    categories.forEach(cat => {
-      categoryContainer.innerHTML += `
-        <div class="category-card">
-          <h4>${cat}</h4>
-        </div>
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <span>${product.category}</span>
       `;
+
+      container.appendChild(card);
     });
   });
