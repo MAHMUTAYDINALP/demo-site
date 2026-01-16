@@ -3,7 +3,7 @@
     "id": 1,
     "name":" Metal Cakmak",
     "description": "uzun ömürlü gövde ",
-    "image":"img/cakmak1.jpg",
+    "image":"img/cakmak.jpg",
     "category":"premium"
 },
 
@@ -11,7 +11,7 @@
     "id": 2,
     "name": "Plastik Çakmak",
     "description": "Hafif ve ekonomik",
-    "image": "img/cakmak2.jpg",
+    "image": "img/cakmak.jpg",
     "category": "Ekonomik"
   }
 
