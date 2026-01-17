@@ -6,6 +6,13 @@
       "description": "deneme",
       "category": "Metal Çakmak",
       "image": "https://trendmiya.com/cdn/shop/files/ejderha_cakmak.jpg?v=1734940774&width=1200"
+    },
+    {
+      "popular": true,
+      "name": "elektirikli çakmak",
+      "description": "deneme2",
+      "category": "Diğer Modeller",
+      "image": "/img/Screenshot 2026-01-17 150240.png"
     }
   ]
 }
