@@ -2,21 +2,20 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("data/product.json")
         .then(res => res.json())
         .then(data => {
-            console.log("Gelen veri:", data); // Veriyi kontrol etmek için
-
-            // Admin paneli veriyi "products" anahtarı altına koyar
-            const productList = data.products || []; 
+            // Admin panelinden gelen liste "products" içindedir
+            const products = data.products || []; 
             const popularContainer = document.getElementById("popular-products");
 
             if (!popularContainer) return;
-            popularContainer.innerHTML = ""; // İçini temizle
+            popularContainer.innerHTML = ""; 
 
-            productList.forEach(product => {
+            products.forEach(product => {
+                // Sadece "Popüler" işaretlenenleri ana sayfaya bas
                 if (product.popular) {
                     const card = document.createElement("div");
                     card.className = "product-card";
                     card.innerHTML = `
-                        <img src="${product.image}" alt="${product.name}">
+                        <img src="${product.image}" alt="${product.name}" style="width:100%; aspect-ratio:1080/1350; object-fit:cover;">
                         <h3>${product.name}</h3>
                         <p>${product.description}</p>
                         <span class="cat-tag">${product.category}</span>
@@ -25,8 +24,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         })
-        .catch(err => {
-            console.error("Veri yüklenirken hata oluştu:", err);
-            document.getElementById("popular-products").innerHTML = "Henüz ürün eklenmemiş.";
-        });
+        .catch(err => console.error("Ürünler yüklenirken hata:", err));
 });
