@@ -27,6 +27,13 @@
       "description": "yeni hesap deneme",
       "category": "Metal Çakmak",
       "image": "/img/metalcakmak.jpg"
+    },
+    {
+      "popular": true,
+      "name": "çakmak",
+      "description": "deneme 5",
+      "category": "Promosyon Çakmak",
+      "image": "/img/metalcakmak.jpg"
     }
   ]
 }
