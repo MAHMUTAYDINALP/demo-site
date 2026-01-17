@@ -13,6 +13,13 @@
       "description": "deneme2",
       "category": "Diğer Modeller",
       "image": "/img/Screenshot 2026-01-17 150240.png"
+    },
+    {
+      "popular": true,
+      "name": "Çakmak promosyon",
+      "description": "Farklı cihaz ekleme",
+      "category": "Promosyon Çakmak",
+      "image": "/img/cakmak.jpg"
     }
   ]
 }
