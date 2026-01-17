@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <title>Ürün Kataloğu</title>
   <link rel="stylesheet" href="css/style.css">
+  <script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </head>
 <body>
 
@@ -33,17 +44,7 @@
   </section>
 
   <script src="js/product.js"></script>
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
+
 
 
 </body>
