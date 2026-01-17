@@ -20,6 +20,13 @@
       "description": "Farklı cihaz ekleme",
       "category": "Promosyon Çakmak",
       "image": "/img/cakmak.jpg"
+    },
+    {
+      "popular": true,
+      "name": "çakmak",
+      "description": "yeni hesap deneme",
+      "category": "Metal Çakmak",
+      "image": "/img/metalcakmak.jpg"
     }
   ]
 }
