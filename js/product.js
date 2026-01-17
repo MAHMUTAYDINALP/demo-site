@@ -1,28 +1,26 @@
-if (!document.getElementById("product-list")) return;
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("data/product.json")
+        .then(res => res.json())
+        .then(data => {
+            const products = data.products; // JSON içindeki liste
+            const popularContainer = document.getElementById("popular-products");
+            const categoryContainer = document.getElementById("category-list");
 
-fetch("data/products-index.json")
-  .then(res => res.json())
-  .then(files => {
-    return Promise.all(
-      files.map(file =>
-        fetch(`data/${file}`).then(res => res.json())
-      )
-    );
-  })
-  .then(products => {
-    const container = document.getElementById("product-list");
+            products.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <span class="cat-tag">${product.category}</span>
+                `;
 
-    products.forEach(product => {
-      const card = document.createElement("div");
-      card.className = "product-card";
-
-      card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <span>${product.category}</span>
-      `;
-
-      container.appendChild(card);
-    });
-  });
+                // Popüler modeller kısmına ekle
+                if (product.popular && popularContainer) {
+                    popularContainer.appendChild(card.cloneNode(true));
+                }
+            });
+        })
+        .catch(err => console.error("Veri yüklenirken hata oluştu:", err));
+});
