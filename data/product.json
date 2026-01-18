@@ -27,6 +27,12 @@
       "description": "deneme popüler olmayan",
       "category": "Promosyon Çakmak",
       "image_file": "/img/cat-promosyon.jpg"
+    },
+    {
+      "is_popular": true,
+      "product_name": "çakmak5",
+      "description": "deneme5 ",
+      "category": "Metal Çakmak"
     }
   ]
 }
