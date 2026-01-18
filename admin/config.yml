@@ -25,4 +25,7 @@ collections:
                 widget: "select"
                 options: ["Plastik Çakmak", "Promosyon Çakmak", "Metal Çakmak", "Diğer Modeller"]
               - { label: "Ürün Görseli", name: "image", widget: "image" }
+              # config.yml içinde fields altına ekleyin
+              - { label: "Ürün Görseli (Dosya)", name: "image", widget: "image", required: false }
+              - { label: "Ürün Görseli (URL)", name: "image_url", widget: "string", required: false }
               - { label: "Popüler mi?", name: "popular", widget: "boolean", default: false }

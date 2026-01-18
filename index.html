@@ -4,48 +4,94 @@
   <meta charset="UTF-8">
   <title>Ürün Kataloğu</title>
   <link rel="stylesheet" href="css/style.css">
-  <script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
+<div id="contact-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Bizimle İletişime Geçin</h2>
+    <div class="contact-info">
+      <p><strong>Telefon:</strong> +90 (XXX) XXX XX XX</p>
+      <p><strong>E-posta:</strong> bilgi@siteniz.com</p>
+      <p><strong>Adres:</strong> İstanbul, Türkiye</p>
+      <hr>
+      <a href="https://wa.me/90XXXXXXXXXX" class="whatsapp-link">WhatsApp'tan Yazın</a>
+    </div>
+  </div>
+</div>
 <body>
 
   <!-- HEADER -->
-  <header class="header">
-    <div class="header-left">
-      <a href="index.html">
-        <img src="img/logo.png" alt="Logo" class="logo">
-      </a>
+ <header class="header">
+  <div class="header-top">
+    <a href="index.html" class="logo-container">
+      <img src="img/logo.png" alt="Logo" class="logo">
+    </a>
 
-      <input type="text" id="search" placeholder="Ürün ara...">
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Model veya kategori ara...">
+      <i class="search-icon">🔍</i>
     </div>
 
-    <a href="#contact" class="contact-btn">İletişim</a>
-  </header>
+    <button id="contact-open" class="contact-btn">İletişim</button>
+  </div>
 
+  <nav class="category-nav">
+    <button class="nav-item" onclick="filterByCategory('Plastik Çakmak')">Plastik Çakmak</button>
+    <button class="nav-item" onclick="filterByCategory('Promosyon Çakmak')">Promosyon Çakmak</button>
+    <button class="nav-item" onclick="filterByCategory('Metal Çakmak')">Metal Çakmak</button>
+    <button class="nav-item" onclick="filterByCategory('Diğer Modeller')">Diğer Modeller</button>
+  </nav>
+</header>
   <!-- POPÜLER MODELLER -->
   <section class="popular">
+  <div class="section-header">
     <h2>Popüler Modellerimiz</h2>
-    <div class="product-grid" id="popular-products"></div>
-  </section>
+    <div class="slider-dots" id="slider-dots"></div> </div>
+  <div class="slider-wrapper">
+    <div class="product-grid slider-container" id="popular-products">
+      </div>
+  </div>
+</section>
 
   <!-- KATEGORİLER -->
-  <section class="categories">
-    <h2>Kategoriler</h2>
-    <div class="category-grid" id="category-list"></div>
-  </section>
+ <section class="categories">
+  <h2>Kategorilerimizi Keşfedin</h2>
+  <div class="category-grid">
+    <div class="category-card-visual" onclick="filterByCategory('Plastik Çakmak')">
+      <img src="img/cat-plastik.jpg" alt="Plastik">
+      <div class="cat-overlay"><span>Plastik Çakmak</span></div>
+    </div>
+    <div class="category-card-visual" onclick="filterByCategory('Promosyon Çakmak')">
+      <img src="img/cat-promosyon.jpg" alt="Promosyon">
+      <div class="cat-overlay"><span>Promosyon Çakmak</span></div>
+    </div>
+    <div class="category-card-visual" onclick="filterByCategory('Metal Çakmak')">
+      <img src="img/cat-metal.jpg" alt="Metal">
+      <div class="cat-overlay"><span>Metal Çakmak</span></div>
+    </div>
+    <div class="category-card-visual" onclick="filterByCategory('Diğer Modeller')">
+      <img src="img/cat-diger.jpg" alt="Diğer">
+      <div class="cat-overlay"><span>Diğer Modeller</span></div>
+    </div>
+  </div>
+</section>
 
-  <script src="js/product.js"></script>
-
-
+<script>
+  if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", user => {
+    // Eğer kullanıcı giriş yapmamışsa VE URL'de bir token (recovery/invite) varsa widget'ı aç
+    if (!user && (window.location.hash.includes("recovery_token") || window.location.hash.includes("invite_token"))) {
+      window.netlifyIdentity.open();
+    }
+    
+    // Giriş yapıldığında admin'e yönlendir
+    window.netlifyIdentity.on("login", () => {
+      document.location.href = "/admin/";
+    });
+  });
+}
+</script>
 
 </body>
 </html>

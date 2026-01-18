@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yönetim Paneli</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+  /* Admin panelindeki resimlerin boyutunu sınırlama */
+  img[class*="ControlPane"] {
+    max-width: 150px !important;
+    height: auto !important;
+    border-radius: 8px;
+  }
+  .nc-entryEditor-controlPane img {
+    max-width: 200px !important;
+    max-height: 200px !important;
+    object-fit: contain !important;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+</style>
+
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
