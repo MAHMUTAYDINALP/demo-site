@@ -20,6 +20,13 @@
       "description": "deneme 3",
       "category": "Diğer Modeller",
       "image_file": "/img/screenshot-2026-01-18-152311.png"
+    },
+    {
+      "is_popular": false,
+      "product_name": "çakmak",
+      "description": "deneme popüler olmayan",
+      "category": "Promosyon Çakmak",
+      "image_file": "/img/cat-promosyon.jpg"
     }
   ]
 }
