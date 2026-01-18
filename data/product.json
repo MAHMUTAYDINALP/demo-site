@@ -1,38 +1,3 @@
 {
-  "products": [
-    {
-      "is_popular": true,
-      "product_name": "çakmak",
-      "description": "deneme1",
-      "category": "Plastik Çakmak",
-      "image_file": "/img/cakmak.jpg"
-    },
-    {
-      "is_popular": true,
-      "product_name": "çakmak2",
-      "description": "deneme2",
-      "category": "Metal Çakmak",
-      "image_file": "/img/cat-metal.jpg"
-    },
-    {
-      "is_popular": true,
-      "product_name": "çakmak3",
-      "description": "deneme 3",
-      "category": "Diğer Modeller",
-      "image_file": "/img/screenshot-2026-01-18-152311.png"
-    },
-    {
-      "is_popular": false,
-      "product_name": "çakmak",
-      "description": "deneme popüler olmayan",
-      "category": "Promosyon Çakmak",
-      "image_file": "/img/cat-promosyon.jpg"
-    },
-    {
-      "is_popular": true,
-      "product_name": "çakmak5",
-      "description": "deneme5 ",
-      "category": "Metal Çakmak"
-    }
-  ]
+  "products": []
 }

@@ -77,20 +77,31 @@
   </div>
 </section>
 
+<nav class="brand-nav" style="display: flex; gap: 15px; justify-content: center; padding: 10px; background: #f9f9f9; overflow-x: auto;">
+  <button onclick="filterByBrand('Clipper')">Clipper</button>
+  <button onclick="filterByBrand('Str')">Str</button>
+  <button onclick="filterByBrand('Tokai')">Tokai</button>
+  <button onclick="filterByBrand('Mry')">Mry</button>
+  <button onclick="filterByBrand('Kasai')">Kasai</button>
+  <button onclick="filterByBrand('Koko')">Koko</button>
+  <button onclick="filterByBrand('Copper')">Copper</button>
+</nav>
+
 <script>
   if (window.netlifyIdentity) {
-  window.netlifyIdentity.on("init", user => {
-    // Eğer kullanıcı giriş yapmamışsa VE URL'de bir token (recovery/invite) varsa widget'ı aç
-    if (!user && (window.location.hash.includes("recovery_token") || window.location.hash.includes("invite_token"))) {
-      window.netlifyIdentity.open();
-    }
-    
-    // Giriş yapıldığında admin'e yönlendir
-    window.netlifyIdentity.on("login", () => {
-      document.location.href = "/admin/";
+    window.netlifyIdentity.on("init", user => {
+      // Sadece şifre sıfırlama gibi işlemler varsa pencereyi aç
+      if (!user && window.location.hash.includes("token")) {
+        window.netlifyIdentity.open();
+      }
     });
-  });
-}
+    window.netlifyIdentity.on("login", () => {
+      // Sonsuz döngüyü engellemek için sadece ana sayfadaysak yönlendir
+      if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
+        document.location.href = "/admin/";
+      }
+    });
+  }
 </script>
 
 </body>

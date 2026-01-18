@@ -1,3 +1,57 @@
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("data/product.json")
+        .then(res => res.json())
+        .then(data => {
+            allProducts = data.products || [];
+            
+            // 1. Ana sayfadaki Slider için SADECE popüler olanları filtrele
+            const populars = allProducts.filter(p => p.is_popular === true);
+            renderProducts(populars, "popular-products");
+
+            // 2. Sayfanın altındaki Kategori kartlarını hazırla
+            setupSearch();
+            if(typeof startAutoSlider === "function") startAutoSlider();
+        })
+        .catch(err => console.error("Veri çekme hatası:", err));
+});
+
+// Ürünleri Listeleme Fonksiyonu
+function renderProducts(products, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    if (products.length === 0) {
+        container.innerHTML = "<p>Bu kategoride henüz ürün bulunmamaktadır.</p>";
+        return;
+    }
+
+    container.innerHTML = products.map(product => `
+        <div class="product-card" onclick="openProductDetail('${product.product_name}')">
+            <img src="${product.image_url || product.image_file}" alt="${product.product_name}">
+            <h3>${product.product_name}</h3>
+            <p>${product.description}</p>
+            <span class="cat-tag">${product.category}</span>
+        </div>
+    `).join('');
+}
+
+// Kategoriye Tıklayınca Çalışacak Fonksiyon
+function filterByCategory(categoryName) {
+    // Ürün hem popüler olabilir hem olmayabilir, ama kategori eşleşiyorsa getirir
+    const filtered = allProducts.filter(p => p.category === categoryName);
+    
+    // Başlığı değiştir ve ürünleri bas
+    const sectionTitle = document.querySelector(".popular h2");
+    if(sectionTitle) sectionTitle.innerText = categoryName;
+    
+    renderProducts(filtered, "popular-products");
+    
+    // Ürünlerin olduğu bölüme yumuşak geçiş yap
+    window.scrollTo({ top: 450, behavior: 'smooth' });
+}
+
 let allProducts = [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -5,73 +59,28 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
             allProducts = data.products || [];
-            renderProducts(allProducts.filter(p => p.popular), "popular-products");
-            setupSearch();
+            // İlk açılışta popülerleri göster
+            renderProducts(allProducts.filter(p => p.p_pop), "popular-products");
         });
-
-    // İletişim Modal Kontrolü
-    const modal = document.getElementById("contact-modal");
-    document.querySelector(".contact-btn").onclick = () => modal.style.display = "block";
-    document.querySelector(".close-modal").onclick = () => modal.style.display = "none";
 });
 
-// Ürünleri Ekrana Basma Fonksiyonu
 function renderProducts(products, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = products.map(product => `
         <div class="product-card">
-            <img src="${product.image_url || product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <span class="cat-tag">${product.category}</span>
+            <img src="${product.p_url || product.p_img}" alt="${product.p_name}">
+            <div class="card-info">
+                <small>${product.p_brand}</small>
+                <h3>${product.p_name}</h3>
+                <span class="cat-tag">${product.p_cat}</span>
+            </div>
         </div>
     `).join('');
 }
 
-// Arama Motoru
-function setupSearch() {
-    const searchInput = document.getElementById("search");
-    searchInput.addEventListener("input", (e) => {
-        const term = e.target.value.toLowerCase();
-        const filtered = allProducts.filter(p => 
-            p.name.toLowerCase().includes(term) || 
-            p.category.toLowerCase().includes(term)
-        );
-        // Arama yapıldığında popüler kısmını arama sonuçlarıyla değiştir
-        document.querySelector(".popular h2").innerText = term ? "Arama Sonuçları" : "Popüler Modellerimiz";
-        renderProducts(term ? filtered : allProducts.filter(p => p.popular), "popular-products");
-    });
-}
-
-// Kategori Filtreleme (HTML'deki butonlar için)
-function filterByCategory(category) {
-    const filtered = allProducts.filter(p => p.category === category);
-    document.querySelector(".popular h2").innerText = category;
+function filterByBrand(brand) {
+    const filtered = allProducts.filter(p => p.p_brand === brand);
+    document.querySelector(".popular h2").innerText = brand + " Modelleri";
     renderProducts(filtered, "popular-products");
-    window.scrollTo({ top: 400, behavior: 'smooth' }); // Ürünlere kaydır
 }
-
-function startAutoSlider() {
-    const slider = document.getElementById("popular-products");
-    let scrollAmount = 0;
-    
-    setInterval(() => {
-        if (!slider) return;
-        const maxScroll = slider.scrollWidth - slider.clientWidth;
-        
-        if (scrollAmount >= maxScroll) {
-            scrollAmount = 0; // Başa dön
-        } else {
-            scrollAmount += slider.clientWidth / 2; // Yarım sayfa kaydır
-        }
-        
-        slider.scrollTo({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    }, 7000); // 7 saniyede bir kayar
-}
-
-// Bunu DOMContentLoaded içindeki fetch bittikten sonra çağıracağız.
-// fetch kısmına şunu ekle: .then(() => startAutoSlider());

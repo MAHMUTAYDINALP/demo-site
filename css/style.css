@@ -212,3 +212,22 @@ body {
   font-weight: bold;
   text-align: center;
 }
+
+.brand-nav button {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.brand-nav button:hover { background: #eee; }
+
+.card-info small { color: #888; font-weight: bold; text-transform: uppercase; }
+
+/* Admin'deki büyük resimleri ehlileştiren kod */
+.nc-entryEditor-controlPane img {
+  max-width: 200px !important;
+  height: auto !important;
+}
