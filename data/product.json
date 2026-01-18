@@ -1,3 +1,11 @@
 {
-  "products": []
+  "products": [
+    {
+      "is_popular": true,
+      "product_name": "çakmak",
+      "description": "deneme1",
+      "category": "Plastik Çakmak",
+      "image_file": "/img/cakmak.jpg"
+    }
+  ]
 }
