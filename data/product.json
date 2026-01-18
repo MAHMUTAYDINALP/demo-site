@@ -1,3 +1,12 @@
 {
-  "products": []
+  "products": [
+    {
+      "p_pop": true,
+      "p_name": "çakmak",
+      "p_desc": "deneme 1",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Koko",
+      "p_img": "/img/cat-diger.jpg"
+    }
+  ]
 }
