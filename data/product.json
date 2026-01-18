@@ -13,6 +13,13 @@
       "description": "deneme2",
       "category": "Metal Çakmak",
       "image_file": "/img/cat-metal.jpg"
+    },
+    {
+      "is_popular": true,
+      "product_name": "çakmak3",
+      "description": "deneme 3",
+      "category": "Diğer Modeller",
+      "image_file": "/img/screenshot-2026-01-18-152311.png"
     }
   ]
 }
