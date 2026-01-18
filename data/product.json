@@ -6,6 +6,13 @@
       "description": "deneme1",
       "category": "Plastik Çakmak",
       "image_file": "/img/cakmak.jpg"
+    },
+    {
+      "is_popular": true,
+      "product_name": "çakmak2",
+      "description": "deneme2",
+      "category": "Metal Çakmak",
+      "image_file": "/img/cat-metal.jpg"
     }
   ]
 }
