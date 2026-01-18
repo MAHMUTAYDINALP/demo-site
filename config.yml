@@ -7,25 +7,23 @@ public_folder: "/img"
 
 collections:
   - name: "setup"
-    label: "Sistem Ayarları"
+    label: "Ürün Yönetimi"
     delete: false
-    editor:
-      preview: false
     files:
-      - name: "product_list"
-        label: "Ürün Yönetimi"
-        file: "data/product.json"
+      - name: "all_products"
+        label: "Tüm Ürünler"
+        file: "data/product.json" # Veri buraya yazılacak
         fields:
           - label: "Ürünler"
             name: "products"
             widget: "list"
-            summary: "{{fields.name}}" # Listede ürün adının görünmesini sağlar
-            fields:
+           fields:
               - { label: "Ürün Adı", name: "name", widget: "string" }
               - { label: "Açıklama", name: "description", widget: "text" }
               - label: "Kategori"
                 name: "category"
                 widget: "select"
                 options: ["Plastik Çakmak", "Promosyon Çakmak", "Metal Çakmak", "Diğer Modeller"]
-              - { label: "Ürün Görseli (1080x1350)", name: "image", widget: "image" }
+              - { label: "Ürün Görseli (Dosya)", name: "image", widget: "image", required: false } # Bu kalsın
+              - { label: "Ürün Görseli (URL)", name: "image_url", widget: "string", required: false } # Bu kalsın
               - { label: "Popüler mi?", name: "popular", widget: "boolean", default: false }
