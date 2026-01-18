@@ -7,6 +7,13 @@
       "p_cat": "Metal Çakmak",
       "p_brand": "Koko",
       "p_img": "/img/cat-diger.jpg"
+    },
+    {
+      "p_pop": false,
+      "p_name": "çakmak2",
+      "p_desc": "deneme2",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Str"
     }
   ]
 }
