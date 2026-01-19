@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
             allProducts = data.products || [];
+            // Popüler ürünleri hero alanına bas
             renderHero(allProducts.filter(p => p.p_pop === true).slice(0, 3));
             setupSearch();
         })
@@ -21,13 +22,25 @@ function renderHero(products) {
     `;
 }
 
+// Dropdown (Marka Paneli) İçeriğini Oluşturma
 function showBrands(category) {
+    // Kategoriye göre benzersiz markaları çek
     const brands = [...new Set(allProducts.filter(p => p.p_cat === category).map(p => p.p_brand))];
-    const dropdownId = category.includes("Plastik") ? "brands-Plastik" : 
-                       category.includes("Promosyon") ? "brands-Promosyon" :
-                       category.includes("Metal") ? "brands-Metal" : "brands-Diger";
+    
+    // HTML'deki doğru dropdown ID'sini belirle
+    let dropdownId = "";
+    if (category.includes("Plastik")) dropdownId = "brands-Plastik";
+    else if (category.includes("Promosyon")) dropdownId = "brands-Promosyon";
+    else if (category.includes("Metal")) dropdownId = "brands-Metal";
+    else dropdownId = "brands-Diger";
+
     const dropdown = document.getElementById(dropdownId);
-    if (dropdown) dropdown.innerHTML = brands.map(b => `<a href="#" class="brand-link" onclick="filterByBrand('${b}', '${category}')">${b}</a>`).join('');
+    if (dropdown) {
+        // Dropdown içeriğini markalarla doldur
+        dropdown.innerHTML = brands.map(b => 
+            `<a href="#" class="brand-link" onclick="filterByBrand('${b}', '${category}')">${b}</a>`
+        ).join('');
+    }
 }
 
 function setupSearch() {

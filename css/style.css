@@ -11,19 +11,27 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
     display: grid;
     grid-template-columns: 1fr 3fr 5fr 2fr 1fr;
     align-items: center;
-    padding: 15px 0;
+    padding: 10px 0;
 }
 
-/* LOGO BUTONU (Logo küçük kalsın istediğin için değerlere dokunmadım) */
+/* LOGO TAM OTURTMA ÇÖZÜMÜ */
+.logo-link { text-decoration: none; display: block; height: 100%; width: 100%; }
 .logo-container {
     background: #e0e0e0; 
-    border-radius: 50px; 
-    padding: 10px 40px; 
+    border-radius: 40px; 
+    padding: 0; /* Padding kaldırıldı ki logo tam sığsın */
     display: flex; justify-content: center; align-items: center;
-    height: 60px;
+    height: 80px; /* Yükseklik butona tam sığacak şekilde ayarlandı */
     margin: 0 10px;
+    overflow: hidden;
+    cursor: pointer;
 }
-.logo { height: 100%; width: auto; object-fit: contain; }
+.logo { 
+    height: 100%; 
+    width: 100%; 
+    object-fit: contain; /* Oranı bozmadan alanı doldurur */
+    padding: 10px; /* Görselin kenarlara yapışmaması için güvenli boşluk */
+}
 
 /* ARAMA KUTUSU */
 .search-box {
@@ -39,7 +47,7 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
     border-radius: 30px; border: none; font-weight: 700; cursor: pointer;
 }
 
-/* KATEGORİ NAV (8/12) */
+/* KATEGORİ NAV (2px KÜÇÜLTÜLDÜ: 21px) */
 .main-nav-container { display: flex; justify-content: center; padding: 10px 0; background: #f4f4f4; }
 .nav-8-12 {
     display: flex; 
@@ -53,22 +61,59 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
 .nav-item { 
     position: relative; background: none; border: none; 
     font-weight: 600; cursor: pointer; color: #444; 
-    font-size: 23px; /* 17px + 6px = 23px */
+    font-size: 21px; /* 23px -> 21px yapıldı */
     display: flex; align-items: center; 
-    gap: 4px; /* Ok ile yazı arası mesafe */
-    line-height: 1;
+    gap: 4px;
 }
 .nav-item:hover { color: #e31e24; }
-.nav-arrow { font-size: 18px; color: #888; display: inline-flex; align-items: center; } 
+.nav-arrow { font-size: 16px; color: #888; } 
 
-/* ASİMETRİK GRID (GÖRSELLER BÜYÜTÜLDÜ) */
-.popular-section { padding: 40px 5%; max-width: 1400px; margin: 0 auto; }
+/* MARKA PANELİ (DROPDOWN) FIX */
+.brand-dropdown {
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background: white; 
+    border: 1px solid #eee; 
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    z-index: 100; 
+    padding: 15px; 
+    min-width: 200px;
+}
+
+/* Hover durumunda panel görünür */
+.nav-item:hover .brand-dropdown { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px;
+}
+
+.brand-link { 
+    display: block; 
+    padding: 8px 12px; 
+    text-decoration: none; 
+    color: #444; 
+    border-radius: 5px; 
+    font-size: 14px; 
+    text-align: left;
+}
+.brand-link:hover { background: #fdf2f2; color: #e31e24; }
+
+/* POPÜLER ÜRÜNLER (%80 GENİŞLİK VE BÜYÜTME) */
+.popular-section { 
+    width: 80%; /* %80 Genişlik ayarı */
+    margin: 40px auto; /* Ortalama */
+    padding: 0;
+}
 .hero-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 20px;
-    height: 700px; /* 500px'den 700px'e çıkarıldı, oran bozulmadan büyütüldü */
+    height: 750px; /* Daha büyük görünmesi için yükseklik artırıldı */
 }
 .hero-item { overflow: hidden; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 .hero-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
