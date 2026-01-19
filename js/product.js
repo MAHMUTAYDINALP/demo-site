@@ -1,96 +1,97 @@
+// Global Değişkenler
 let allProducts = [];
-window.selectedCategory = "";
+let selectedCategory = "";
 
 document.addEventListener("DOMContentLoaded", () => {
     fetch("data/product.json")
         .then(res => res.json())
         .then(data => {
+            // Veriyi al ve yedekle
             allProducts = data.products || [];
-            // İlk açılışta sadece popüler olanları göster
-            renderProducts(allProducts.filter(p => p.p_pop));
+            
+            // Başlangıçta popüler olanları göster
+            const populars = allProducts.filter(p => p.p_pop === true);
+            renderProducts(populars);
+            
+            // Arama motorunu başlat
             setupSearch();
         })
-        .catch(err => console.error("Ürünler yüklenirken hata:", err));
+        .catch(err => console.error("Ürünler yüklenirken hata oluştu:", err));
 });
 
+// Ürünleri Ekrana Basan Ana Fonksiyon
 function renderProducts(products) {
     const container = document.getElementById("popular-products");
     if (!container) return;
 
     if (products.length === 0) {
-        container.innerHTML = "<p>Aradığınız kriterlerde ürün bulunamadı.</p>";
+        container.innerHTML = "<div style='grid-column: 1/-1; padding: 50px; color: #999;'>Ürün bulunamadı.</div>";
         return;
     }
 
     container.innerHTML = products.map(p => `
-        <div class="product-card">
+        <div class="product-card" onclick="window.location.href='#product-detail'">
             <img src="${p.p_url || p.p_img}" alt="${p.p_name}">
             <div class="p-info">
                 <small>${p.p_brand}</small>
                 <h3>${p.p_name}</h3>
-                <p style="font-size: 13px; color: #666;">${p.p_desc || ''}</p>
-                <span style="background: #f0f0f0; padding: 4px 10px; border-radius: 10px; font-size: 12px;">${p.p_cat}</span>
+                <span style="font-size: 13px; color: #d32f2f; font-weight: bold;">${p.p_cat}</span>
             </div>
         </div>
     `).join('');
 }
 
+// Kategori Seçimi ve Marka Paneli Toggle Mantığı
 function showBrands(category) {
-    window.selectedCategory = category;
-    document.getElementById("brand-panel").style.display = "flex";
-    document.getElementById("section-title").innerText = category;
-    
-    // Kategoriye ait ürünleri hemen göster
+    const panel = document.getElementById("brand-panel");
+    const title = document.getElementById("section-title");
+
+    // Eğer zaten o kategorideysek ve panel açıksa kapat (Toggle)
+    if (selectedCategory === category && panel.style.display === "flex") {
+        closeBrands();
+        return;
+    }
+
+    // Seçimi güncelle ve paneli aç
+    selectedCategory = category;
+    panel.style.display = "flex";
+    title.innerText = category;
+
+    // Seçilen kategoriye ait ürünleri hemen listele
     const filtered = allProducts.filter(p => p.p_cat === category);
     renderProducts(filtered);
-    window.scrollTo({ top: 300, behavior: 'smooth' });
+
+    // Ürünlerin olduğu bölüme yumuşak kaydır
+    window.scrollTo({ top: 350, behavior: 'smooth' });
 }
 
 function closeBrands() {
     document.getElementById("brand-panel").style.display = "none";
+    // Opsiyonel: Kapatınca tekrar popülerleri gösterir
+    // renderProducts(allProducts.filter(p => p.p_pop));
 }
 
+// Marka Filtreleme
 function filterByBrand(brand) {
-    const filtered = allProducts.filter(p => p.p_brand === brand && p.p_cat === window.selectedCategory);
-    document.getElementById("section-title").innerText = `${window.selectedCategory} > ${brand}`;
+    const filtered = allProducts.filter(p => p.p_brand === brand && p.p_cat === selectedCategory);
+    document.getElementById("section-title").innerText = `${selectedCategory} > ${brand}`;
     renderProducts(filtered);
     closeBrands();
 }
 
+// Arama Motoru Fonksiyonu
 function setupSearch() {
     const searchInput = document.getElementById("search");
     searchInput.addEventListener("input", (e) => {
         const term = e.target.value.toLowerCase();
+        
         const filtered = allProducts.filter(p => 
             p.p_name.toLowerCase().includes(term) || 
             p.p_brand.toLowerCase().includes(term) ||
             p.p_cat.toLowerCase().includes(term)
         );
-        renderProducts(filtered);
+        
+        document.getElementById("section-title").innerText = term ? `"${term}" için Sonuçlar` : "Popüler Modellerimiz";
+        renderProducts(term ? filtered : allProducts.filter(p => p.p_pop));
     });
-}
-
-
-// Kategoriye tıklayınca toggle (aç/kapat) işlemi
-function showBrands(category) {
-    const panel = document.getElementById("brand-panel");
-    
-    // Eğer aynı kategoriye tekrar basıldıysa kapat
-    if (window.selectedCategory === category && panel.style.display === "flex") {
-        closeBrands();
-        return;
-    }
-
-    // Değilse paneli aç ve ürünleri filtrele
-    window.selectedCategory = category;
-    panel.style.display = "flex";
-    document.getElementById("section-title").innerText = category;
-    
-    const filtered = allProducts.filter(p => p.p_cat === category);
-    renderProducts(filtered);
-}
-
-function closeBrands() {
-    document.getElementById("brand-panel").style.display = "none";
-    window.selectedCategory = ""; // Seçimi sıfırla
 }
