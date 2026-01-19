@@ -12,11 +12,11 @@
   <div id="contact-modal" class="modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeContact()">&times;</span>
-      <h2>İletişim Bilgileri</h2>
+      <h2>Kırgıl Çakmak İletişim</h2>
       <div class="contact-info">
         <p><strong>Telefon:</strong> 0505 069 6639</p>
         <p><strong>E-posta:</strong> bakirkirgil@gmail.com</p>
-        <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye ŞANLIURFA (Topçu Meydanı)</p>
+        <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye ŞANLIURFA</p>
         <hr>
         <a href="https://wa.me/905050696639" class="whatsapp-link" target="_blank">WhatsApp Destek Hattı</a>
       </div>
@@ -24,41 +24,48 @@
   </div>
 
   <div class="header-wrapper">
-    <header class="header">
-      <div class="header-top">
+    <header class="header-grid">
+      <div class="grid-spacer"></div> <div class="grid-logo">
         <a href="index.html" class="logo-link">
-          <img src="img/logo.png" alt="Kırgıl Çakmak Logo" class="logo">
+          <div class="logo-container">
+            <img src="img/logo.png" alt="Kırgıl Çakmak Logo" class="logo">
+          </div>
         </a>
-        
+      </div>
+
+      <div class="grid-search">
         <div class="search-box">
           <input type="text" id="search" placeholder="Model veya marka ara...">
           <button id="search-btn">🔍</button>
         </div>
-
-        <div class="header-right">
-          <button class="contact-btn" onclick="openContact()">İletişim</button>
-        </div>
       </div>
 
-      <nav class="main-nav">
+      <div class="grid-contact">
+        <button class="contact-btn" onclick="openContact()">İletişim</button>
+      </div>
+
+      <div class="grid-spacer"></div> </header>
+
+    <nav class="main-nav-container">
+      <div class="nav-8-12">
         <button class="nav-item" onmouseenter="showBrands('Plastik Çakmak')" onclick="filterByCategory('Plastik Çakmak')">
-          Plastik Çakmak
+          Plastik Çakmak <span class="nav-arrow">⌄</span>
           <div class="brand-dropdown" id="brands-Plastik"></div>
         </button>
         <button class="nav-item" onmouseenter="showBrands('Promosyon Çakmak')" onclick="filterByCategory('Promosyon Çakmak')">
-          Promosyon Çakmak
+          Promosyon Çakmak <span class="nav-arrow">⌄</span>
           <div class="brand-dropdown" id="brands-Promosyon"></div>
         </button>
         <button class="nav-item" onmouseenter="showBrands('Metal Çakmak')" onclick="filterByCategory('Metal Çakmak')">
-          Metal Çakmak
+          Metal Çakmak <span class="nav-arrow">⌄</span>
           <div class="brand-dropdown" id="brands-Metal"></div>
         </button>
         <button class="nav-item" onmouseenter="showBrands('Diğer Modeller')" onclick="filterByCategory('Diğer Modeller')">
-          Diğer Modeller
+          Diğer Modeller <span class="nav-arrow">⌄</span>
           <div class="brand-dropdown" id="brands-Diger"></div>
         </button>
-      </nav>
-    </header>
+      </div>
+    </nav>
   </div>
 
   <main>

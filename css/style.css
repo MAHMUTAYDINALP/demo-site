@@ -1,51 +1,65 @@
 body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fdfdfd; color: #222; }
 
-/* HEADER VE LOGO DÜZENLEMESİ */
+/* 12 PARÇALIK HEADER GRID */
 .header-wrapper {
     position: sticky; top: 0; z-index: 1000;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #eaeaea;
+    background: #f4f4f4;
+    border-bottom: 1px solid #ddd;
 }
 
-.header-top {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 15px 5%; max-width: 1400px; margin: 0 auto;
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 5fr 2fr 1fr; /* 12 Parça Sistemi */
+    align-items: center;
+    padding: 15px 0;
 }
 
-/* LOGO ALANI */
-.logo-link {
-    display: block;
-    height: 70px; /* Logo için ayrılan yükseklik */
-}
-
-.logo {
-    height: 100%; /* Ayrılan yüksekliğin tamamını kapla */
-    width: auto; /* Eni otomatik ayarla, görsel bozulmasın */
-    object-fit: contain; /* Taşan kısımları kesmeden sığdır */
+/* LOGO BUTONU (Genişletilmiş ve Yumuşatılmış) */
+.logo-container {
+    background: #e0e0e0; 
+    border-radius: 50px; /* Köşeler iyice yumuşatıldı */
+    padding: 10px 40px; /* Yatayda (40px) genişletildi */
+    display: flex; justify-content: center; align-items: center;
+    height: 60px;
+    margin: 0 10px;
     transition: 0.3s;
 }
-.logo:hover { transform: scale(1.05); }
+.logo-container:hover { background: #d0d0d0; }
+.logo { height: 100%; width: auto; object-fit: contain; }
 
 /* ARAMA KUTUSU */
 .search-box {
-    flex: 0 1 500px; display: flex; background: #f0f0f0;
-    border-radius: 30px; padding: 5px 20px; margin: 0 20px;
+    display: flex; background: #fff;
+    border-radius: 30px; padding: 5px 20px;
+    border: 1px solid #ccc;
 }
 #search { border: none; background: transparent; padding: 12px; width: 100%; outline: none; font-size: 15px; }
 #search-btn { border: none; background: transparent; cursor: pointer; font-size: 18px; color: #666; }
 
-/* İLETİŞİM BUTONU */
 .contact-btn {
-    background: #e31e24; color: white; padding: 12px 28px;
-    border-radius: 30px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s;
+    background: #333; color: white; padding: 12px 25px;
+    border-radius: 30px; border: none; font-weight: 700; cursor: pointer;
 }
-.contact-btn:hover { background: #c01a1f; }
 
-/* NAVİGASYON */
-.main-nav { display: flex; justify-content: center; gap: 30px; padding: 15px; border-top: 1px solid #eee; }
-.nav-item { position: relative; background: none; border: none; font-weight: 600; cursor: pointer; color: #444; font-size: 15px; }
+/* KATEGORİ NAV (8/12 Alanını Kapsar) */
+.main-nav-container { display: flex; justify-content: center; padding: 10px 0; background: #f4f4f4; }
+.nav-8-12 {
+    display: flex; 
+    width: 66.66%; /* 12 parçanın 8'i */
+    justify-content: space-between; /* Butonları alana yayar */
+    position: relative;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+.nav-item { 
+    position: relative; background: none; border: none; 
+    font-weight: 600; cursor: pointer; color: #444; 
+    font-size: 17px; /* Kategoriler biraz büyütüldü */
+    display: flex; align-items: center; gap: 8px;
+}
 .nav-item:hover { color: #e31e24; }
+.nav-arrow { font-size: 14px; color: #888; } /* Aşağı ok işareti stili */
 
 /* DROPDOWN */
 .brand-dropdown {
@@ -54,10 +68,10 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fdfdfd; colo
     box-shadow: 0 8px 20px rgba(0,0,0,0.1); z-index: 100; padding: 15px; min-width: 180px; text-align: left;
 }
 .nav-item:hover .brand-dropdown { display: block; }
-.brand-link { display: block; padding: 8px 12px; text-decoration: none; color: #444; border-radius: 5px; }
+.brand-link { display: block; padding: 8px 12px; text-decoration: none; color: #444; border-radius: 5px; font-size: 14px; }
 .brand-link:hover { background: #fdf2f2; color: #e31e24; }
 
-/* POPÜLER HERO (Asimetrik) */
+/* ASİMETRİK GRID (1 BÜYÜK 2 KÜÇÜK) */
 .popular-section { padding: 40px 5%; max-width: 1400px; margin: 0 auto; }
 .hero-grid {
     display: grid;
@@ -77,14 +91,9 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fdfdfd; colo
 .cat-card { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; height: 300px; }
 .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
 .cat-card:hover img { transform: scale(1.08); }
-.cat-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 20px; text-align: center; font-size: 18px; font-weight: bold; }
+.cat-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 20px; text-align: center; font-size: 18px; font-weight: bold; }
 
 /* MODAL */
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
-.modal-content { background: white; margin: 8% auto; padding: 40px; border-radius: 25px; width: 350px; position: relative; text-align: center; }
+.modal-content { background: white; margin: 10% auto; padding: 40px; border-radius: 25px; width: 350px; position: relative; text-align: center; }
 .close-modal { position: absolute; right: 20px; top: 15px; cursor: pointer; font-size: 28px; color: #999; }
-
-/* GENEL ÜRÜN LISTESI (Arama/Filtre Sonucu) */
-.general-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; padding: 30px 5%; }
-.product-card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.04); text-align: center; }
-.product-card img { width: 100%; height: 250px; object-fit: contain; margin-bottom: 15px; }
