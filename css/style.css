@@ -29,7 +29,7 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
 }
 .logo { 
     height: 100px;
-    width: 600px;
+    width: 400px;
     object-fit: contain; /* Oranı bozmadan alanı doldurur */
     padding: 10px; /* Görselin kenarlara yapışmaması için güvenli boşluk */
     border-radius: 40px; 
