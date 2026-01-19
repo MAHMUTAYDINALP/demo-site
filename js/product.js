@@ -69,3 +69,28 @@ function setupSearch() {
         renderProducts(filtered);
     });
 }
+
+
+// Kategoriye tıklayınca toggle (aç/kapat) işlemi
+function showBrands(category) {
+    const panel = document.getElementById("brand-panel");
+    
+    // Eğer aynı kategoriye tekrar basıldıysa kapat
+    if (window.selectedCategory === category && panel.style.display === "flex") {
+        closeBrands();
+        return;
+    }
+
+    // Değilse paneli aç ve ürünleri filtrele
+    window.selectedCategory = category;
+    panel.style.display = "flex";
+    document.getElementById("section-title").innerText = category;
+    
+    const filtered = allProducts.filter(p => p.p_cat === category);
+    renderProducts(filtered);
+}
+
+function closeBrands() {
+    document.getElementById("brand-panel").style.display = "none";
+    window.selectedCategory = ""; // Seçimi sıfırla
+}

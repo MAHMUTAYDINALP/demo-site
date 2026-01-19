@@ -1,40 +1,60 @@
-body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f9f9f9; color: #333; }
+/* Tasarım ve Header Düzenlemeleri */
+.header-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8); /* Şeffaf beyaz */
+    backdrop-filter: blur(10px); /* Arka planı bulanıklaştırma */
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e0e0e0; /* İnce gri çizgi */
+}
 
-/* Header & Search */
-.header { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-.header-top { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; }
-.logo { height: 50px; }
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
-.search-box { flex: 0 1 500px; display: flex; background: #f1f1f1; border-radius: 25px; padding: 5px 15px; }
-#search { border: none; background: transparent; padding: 10px; width: 100%; outline: none; }
-#search-btn { border: none; background: transparent; cursor: pointer; font-size: 18px; }
+.logo {
+    height: 70px; /* Logo büyütüldü */
+    transition: transform 0.3s ease;
+}
 
-/* Navigasyon */
-.main-nav { display: flex; justify-content: center; gap: 20px; padding: 10px; border-top: 1px solid #eee; }
-.main-nav button { background: none; border: none; font-weight: 600; cursor: pointer; color: #555; transition: 0.3s; }
-.main-nav button:hover { color: #d32f2f; }
+.logo:hover {
+    transform: scale(1.05);
+}
 
-/* Brand Overlay */
-.brand-overlay { display: none; background: #fff; padding: 20px; justify-content: center; border-bottom: 2px solid #d32f2f; }
-.brand-grid { display: flex; flex-wrap: wrap; gap: 10px; max-width: 900px; justify-content: center; }
-.brand-grid button { padding: 8px 20px; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; }
-.brand-grid button:hover { background: #f5f5f5; border-color: #d32f2f; }
-.close-brands { color: #d32f2f; font-weight: bold; }
+/* İletişim Butonu Güzelleştirme */
+.contact-btn {
+    background: #d32f2f;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+    transition: all 0.3s ease;
+}
 
-/* Ürün Kartları */
-.products-container { display: flex; gap: 20px; overflow-x: auto; padding: 20px 5%; scroll-behavior: smooth; }
-.products-container::-webkit-scrollbar { display: none; }
-.product-card { min-width: 250px; background: white; border-radius: 12px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
-.product-card img { width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 8px; }
-.p-info small { color: #999; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+.contact-btn:hover {
+    background: #b71c1c;
+    box-shadow: 0 6px 15px rgba(211, 47, 47, 0.4);
+    transform: translateY(-2px);
+}
 
-/* Kategori Resimleri */
-.cat-image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px 5%; }
-.cat-card { position: relative; border-radius: 15px; overflow: hidden; cursor: pointer; height: 200px; }
-.cat-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-.cat-card:hover img { transform: scale(1.1); }
-.cat-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); color: white; padding: 15px; text-align: center; font-weight: bold; }
+/* Kategori Kartlarını Büyütme */
+.cat-card {
+    height: 300px; /* Görseller daha belirgin olsun diye büyütüldü */
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
 
-/* Modal */
-.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
-.modal-content { background: white; margin: 10% auto; padding: 40px; border-radius: 20px; width: 320px; position: relative; }
+.cat-card img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Görselin bozulmadan sığmasını sağlar */
+}
