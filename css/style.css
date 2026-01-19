@@ -21,7 +21,7 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
     border-radius: 40px; 
     padding: 0; /* Padding kaldırıldı ki logo tam sığsın */
     display: flex; justify-content: center; align-items: center;
-    height: 80px; /* Yükseklik butona tam sığacak şekilde ayarlandı */
+   
     margin: 0 10px;
     overflow: hidden;
     cursor: pointer;
@@ -30,7 +30,7 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
     height: 100%; 
     width: 100%; 
     object-fit: contain; /* Oranı bozmadan alanı doldurur */
-    
+    padding: 10px; /* Görselin kenarlara yapışmaması için güvenli boşluk */
 }
 
 /* ARAMA KUTUSU */
@@ -43,7 +43,7 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
 #search-btn { border: none; background: transparent; cursor: pointer; font-size: 18px; color: #666; }
 
 .contact-btn {
-    background: #333; color: white; padding: 12px 25px;
+    background: #333; color: rgb(255, 0, 0); padding: 12px 25px;
     border-radius: 30px; border: none; font-weight: 700; cursor: pointer;
 }
 
