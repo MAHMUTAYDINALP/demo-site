@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yürek Çakmak | Katalog</title>
+  <title>Kırgıl Çakmak | Ürün Kataloğu</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
@@ -12,24 +12,23 @@
   <div id="contact-modal" class="modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeContact()">&times;</span>
-      <h2>İletişim Bilgileri</h2>
+      <h2>Kırgıl Çakmak İletişim</h2>
       <div class="contact-info">
-        <p><strong>Telefon:</strong> +90 (505) 069 8639</p>
-        <p><strong>E-posta:</strong> info@yurekcakmak.com</p>
+        <p><strong>Telefon:</strong> 0505 069 6639</p>
+        <p><strong>E-posta:</strong> bakirkirgil@gmail.com</p>
+        <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye ŞANLIURFA (Topçu Meydanı)</p>
         <hr>
-        <a href="https://wa.me/905050698639" class="whatsapp-link" target="_blank">WhatsApp Destek Hattı</a>
+        <a href="https://wa.me/905050696639" class="whatsapp-link" target="_blank">WhatsApp Destek Hattı</a>
       </div>
     </div>
   </div>
 
   <div class="header-wrapper">
     <header class="header-grid">
-      <div class="grid-spacer"></div>
-
-      <div class="grid-logo">
+      <div class="grid-spacer"></div> <div class="grid-logo">
         <a href="index.html">
           <div class="logo-container">
-            <img src="img/logo.png" alt="Logo" class="logo">
+            <img src="img/logo.png" alt="Kırgıl Çakmak Logo" class="logo">
           </div>
         </a>
       </div>
@@ -45,8 +44,7 @@
         <button class="contact-btn" onclick="openContact()">İletişim</button>
       </div>
 
-      <div class="grid-spacer"></div>
-    </header>
+      <div class="grid-spacer"></div> </header>
 
     <nav class="main-nav-container">
       <div class="nav-8-12">
@@ -99,20 +97,5 @@
   </main>
 
   <script src="js/product.js"></script>
-  <script>
-    function openContact() { document.getElementById("contact-modal").style.display = "block"; }
-    function closeContact() { document.getElementById("contact-modal").style.display = "none"; }
-    
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user && window.location.hash.includes("token")) window.netlifyIdentity.open();
-      });
-      window.netlifyIdentity.on("login", () => {
-        if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
-          document.location.href = "/admin/";
-        }
-      });
-    }
-  </script>
 </body>
 </html>
