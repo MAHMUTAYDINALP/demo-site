@@ -66,15 +66,21 @@ function filterByCategory(category) {
 
 function renderGeneralList(products, title) {
     document.getElementById("section-title").innerText = title;
-    const container = document.getElementById("popular-layout");
-    container.innerHTML = `<div class="general-grid" id="general-list"></div>`;
-    document.getElementById("general-list").innerHTML = products.map(p => `
-        <div class="product-card" style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.04); text-align: center;">
-            <img src="${p.p_url || p.p_img}" style="width: 100%; height: 250px; object-fit: contain; margin-bottom: 15px;">
+    const containerArea = document.getElementById("popular-hero-area");
+    
+    // Hero grid yapısını silip standart liste yapısını getirir
+    containerArea.innerHTML = `<h2 id="section-title">${title}</h2><div class="general-grid" id="general-list"></div>`;
+    
+    const list = document.getElementById("general-list");
+    // Ürünleri standart kart boyutunda basar
+    list.innerHTML = products.map(p => `
+        <div class="product-card">
+            <img src="${p.p_url || p.p_img}">
             <small style="color:#999; text-transform:uppercase; font-size:11px;">${p.p_brand}</small>
             <h4 style="margin:10px 0;">${p.p_name}</h4>
         </div>
     `).join('');
+    
     window.scrollTo({ top: 400, behavior: 'smooth' });
 }
 

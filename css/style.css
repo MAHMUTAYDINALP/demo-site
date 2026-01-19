@@ -14,24 +14,24 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
     padding: 10px 0;
 }
 
-/* LOGO TAM OTURTMA ÇÖZÜMÜ */
-
+/* LOGO BUTONU VE GÖRSEL TAM EŞİTLEME */
 .logo-container {
     background: #e0e0e0; 
     border-radius: 40px; 
-    padding: 0; /* Padding kaldırıldı ki logo tam sığsın */
+    padding: 0;
     display: flex; justify-content: center; align-items: center;
-   height: 100px;
-   width: 600px;
-    margin: 0 10px;
+    height: 100px; /* Logo ile aynı yükseklik */
+    width: 100%; /* Grid hücresini kapla */
+    max-width: 400px; /* Logo genişliğiyle sınırla */
+    margin: 0 auto;
     overflow: hidden;
     cursor: pointer;
 }
 .logo { 
     height: 100px;
     width: 400px;
-    object-fit: contain; /* Oranı bozmadan alanı doldurur */
-    padding: 10px; /* Görselin kenarlara yapışmaması için güvenli boşluk */
+    object-fit: contain; 
+    padding: 5px;
     border-radius: 40px; 
 }
 
@@ -45,11 +45,11 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
 #search-btn { border: none; background: transparent; cursor: pointer; font-size: 18px; color: #666; }
 
 .contact-btn {
-    background: #e80000; color: rgb(255, 255, 255); padding: 12px 25px;
+    background: #e80000; color: #fff; padding: 12px 25px;
     border-radius: 30px; border: none; font-weight: 700; cursor: pointer;
 }
 
-/* KATEGORİ NAV (2px KÜÇÜLTÜLDÜ: 21px) */
+/* KATEGORİ NAV (21px) */
 .main-nav-container { display: flex; justify-content: center; padding: 10px 0; background: #f4f4f4; }
 .nav-8-12 {
     display: flex; 
@@ -63,52 +63,31 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
 .nav-item { 
     position: relative; background: none; border: none; 
     font-weight: 600; cursor: pointer; color: #444; 
-    font-size: 21px; /* 23px -> 21px yapıldı */
+    font-size: 21px; 
     display: flex; align-items: center; 
     gap: 4px;
 }
 .nav-item:hover { color: #e31e24; }
 .nav-arrow { font-size: 16px; color: #888; } 
 
-/* MARKA PANELİ (DROPDOWN) FIX */
+/* MARKA PANELİ */
 .brand-dropdown {
     display: none; 
     position: absolute; 
-    top: 100%; 
-    left: 50%;
+    top: 100%; left: 50%;
     transform: translateX(-50%);
-    background: white; 
-    border: 1px solid #eee; 
-    border-radius: 12px;
+    background: white; border: 1px solid #eee; border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
-    z-index: 100; 
-    padding: 15px; 
-    min-width: 200px;
+    z-index: 100; padding: 15px; min-width: 200px;
 }
-
-/* Hover durumunda panel görünür */
-.nav-item:hover .brand-dropdown { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 8px;
-}
-
-.brand-link { 
-    display: block; 
-    padding: 8px 12px; 
-    text-decoration: none; 
-    color: #444; 
-    border-radius: 5px; 
-    font-size: 14px; 
-    text-align: left;
-}
+.nav-item:hover .brand-dropdown { display: flex; flex-direction: column; gap: 8px; }
+.brand-link { display: block; padding: 8px 12px; text-decoration: none; color: #444; border-radius: 5px; font-size: 14px; text-align: left; }
 .brand-link:hover { background: #fdf2f2; color: #e31e24; }
 
-/* POPÜLER ÜRÜNLER (%80 GENİŞLİK VE BÜYÜTME) */
+/* POPÜLER ÜRÜNLER (GÜNCELLENEN ÖLÇÜLER: %96 G, 675px Y) */
 .popular-section { 
-    width: 80%; /* %80 Genişlik ayarı */
-    height: auto;
-    margin: 40px auto; /* Ortalama */
+    width: 96%; /* %80 + %20 artış */
+    margin: 40px auto;
     padding: 0;
 }
 .hero-grid {
@@ -116,12 +95,26 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
     grid-template-columns: 1.5fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 20px;
-    height: 750px; /* Daha büyük görünmesi için yükseklik artırıldı */
+    height: 675px; /* 750px - %10 küçülme */
 }
 .hero-item { overflow: hidden; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 .hero-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 .hero-item:hover img { transform: scale(1.05); }
 .item-big { grid-row: 1 / span 2; }
+
+/* KATEGORİ GÖRÜNÜMÜ FIX (STANDART KARTLAR) */
+.general-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    width: 90%;
+    margin: 0 auto;
+}
+.product-card { 
+    background: white; border-radius: 15px; padding: 20px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.04); text-align: center;
+}
+.product-card img { width: 100%; height: 250px; object-fit: contain; margin-bottom: 15px; }
 
 /* KATEGORİ KARTLARI */
 .cat-images-section { padding: 50px 5%; background: #fff; }
