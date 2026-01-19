@@ -2,107 +2,109 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Ürün Kataloğu</title>
+  <title>Yürek Çakmak | Katalog</title>
   <link rel="stylesheet" href="css/style.css">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
-<div id="contact-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h2>Bizimle İletişime Geçin</h2>
-    <div class="contact-info">
-      <p><strong>Telefon:</strong> +90 (XXX) XXX XX XX</p>
-      <p><strong>E-posta:</strong> bilgi@siteniz.com</p>
-      <p><strong>Adres:</strong> İstanbul, Türkiye</p>
-      <hr>
-      <a href="https://wa.me/90XXXXXXXXXX" class="whatsapp-link">WhatsApp'tan Yazın</a>
-    </div>
-  </div>
-</div>
 <body>
 
-  <!-- HEADER -->
- <header class="header">
-  <div class="header-top">
-    <a href="index.html" class="logo-container">
-      <img src="img/logo.png" alt="Logo" class="logo">
-    </a>
-
-    <div class="search-container">
-      <input type="text" id="search" placeholder="Model veya kategori ara...">
-      <i class="search-icon">🔍</i>
-    </div>
-
-    <button id="contact-open" class="contact-btn">İletişim</button>
-  </div>
-
-  <nav class="category-nav">
-    <button class="nav-item" onclick="filterByCategory('Plastik Çakmak')">Plastik Çakmak</button>
-    <button class="nav-item" onclick="filterByCategory('Promosyon Çakmak')">Promosyon Çakmak</button>
-    <button class="nav-item" onclick="filterByCategory('Metal Çakmak')">Metal Çakmak</button>
-    <button class="nav-item" onclick="filterByCategory('Diğer Modeller')">Diğer Modeller</button>
-  </nav>
-</header>
-  <!-- POPÜLER MODELLER -->
-  <section class="popular">
-  <div class="section-header">
-    <h2>Popüler Modellerimiz</h2>
-    <div class="slider-dots" id="slider-dots"></div> </div>
-  <div class="slider-wrapper">
-    <div class="product-grid slider-container" id="popular-products">
+  <div id="contact-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeContact()">&times;</span>
+      <h2>İletişim Bilgileri</h2>
+      <div class="contact-info">
+        <p><strong>Telefon:</strong> +90 (505) 069 8639</p>
+        <p><strong>E-posta:</strong> info@yurekcakmak.com</p>
+        <p><strong>Adres:</strong> Gaziantep, Türkiye</p>
+        <hr>
+        <a href="https://wa.me/905050698639" class="whatsapp-link">WhatsApp Destek</a>
       </div>
-  </div>
-</section>
-
-  <!-- KATEGORİLER -->
- <section class="categories">
-  <h2>Kategorilerimizi Keşfedin</h2>
-  <div class="category-grid">
-    <div class="category-card-visual" onclick="filterByCategory('Plastik Çakmak')">
-      <img src="img/cat-plastik.jpg" alt="Plastik">
-      <div class="cat-overlay"><span>Plastik Çakmak</span></div>
-    </div>
-    <div class="category-card-visual" onclick="filterByCategory('Promosyon Çakmak')">
-      <img src="img/cat-promosyon.jpg" alt="Promosyon">
-      <div class="cat-overlay"><span>Promosyon Çakmak</span></div>
-    </div>
-    <div class="category-card-visual" onclick="filterByCategory('Metal Çakmak')">
-      <img src="img/cat-metal.jpg" alt="Metal">
-      <div class="cat-overlay"><span>Metal Çakmak</span></div>
-    </div>
-    <div class="category-card-visual" onclick="filterByCategory('Diğer Modeller')">
-      <img src="img/cat-diger.jpg" alt="Diğer">
-      <div class="cat-overlay"><span>Diğer Modeller</span></div>
     </div>
   </div>
-</section>
 
-<nav class="brand-nav" style="display: flex; gap: 15px; justify-content: center; padding: 10px; background: #f9f9f9; overflow-x: auto;">
-  <button onclick="filterByBrand('Clipper')">Clipper</button>
-  <button onclick="filterByBrand('Str')">Str</button>
-  <button onclick="filterByBrand('Tokai')">Tokai</button>
-  <button onclick="filterByBrand('Mry')">Mry</button>
-  <button onclick="filterByBrand('Kasai')">Kasai</button>
-  <button onclick="filterByBrand('Koko')">Koko</button>
-  <button onclick="filterByBrand('Copper')">Copper</button>
-</nav>
+  <header class="header">
+    <div class="header-top">
+      <a href="index.html"><img src="img/logo.png" alt="Logo" class="logo"></a>
+      
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Model veya marka ara...">
+        <button id="search-btn">🔍</button>
+      </div>
 
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      // Sadece şifre sıfırlama gibi işlemler varsa pencereyi aç
-      if (!user && window.location.hash.includes("token")) {
-        window.netlifyIdentity.open();
-      }
-    });
-    window.netlifyIdentity.on("login", () => {
-      // Sonsuz döngüyü engellemek için sadece ana sayfadaysak yönlendir
-      if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
-        document.location.href = "/admin/";
-      }
-    });
-  }
-</script>
+      <div class="header-right">
+        <button class="contact-btn" onclick="openContact()">İletişim</button>
+      </div>
+    </div>
 
+    <nav class="main-nav">
+      <button onclick="showBrands('Plastik Çakmak')">Plastik Çakmak</button>
+      <button onclick="showBrands('Promosyon Çakmak')">Promosyon Çakmak</button>
+      <button onclick="showBrands('Metal Çakmak')">Metal Çakmak</button>
+      <button onclick="showBrands('Diğer Modeller')">Diğer Modeller</button>
+    </nav>
+
+    <div id="brand-panel" class="brand-overlay">
+      <div class="brand-grid">
+        <button onclick="filterByBrand('Clipper')">Clipper</button>
+        <button onclick="filterByBrand('Str')">Str</button>
+        <button onclick="filterByBrand('Tokai')">Tokai</button>
+        <button onclick="filterByBrand('Mry')">Mry</button>
+        <button onclick="filterByBrand('Kasai')">Kasai</button>
+        <button onclick="filterByBrand('Koko')">Koko</button>
+        <button onclick="filterByBrand('Copper')">Copper</button>
+        <button class="close-brands" onclick="closeBrands()">× Kapat</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="popular-section">
+    <h2 id="section-title">Popüler Modellerimiz</h2>
+    <div class="slider-wrapper">
+      <div id="popular-products" class="products-container">
+        </div>
+    </div>
+  </section>
+
+  <section class="cat-images-section">
+    <h2>Kategorilerimizi Keşfedin</h2>
+    <div class="cat-image-grid">
+      <div class="cat-card" onclick="showBrands('Plastik Çakmak')">
+        <img src="img/cat-plastik.jpg" alt="Plastik">
+        <div class="cat-label">Plastik Çakmak</div>
+      </div>
+      <div class="cat-card" onclick="showBrands('Promosyon Çakmak')">
+        <img src="img/cat-promosyon.jpg" alt="Promosyon">
+        <div class="cat-label">Promosyon Çakmak</div>
+      </div>
+      <div class="cat-card" onclick="showBrands('Metal Çakmak')">
+        <img src="img/cat-metal.jpg" alt="Metal">
+        <div class="cat-label">Metal Çakmak</div>
+      </div>
+      <div class="cat-card" onclick="showBrands('Diğer Modeller')">
+        <img src="img/cat-diger.jpg" alt="Diğer Modeller">
+        <div class="cat-label">Diğer Modeller</div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/product.js"></script>
+  <script>
+    // Netlify Identity ve Modal Fonksiyonları
+    function openContact() { document.getElementById("contact-modal").style.display = "block"; }
+    function closeContact() { document.getElementById("contact-modal").style.display = "none"; }
+    
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user && window.location.hash.includes("token")) {
+          window.netlifyIdentity.open();
+        }
+      });
+      window.netlifyIdentity.on("login", () => {
+        if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
+          document.location.href = "/admin/";
+        }
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1,86 +1,71 @@
-
+let allProducts = [];
+window.selectedCategory = "";
 
 document.addEventListener("DOMContentLoaded", () => {
     fetch("data/product.json")
         .then(res => res.json())
         .then(data => {
             allProducts = data.products || [];
-            
-            // 1. Ana sayfadaki Slider için SADECE popüler olanları filtrele
-            const populars = allProducts.filter(p => p.is_popular === true);
-            renderProducts(populars, "popular-products");
-
-            // 2. Sayfanın altındaki Kategori kartlarını hazırla
+            // İlk açılışta sadece popüler olanları göster
+            renderProducts(allProducts.filter(p => p.p_pop));
             setupSearch();
-            if(typeof startAutoSlider === "function") startAutoSlider();
         })
-        .catch(err => console.error("Veri çekme hatası:", err));
+        .catch(err => console.error("Ürünler yüklenirken hata:", err));
 });
 
-// Ürünleri Listeleme Fonksiyonu
-function renderProducts(products, containerId) {
-    const container = document.getElementById(containerId);
+function renderProducts(products) {
+    const container = document.getElementById("popular-products");
     if (!container) return;
-    
+
     if (products.length === 0) {
-        container.innerHTML = "<p>Bu kategoride henüz ürün bulunmamaktadır.</p>";
+        container.innerHTML = "<p>Aradığınız kriterlerde ürün bulunamadı.</p>";
         return;
     }
 
-    container.innerHTML = products.map(product => `
-        <div class="product-card" onclick="openProductDetail('${product.product_name}')">
-            <img src="${product.image_url || product.image_file}" alt="${product.product_name}">
-            <h3>${product.product_name}</h3>
-            <p>${product.description}</p>
-            <span class="cat-tag">${product.category}</span>
-        </div>
-    `).join('');
-}
-
-// Kategoriye Tıklayınca Çalışacak Fonksiyon
-function filterByCategory(categoryName) {
-    // Ürün hem popüler olabilir hem olmayabilir, ama kategori eşleşiyorsa getirir
-    const filtered = allProducts.filter(p => p.category === categoryName);
-    
-    // Başlığı değiştir ve ürünleri bas
-    const sectionTitle = document.querySelector(".popular h2");
-    if(sectionTitle) sectionTitle.innerText = categoryName;
-    
-    renderProducts(filtered, "popular-products");
-    
-    // Ürünlerin olduğu bölüme yumuşak geçiş yap
-    window.scrollTo({ top: 450, behavior: 'smooth' });
-}
-
-let allProducts = [];
-
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("data/product.json")
-        .then(res => res.json())
-        .then(data => {
-            allProducts = data.products || [];
-            // İlk açılışta popülerleri göster
-            renderProducts(allProducts.filter(p => p.p_pop), "popular-products");
-        });
-});
-
-function renderProducts(products, containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    container.innerHTML = products.map(product => `
+    container.innerHTML = products.map(p => `
         <div class="product-card">
-            <img src="${product.p_url || product.p_img}" alt="${product.p_name}">
-            <div class="card-info">
-                <small>${product.p_brand}</small>
-                <h3>${product.p_name}</h3>
-                <span class="cat-tag">${product.p_cat}</span>
+            <img src="${p.p_url || p.p_img}" alt="${p.p_name}">
+            <div class="p-info">
+                <small>${p.p_brand}</small>
+                <h3>${p.p_name}</h3>
+                <p style="font-size: 13px; color: #666;">${p.p_desc || ''}</p>
+                <span style="background: #f0f0f0; padding: 4px 10px; border-radius: 10px; font-size: 12px;">${p.p_cat}</span>
             </div>
         </div>
     `).join('');
 }
 
+function showBrands(category) {
+    window.selectedCategory = category;
+    document.getElementById("brand-panel").style.display = "flex";
+    document.getElementById("section-title").innerText = category;
+    
+    // Kategoriye ait ürünleri hemen göster
+    const filtered = allProducts.filter(p => p.p_cat === category);
+    renderProducts(filtered);
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+}
+
+function closeBrands() {
+    document.getElementById("brand-panel").style.display = "none";
+}
+
 function filterByBrand(brand) {
-    const filtered = allProducts.filter(p => p.p_brand === brand);
-    document.querySelector(".popular h2").innerText = brand + " Modelleri";
-    renderProducts(filtered, "popular-products");
+    const filtered = allProducts.filter(p => p.p_brand === brand && p.p_cat === window.selectedCategory);
+    document.getElementById("section-title").innerText = `${window.selectedCategory} > ${brand}`;
+    renderProducts(filtered);
+    closeBrands();
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById("search");
+    searchInput.addEventListener("input", (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = allProducts.filter(p => 
+            p.p_name.toLowerCase().includes(term) || 
+            p.p_brand.toLowerCase().includes(term) ||
+            p.p_cat.toLowerCase().includes(term)
+        );
+        renderProducts(filtered);
+    });
 }
