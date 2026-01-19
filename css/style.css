@@ -3,75 +3,78 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
-/* Header Tasarımı */
+body {
+    background-color: #f9f9f9;
+}
+
+/* Header Arka Planı (Gri) */
 .main-header {
-    background-color: #e0e0e0; /* Gri Div Arka Plan */
-    padding: 20px 0 10px 0;
+    background-color: #e0e0e0; 
+    padding: 20px 0 15px 0;
     width: 100%;
+    border-bottom: 2px solid #ccc;
 }
 
-/* 12 Parçalı Grid Sistemi (1-3-5-2-1 Dağılımı) */
+/* 12 Parçalı Grid (1-3-5-2-1) */
 .header-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
-    gap: 15px;
+    max-width: 100%;
+    gap: 10px;
 }
 
-.spacer {
-    grid-column: span 1;
-}
+.spacer { grid-column: span 1; }
 
-.logo-area {
-    grid-column: span 3;
-    display: flex;
-    justify-content: center;
-}
-
-.main-logo {
+/* Logo Alanı ve Yuvarlatılmış Köşeler */
+.logo-area { grid-column: span 3; display: flex; justify-content: center; }
+.logo-placeholder {
     width: 100%;
-    max-width: 180px;
-    border-radius: 50px; /* Radius Artırıldı */
-    background-color: #fff;
-    padding: 5px;
+    max-width: 200px;
+    height: 60px;
+    background: #fff;
+    border-radius: 60px; /* Radius Artırıldı */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+    border: 1px solid #bbb;
 }
 
-.search-area {
-    grid-column: span 5;
-}
-
+/* Beyaz Arama Inputu */
+.search-area { grid-column: span 5; }
 .search-input {
     width: 100%;
-    padding: 12px 20px;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-    background-color: white; /* Beyaz Arama Inputu */
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    background-color: white;
     outline: none;
+    font-size: 16px;
 }
 
-.contact-area {
-    grid-column: span 2;
-}
-
+/* İletişim Butonu */
+.contact-area { grid-column: span 2; }
 .contact-btn {
     width: 100%;
     padding: 12px;
-    border-radius: 25px;
-    background-color: #333;
+    border-radius: 30px;
+    background-color: #222;
     color: white;
     border: none;
     cursor: pointer;
-    font-weight: bold;
+    transition: 0.3s;
 }
 
-/* Kategori Navigasyonu (8/12 Genişlik) */
+.contact-btn:hover { background-color: #444; }
+
+/* Kategoriler (8/12 genişlik ve Merkezleme) */
 .category-nav {
-    width: 66.66%; /* 12 parçanın 8'i */
+    width: 66.66%; 
     margin: 20px auto 0 auto;
 }
 
@@ -81,64 +84,58 @@
     list-style: none;
 }
 
-.category-item {
-    position: relative;
-    padding-bottom: 10px;
-}
+.category-item { position: relative; padding: 10px; }
+.cat-link { text-decoration: none; color: #333; font-weight: bold; }
 
-.cat-link {
-    text-decoration: none;
-    color: #333;
-    font-weight: 600;
-}
-
-/* Dropdown: Markalar */
+/* Marka Dropdown (Hover Durumunda) */
 .brand-dropdown {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: white;
-    min-width: 150px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-    z-index: 10;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     border-radius: 8px;
     padding: 10px 0;
+    z-index: 100;
 }
 
 .brand-dropdown a {
-    color: #555;
-    padding: 8px 16px;
+    display: block;
+    padding: 10px 20px;
     text-decoration: none;
-    display: block;
+    color: #555;
 }
 
-.brand-dropdown a:hover {
-    background-color: #f5f5f5;
-}
+.brand-dropdown a:hover { background: #f0f0f0; }
+.category-item:hover .brand-dropdown { display: block; }
 
-.category-item:hover .brand-dropdown {
-    display: block;
-}
-
-/* Popüler Ürünler Bölümü */
+/* Popüler Ürünler Gridi */
 .content-container {
     max-width: 1200px;
     margin: 40px auto;
-    padding: 0 20px;
+    padding: 20px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
 }
 
 .popular-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* Sol 2 birim, sağ 1 birim */
+    grid-template-columns: 2fr 1fr; /* Sol geniş, sağ dar */
     gap: 20px;
+    height: 500px;
 }
 
 .popular-big img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 .popular-small-group {
@@ -147,13 +144,10 @@
     gap: 20px;
 }
 
-.popular-small {
-    flex: 1;
-}
-
+.popular-small { flex: 1; }
 .popular-small img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 20px;
 }
