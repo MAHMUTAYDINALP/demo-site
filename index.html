@@ -12,7 +12,7 @@
   <div id="contact-modal" class="modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeContact()">&times;</span>
-      <h2>Kırgıl Çakmak İletişim</h2>
+      <h2>İletişim Bilgileri</h2>
       <div class="contact-info">
         <p><strong>Telefon:</strong> 0505 069 6639</p>
         <p><strong>E-posta:</strong> bakirkirgil@gmail.com</p>
@@ -24,54 +24,47 @@
   </div>
 
   <div class="header-wrapper">
-    <header class="header-grid">
-      <div class="grid-spacer"></div> <div class="grid-logo">
-        <a href="index.html">
-          <div class="logo-container">
-            <img src="img/logo.png" alt="Kırgıl Çakmak Logo" class="logo">
-          </div>
+    <header class="header">
+      <div class="header-top">
+        <a href="index.html" class="logo-link">
+          <img src="img/logo.png" alt="Kırgıl Çakmak Logo" class="logo">
         </a>
-      </div>
-
-      <div class="grid-search">
+        
         <div class="search-box">
           <input type="text" id="search" placeholder="Model veya marka ara...">
           <button id="search-btn">🔍</button>
         </div>
+
+        <div class="header-right">
+          <button class="contact-btn" onclick="openContact()">İletişim</button>
+        </div>
       </div>
 
-      <div class="grid-contact">
-        <button class="contact-btn" onclick="openContact()">İletişim</button>
-      </div>
-
-      <div class="grid-spacer"></div> </header>
-
-    <nav class="main-nav-container">
-      <div class="nav-8-12">
-        <div class="nav-item" onmouseenter="showBrands('Plastik Çakmak')" onclick="filterByCategory('Plastik Çakmak')">
+      <nav class="main-nav">
+        <button class="nav-item" onmouseenter="showBrands('Plastik Çakmak')" onclick="filterByCategory('Plastik Çakmak')">
           Plastik Çakmak
           <div class="brand-dropdown" id="brands-Plastik"></div>
-        </div>
-        <div class="nav-item" onmouseenter="showBrands('Promosyon Çakmak')" onclick="filterByCategory('Promosyon Çakmak')">
+        </button>
+        <button class="nav-item" onmouseenter="showBrands('Promosyon Çakmak')" onclick="filterByCategory('Promosyon Çakmak')">
           Promosyon Çakmak
           <div class="brand-dropdown" id="brands-Promosyon"></div>
-        </div>
-        <div class="nav-item" onmouseenter="showBrands('Metal Çakmak')" onclick="filterByCategory('Metal Çakmak')">
+        </button>
+        <button class="nav-item" onmouseenter="showBrands('Metal Çakmak')" onclick="filterByCategory('Metal Çakmak')">
           Metal Çakmak
           <div class="brand-dropdown" id="brands-Metal"></div>
-        </div>
-        <div class="nav-item" onmouseenter="showBrands('Diğer Modeller')" onclick="filterByCategory('Diğer Modeller')">
+        </button>
+        <button class="nav-item" onmouseenter="showBrands('Diğer Modeller')" onclick="filterByCategory('Diğer Modeller')">
           Diğer Modeller
           <div class="brand-dropdown" id="brands-Diger"></div>
-        </div>
-      </div>
-    </nav>
+        </button>
+      </nav>
+    </header>
   </div>
 
   <main>
-    <section class="popular-hero">
-      <div id="popular-layout" class="hero-grid">
-        </div>
+    <section class="popular-section">
+      <h2 id="section-title">Popüler Modellerimiz</h2>
+      <div id="popular-layout" class="hero-grid"></div>
     </section>
 
     <section class="cat-images-section">
