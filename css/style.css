@@ -21,15 +21,15 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
     border-radius: 40px; 
     padding: 0; /* Padding kaldırıldı ki logo tam sığsın */
     display: flex; justify-content: center; align-items: center;
-   height: 20px;
-   width: 30px;
+   height: 200px;
+   width: 300px;
     margin: 0 10px;
     overflow: hidden;
     cursor: pointer;
 }
 .logo { 
-    height: 100%; 
-    width: 100%; 
+    height: 200px;
+    width: 300px;
     object-fit: contain; /* Oranı bozmadan alanı doldurur */
     padding: 10px; /* Görselin kenarlara yapışmaması için güvenli boşluk */
 }
@@ -44,7 +44,7 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: 
 #search-btn { border: none; background: transparent; cursor: pointer; font-size: 18px; color: #666; }
 
 .contact-btn {
-    background: #e80000; color: rgb(255, 255, 255); padding: 12px 25px;
+    background: #e80000; color: rgb(255, 255, 255); padding: 10px 12px 25px;
     border-radius: 30px; border: none; font-weight: 700; cursor: pointer;
 }
 
