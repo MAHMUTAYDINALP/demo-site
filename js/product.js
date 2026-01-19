@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
-// POPÜLER GÖRSEL GRID (SADECE GÖRSEL)
+// POPÜLER GÖRSEL GRID
 function renderHero(products) {
     const container = document.getElementById("popular-layout");
     if (!container || products.length < 3) return;
@@ -33,7 +33,7 @@ function renderHero(products) {
     `;
 }
 
-// HOVER İLE MARKA GÖSTERME
+// HOVER MARKA MANTIĞI
 function showBrands(category) {
     const brands = [...new Set(allProducts.filter(p => p.p_cat === category).map(p => p.p_brand))];
     const dropdownId = category.includes("Plastik") ? "brands-Plastik" : 
@@ -48,18 +48,19 @@ function showBrands(category) {
     }
 }
 
-// ARAMA MOTORU (BUTON ÇALIŞIR HALE GELDİ)
+// ARAMA MOTORU - Fix
 function setupSearch() {
     const searchInput = document.getElementById("search");
     const searchBtn = document.getElementById("search-btn");
 
     const performSearch = () => {
         const term = searchInput.value.toLowerCase();
+        if (!term) return;
         const filtered = allProducts.filter(p => 
             p.p_name.toLowerCase().includes(term) || 
             p.p_brand.toLowerCase().includes(term)
         );
-        renderGeneralList(filtered, term ? `"${term}" Sonuçları` : "Tüm Ürünler");
+        renderGeneralList(filtered, `"${term}" için Sonuçlar`);
     };
 
     searchBtn.addEventListener("click", performSearch);
@@ -87,9 +88,9 @@ function renderGeneralList(products, title) {
     list.style.gap = "25px";
 
     list.innerHTML = products.map(p => `
-        <div class="product-card" style="border: 1px solid #eee; padding: 20px; border-radius: 15px; text-align: center; background:#fff;">
+        <div class="product-card" style="border: 1px solid #eee; padding: 20px; border-radius: 15px; text-align: center; background:#fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
             <img src="${p.p_url || p.p_img}" style="width:100%; height:250px; object-fit:contain; margin-bottom:15px;">
-            <small style="color:#999; text-transform:uppercase;">${p.p_brand}</small>
+            <small style="color:#999; text-transform:uppercase; font-size:11px;">${p.p_brand}</small>
             <h4 style="margin:10px 0;">${p.p_name}</h4>
         </div>
     `).join('');
