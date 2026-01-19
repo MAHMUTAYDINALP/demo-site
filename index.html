@@ -1,77 +1,118 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ürün Portalı - Güncel Tasarım</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yürek Çakmak | Katalog</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-grid">
-            <div class="spacer"></div>
+  <div id="contact-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeContact()">&times;</span>
+      <h2>İletişim Bilgileri</h2>
+      <div class="contact-info">
+        <p><strong>Telefon:</strong> +90 (505) 069 8639</p>
+        <p><strong>E-posta:</strong> info@yurekcakmak.com</p>
+        <hr>
+        <a href="https://wa.me/905050698639" class="whatsapp-link" target="_blank">WhatsApp Destek Hattı</a>
+      </div>
+    </div>
+  </div>
 
-            <div class="logo-area">
-                <div class="logo-placeholder">LOGO</div>
-            </div>
+  <div class="header-wrapper">
+    <header class="header-grid">
+      <div class="grid-spacer"></div>
 
-            <div class="search-area">
-                <input type="text" placeholder="Ürün veya marka ara..." class="search-input">
-            </div>
+      <div class="grid-logo">
+        <a href="index.html">
+          <div class="logo-container">
+            <img src="img/logo.png" alt="Logo" class="logo">
+          </div>
+        </a>
+      </div>
 
-            <div class="contact-area">
-                <button class="contact-btn">İletişim</button>
-            </div>
-
-            <div class="spacer"></div>
+      <div class="grid-search">
+        <div class="search-box">
+          <input type="text" id="search" placeholder="Model veya marka ara...">
+          <button id="search-btn">🔍</button>
         </div>
+      </div>
 
-        <nav class="category-nav">
-            <ul class="category-list">
-                <li class="category-item">
-                    <a href="#" class="cat-link">Elektronik</a>
-                    <div class="brand-dropdown">
-                        <a href="#">Apple</a>
-                        <a href="#">Samsung</a>
-                        <a href="#">Xiaomi</a>
-                    </div>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="cat-link">Moda</a>
-                    <div class="brand-dropdown">
-                        <a href="#">Nike</a>
-                        <a href="#">Adidas</a>
-                        <a href="#">Zara</a>
-                    </div>
-                </li>
-                <li class="category-item"><a href="#" class="cat-link">Ev & Yaşam</a></li>
-                <li class="category-item"><a href="#" class="cat-link">Spor</a></li>
-            </ul>
-        </nav>
+      <div class="grid-contact">
+        <button class="contact-btn" onclick="openContact()">İletişim</button>
+      </div>
+
+      <div class="grid-spacer"></div>
     </header>
 
-    <main class="content-container">
-        
-        <h2 class="section-title">Popüler Ürünler</h2>
+    <nav class="main-nav-container">
+      <div class="nav-8-12">
+        <div class="nav-item" onmouseenter="showBrands('Plastik Çakmak')" onclick="filterByCategory('Plastik Çakmak')">
+          Plastik Çakmak
+          <div class="brand-dropdown" id="brands-Plastik"></div>
+        </div>
+        <div class="nav-item" onmouseenter="showBrands('Promosyon Çakmak')" onclick="filterByCategory('Promosyon Çakmak')">
+          Promosyon Çakmak
+          <div class="brand-dropdown" id="brands-Promosyon"></div>
+        </div>
+        <div class="nav-item" onmouseenter="showBrands('Metal Çakmak')" onclick="filterByCategory('Metal Çakmak')">
+          Metal Çakmak
+          <div class="brand-dropdown" id="brands-Metal"></div>
+        </div>
+        <div class="nav-item" onmouseenter="showBrands('Diğer Modeller')" onclick="filterByCategory('Diğer Modeller')">
+          Diğer Modeller
+          <div class="brand-dropdown" id="brands-Diger"></div>
+        </div>
+      </div>
+    </nav>
+  </div>
 
-        <section class="popular-section">
-            <div class="popular-grid">
-                <div class="popular-big">
-                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800" alt="Popüler 1">
-                </div>
-                <div class="popular-small-group">
-                    <div class="popular-small">
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Popüler 2">
-                    </div>
-                    <div class="popular-small">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Popüler 3">
-                    </div>
-                </div>
-            </div>
-        </section>
+  <main>
+    <section class="popular-hero">
+      <div id="popular-layout" class="hero-grid">
+        </div>
+    </section>
 
-    </main>
+    <section class="cat-images-section">
+      <div class="cat-image-grid">
+        <div class="cat-card" onclick="filterByCategory('Plastik Çakmak')">
+          <img src="img/cat-plastik.jpg" alt="Plastik">
+          <div class="cat-label">Plastik Çakmak</div>
+        </div>
+        <div class="cat-card" onclick="filterByCategory('Promosyon Çakmak')">
+          <img src="img/cat-promosyon.jpg" alt="Promosyon">
+          <div class="cat-label">Promosyon Çakmak</div>
+        </div>
+        <div class="cat-card" onclick="filterByCategory('Metal Çakmak')">
+          <img src="img/cat-metal.jpg" alt="Metal">
+          <div class="cat-label">Metal Çakmak</div>
+        </div>
+        <div class="cat-card" onclick="filterByCategory('Diğer Modeller')">
+          <img src="img/cat-diger.jpg" alt="Diğer Modeller">
+          <div class="cat-label">Diğer Modeller</div>
+        </div>
+      </div>
+    </section>
+  </main>
 
+  <script src="js/product.js"></script>
+  <script>
+    function openContact() { document.getElementById("contact-modal").style.display = "block"; }
+    function closeContact() { document.getElementById("contact-modal").style.display = "none"; }
+    
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user && window.location.hash.includes("token")) window.netlifyIdentity.open();
+      });
+      window.netlifyIdentity.on("login", () => {
+        if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
+          document.location.href = "/admin/";
+        }
+      });
+    }
+  </script>
 </body>
 </html>

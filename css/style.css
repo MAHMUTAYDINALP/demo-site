@@ -1,153 +1,91 @@
-/* Genel Sıfırlama */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: #222; }
+
+/* 12 PARÇALIK GRID SİSTEMİ */
+.header-wrapper {
+    position: sticky; top: 0; z-index: 1000;
+    background: #f4f4f4; /* Gri alan */
+    border-bottom: 1px solid #ddd;
 }
 
-body {
-    background-color: #f9f9f9;
-}
-
-/* Header Arka Planı (Gri) */
-.main-header {
-    background-color: #e0e0e0; 
-    padding: 20px 0 15px 0;
-    width: 100%;
-    border-bottom: 2px solid #ccc;
-}
-
-/* 12 Parçalı Grid (1-3-5-2-1) */
 .header-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: 1fr 3fr 5fr 2fr 1fr; /* 1+3+5+2+1 = 12 */
     align-items: center;
-    max-width: 100%;
-    gap: 10px;
-}
-
-.spacer { grid-column: span 1; }
-
-/* Logo Alanı ve Yuvarlatılmış Köşeler */
-.logo-area { grid-column: span 3; display: flex; justify-content: center; }
-.logo-placeholder {
-    width: 100%;
-    max-width: 200px;
-    height: 60px;
-    background: #fff;
-    border-radius: 60px; /* Radius Artırıldı */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: #333;
-    border: 1px solid #bbb;
-}
-
-/* Beyaz Arama Inputu */
-.search-area { grid-column: span 5; }
-.search-input {
-    width: 100%;
-    padding: 12px 25px;
-    border-radius: 30px;
-    border: 1px solid #fff;
-    background-color: white;
-    outline: none;
-    font-size: 16px;
-}
-
-/* İletişim Butonu */
-.contact-area { grid-column: span 2; }
-.contact-btn {
-    width: 100%;
-    padding: 12px;
-    border-radius: 30px;
-    background-color: #222;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.contact-btn:hover { background-color: #444; }
-
-/* Kategoriler (8/12 genişlik ve Merkezleme) */
-.category-nav {
-    width: 66.66%; 
-    margin: 20px auto 0 auto;
-}
-
-.category-list {
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-}
-
-.category-item { position: relative; padding: 10px; }
-.cat-link { text-decoration: none; color: #333; font-weight: bold; }
-
-/* Marka Dropdown (Hover Durumunda) */
-.brand-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: white;
-    min-width: 160px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    border-radius: 8px;
     padding: 10px 0;
-    z-index: 100;
+    max-width: 100%;
 }
 
-.brand-dropdown a {
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #555;
+.logo-container {
+    background: #e0e0e0; 
+    border-radius: 40px; /* Yüksek radius */
+    padding: 10px;
+    display: flex; justify-content: center;
+}
+.logo { height: 60px; border-radius: 30px; }
+
+.search-box {
+    display: flex; background: #fff; /* Beyaz input alanı */
+    border-radius: 25px; padding: 5px 15px; margin: 0 10px;
+    border: 1px solid #ccc;
+}
+#search { border: none; width: 100%; padding: 10px; outline: none; }
+#search-btn { border: none; background: transparent; cursor: pointer; }
+
+.contact-btn {
+    background: #333; color: white; border: none;
+    padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;
 }
 
-.brand-dropdown a:hover { background: #f0f0f0; }
-.category-item:hover .brand-dropdown { display: block; }
-
-/* Popüler Ürünler Gridi */
-.content-container {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
+/* KATEGORİ NAV (8/12) */
+.main-nav-container { display: flex; justify-content: center; padding: 10px 0; }
+.nav-8-12 {
+    display: flex; width: 66.66%; /* 8/12 genişlik */
+    justify-content: space-around; position: relative;
 }
 
-.section-title {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+.nav-item {
+    position: relative; padding: 10px; font-weight: bold; cursor: pointer;
 }
+.nav-item:hover { color: #d32f2f; }
 
-.popular-grid {
+/* MARKA DROPDOWN */
+.brand-dropdown {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: white; border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 10; padding: 10px; border-radius: 8px; min-width: 150px;
+}
+.nav-item:hover .brand-dropdown { display: block; }
+.brand-link { display: block; padding: 5px 10px; text-decoration: none; color: #444; }
+.brand-link:hover { background: #f5f5f5; color: #d32f2f; }
+
+/* ASİMETRİK HERO GRID (3 ÜRÜN) */
+.popular-hero { padding: 20px 5%; }
+.hero-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* Sol geniş, sağ dar */
-    gap: 20px;
+    grid-template-columns: 2fr 1fr; /* Sol 2 kat geniş */
+    grid-template-rows: 1fr 1fr;
+    gap: 15px;
     height: 500px;
 }
+.hero-item { overflow: hidden; border-radius: 12px; position: relative; }
+.hero-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.hero-item:hover img { transform: scale(1.05); }
 
-.popular-big img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px;
+/* Sol büyük resim */
+.item-big { grid-row: 1 / span 2; } 
+
+/* KATEGORİ KARTLARI (ALTTA) */
+.cat-image-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px 5%;
+}
+.cat-card { position: relative; border-radius: 12px; overflow: hidden; height: 250px; cursor: pointer; }
+.cat-card img { width: 100%; height: 100%; object-fit: cover; }
+.cat-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(0,0,0,0.6); color: white; padding: 15px; text-align: center;
 }
 
-.popular-small-group {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.popular-small { flex: 1; }
-.popular-small img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px;
-}
+/* MODAL */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+.modal-content { background: white; margin: 15% auto; padding: 30px; width: 300px; border-radius: 20px; position: relative; text-align: center; }
+.close-modal { position: absolute; right: 20px; top: 10px; cursor: pointer; font-size: 24px; }
