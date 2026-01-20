@@ -5,6 +5,7 @@ let sliderInterval;
 let isAnimating = false;
 let startX = 0;
 let isDragging = false;
+const dragThreshold = 10; // 10 pikselden az hareket tıklama sayılır
 
 document.addEventListener("DOMContentLoaded", () => {
     fetch("data/product.json")
@@ -33,6 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 });
 
+function renderHeroSet(products) {
+    const container = document.getElementById("popular-layout");
+    if (!container) return;
+    // TIKLAMA OLAYINI BURADAN KALDIRDIK, JS İÇİNDE YÖNETECEĞİZ
+    container.innerHTML = products.map((p, index) => `
+        <div class="hero-item ${index === 0 ? 'item-big' : ''}" data-name="${p.p_name}">
+            <img src="${p.p_url || p.p_img}" alt="${p.p_name}" draggable="false">
+        </div>
+    `).join('');
+}
+
 function startAutoSlider() {
     clearInterval(sliderInterval);
     sliderInterval = setInterval(() => moveSlider(1), 7000);
@@ -50,7 +62,6 @@ function moveSlider(direction) {
         const currentImg = item.querySelector('img');
         const nextImg = document.createElement('img');
         nextImg.src = nextSet[i].p_url || nextSet[i].p_img;
-        nextImg.alt = nextSet[i].p_name;
         nextImg.setAttribute('draggable', 'false');
         
         nextImg.className = direction > 0 ? 'slide-left-in' : 'slide-right-in';
@@ -61,7 +72,7 @@ function moveSlider(direction) {
         setTimeout(() => {
             if (currentImg) currentImg.remove();
             nextImg.className = ''; 
-            item.setAttribute('onclick', `goToDetail('${nextSet[i].p_name}')`);
+            item.setAttribute('data-name', nextSet[i].p_name); // İsmi güncelle
             if (i === heroItems.length - 1) {
                 currentSetIndex = nextIndex;
                 isAnimating = false;
@@ -71,11 +82,11 @@ function moveSlider(direction) {
 }
 
 function initManualSwipe() {
-   const layout = document.getElementById("popular-layout");
+    const layout = document.getElementById("popular-layout");
     if (!layout) return;
     
     layout.addEventListener('mousedown', (e) => {
-        e.preventDefault(); // BU SATIR RESMİ TUTUP SÜRÜKLEMEYİ (BROWSER DRAG) ENGELLER
+        e.preventDefault();
         startX = e.pageX;
         isDragging = true;
         clearInterval(sliderInterval);
@@ -83,47 +94,31 @@ function initManualSwipe() {
 
     window.addEventListener('mouseup', (e) => {
         if (!isDragging) return;
-        handleSwipeEnd(e.pageX);
+        handleActionEnd(e.pageX, e.target);
     });
-
-    // DOKUNMATİK OLAYLAR
-    layout.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX;
-        isDragging = true;
-        clearInterval(sliderInterval);
-    }, {passive: true});
-
-    layout.addEventListener('touchend', (e) => {
-        if (!isDragging) return;
-        handleSwipeEnd(e.changedTouches[0].pageX);
-    }, {passive: true});
 }
 
-function handleSwipeEnd(endX) {
+// TIKLAMA MI KAYDIRMA MI KARAR VEREN FONKSİYON
+function handleActionEnd(endX, targetElement) {
     isDragging = false;
     const diff = startX - endX;
-    if (Math.abs(diff) > 50) moveSlider(diff > 0 ? 1 : -1);
+    const absDiff = Math.abs(diff);
+
+    if (absDiff < dragThreshold) {
+        // HAREKET ÇOK AZ, DEMEK Kİ TIKLAMAK İSTEDİ
+        const heroItem = targetElement.closest('.hero-item');
+        if (heroItem) {
+            const productName = heroItem.getAttribute('data-name');
+            goToDetail(productName);
+        }
+    } else {
+        // HAREKET EŞİĞİ GEÇTİ, KAYDIRMA YAP
+        moveSlider(diff > 0 ? 1 : -1);
+    }
     startAutoSlider();
 }
 
-function renderHeroSet(products) {
-    const container = document.getElementById("popular-layout");
-    if (!container) return;
-    container.innerHTML = products.map((p, index) => `
-        <div class="hero-item ${index === 0 ? 'item-big' : ''}" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_url || p.p_img}" alt="${p.p_name}" draggable="false">
-        </div>
-    `).join('');
-}
-
-// --- DİĞER TEMEL FONKSİYONLAR ---
-function setupSearch() {
-    const btn = document.getElementById("search-btn");
-    const input = document.getElementById("search");
-    if (btn) btn.onclick = performSearch;
-    if (input) input.onkeypress = (e) => { if (e.key === 'Enter') performSearch(); };
-}
-
+// DİĞER FONKSİYONLAR (Detay yükleme, Arama vb.)
 function performSearch() {
     const term = document.getElementById("search").value.toLowerCase();
     if (!term) return;
@@ -131,20 +126,7 @@ function performSearch() {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
     }
-    const filtered = allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term));
-    renderGeneralList(filtered, `"${term}" Sonuçları`);
-}
-
-function filterByCategory(cat) {
-    if (!document.getElementById("popular-hero-area")) {
-        window.location.href = `index.html?cat=${encodeURIComponent(cat)}`;
-        return;
-    }
-    renderGeneralList(allProducts.filter(p => p.p_cat === cat), cat);
-}
-
-function filterByBrand(brand, cat) {
-    renderGeneralList(allProducts.filter(p => p.p_brand === brand && p.p_cat === cat), `${cat} > ${brand}`);
+    renderGeneralList(allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term)), `"${term}" Sonuçları`);
 }
 
 function renderGeneralList(products, title) {
@@ -157,7 +139,6 @@ function renderGeneralList(products, title) {
             <h4 style="font-size:14px; margin: 10px 0;">${p.p_name}</h4>
         </div>
     `).join('');
-    window.scrollTo({ top: 300, behavior: 'smooth' });
 }
 
 function showBrands(category) {
@@ -190,3 +171,9 @@ function loadProductDetail(name) {
 
 function openContact() { document.getElementById("contact-modal").style.display = "block"; }
 function closeContact() { document.getElementById("contact-modal").style.display = "none"; }
+function setupSearch() {
+    const btn = document.getElementById("search-btn");
+    const input = document.getElementById("search");
+    if (btn) btn.onclick = performSearch;
+    if (input) input.onkeypress = (e) => { if (e.key === 'Enter') performSearch(); };
+}
