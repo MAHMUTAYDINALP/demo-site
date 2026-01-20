@@ -3,9 +3,13 @@ let popularSets = [];
 let currentSetIndex = 0;
 let sliderInterval;
 let isAnimating = false;
+
+// Tıklama ve Kaydırma Kontrol Değişkenleri
 let startX = 0;
+let startTime = 0;
 let isDragging = false;
-const dragThreshold = 10; // 10 pikselden az hareket tıklama sayılır
+const timeThreshold = 200; // 200ms'den uzun basışlar sürükleme sayılır
+const moveThreshold = 5;   // 5px'den fazla hareket sürükleme sayılır
 
 document.addEventListener("DOMContentLoaded", () => {
     fetch("data/product.json")
@@ -37,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderHeroSet(products) {
     const container = document.getElementById("popular-layout");
     if (!container) return;
-    // TIKLAMA OLAYINI BURADAN KALDIRDIK, JS İÇİNDE YÖNETECEĞİZ
     container.innerHTML = products.map((p, index) => `
         <div class="hero-item ${index === 0 ? 'item-big' : ''}" data-name="${p.p_name}">
             <img src="${p.p_url || p.p_img}" alt="${p.p_name}" draggable="false">
@@ -72,7 +75,7 @@ function moveSlider(direction) {
         setTimeout(() => {
             if (currentImg) currentImg.remove();
             nextImg.className = ''; 
-            item.setAttribute('data-name', nextSet[i].p_name); // İsmi güncelle
+            item.setAttribute('data-name', nextSet[i].p_name);
             if (i === heroItems.length - 1) {
                 currentSetIndex = nextIndex;
                 isAnimating = false;
@@ -85,43 +88,72 @@ function initManualSwipe() {
     const layout = document.getElementById("popular-layout");
     if (!layout) return;
     
+    // MOUSE OLAYLARI
     layout.addEventListener('mousedown', (e) => {
         e.preventDefault();
         startX = e.pageX;
-        isDragging = true;
+        startTime = Date.now(); // Basıldığı anı kaydet
+        isDragging = false;
         clearInterval(sliderInterval);
     });
 
+    // Hareket kontrolü: Çok az bile oynatsa sürükleme başlasın
+    layout.addEventListener('mousemove', (e) => {
+        if (startTime === 0) return;
+        if (Math.abs(e.pageX - startX) > moveThreshold) {
+            isDragging = true;
+        }
+    });
+
     window.addEventListener('mouseup', (e) => {
-        if (!isDragging) return;
+        if (startTime === 0) return;
         handleActionEnd(e.pageX, e.target);
+        startTime = 0; // Sıfırla
+    });
+
+    // MOBİL (TOUCH) OLAYLARI
+    layout.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX;
+        startTime = Date.now();
+        isDragging = false;
+        clearInterval(sliderInterval);
+    });
+
+    layout.addEventListener('touchend', (e) => {
+        if (startTime === 0) return;
+        handleActionEnd(e.changedTouches[0].pageX, e.target);
+        startTime = 0;
     });
 }
 
-// TIKLAMA MI KAYDIRMA MI KARAR VEREN FONKSİYON
+// ASIL KARAR MEKANİZMASI
 function handleActionEnd(endX, targetElement) {
-    isDragging = false;
+    const endTime = Date.now();
+    const duration = endTime - startTime;
     const diff = startX - endX;
     const absDiff = Math.abs(diff);
 
-    if (absDiff < dragThreshold) {
-        // HAREKET ÇOK AZ, DEMEK Kİ TIKLAMAK İSTEDİ
+    // KURAL 1: Süre çok kısaysa VE hareket çok azsa TIKLAMA say.
+    // KURAL 2: Süre uzunsa VEYA hareket çoksa sürükleme (yönüne göre) veya iptal say.
+    if (duration < timeThreshold && absDiff < moveThreshold) {
         const heroItem = targetElement.closest('.hero-item');
         if (heroItem) {
             const productName = heroItem.getAttribute('data-name');
             goToDetail(productName);
         }
-    } else {
-        // HAREKET EŞİĞİ GEÇTİ, KAYDIRMA YAP
+    } else if (absDiff >= 50) {
+        // 50px'den fazla kaydıysa seti değiştir
         moveSlider(diff > 0 ? 1 : -1);
     }
+    
     startAutoSlider();
 }
 
-// DİĞER FONKSİYONLAR (Detay yükleme, Arama vb.)
+// DİĞER FONKSİYONLAR (Arama, Filtre vb. Değişmedi)
 function performSearch() {
-    const term = document.getElementById("search").value.toLowerCase();
-    if (!term) return;
+    const input = document.getElementById("search");
+    if (!input) return;
+    const term = input.value.toLowerCase();
     if (!document.getElementById("popular-hero-area")) {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
@@ -139,6 +171,7 @@ function renderGeneralList(products, title) {
             <h4 style="font-size:14px; margin: 10px 0;">${p.p_name}</h4>
         </div>
     `).join('');
+    window.scrollTo({ top: 300, behavior: 'smooth' });
 }
 
 function showBrands(category) {
