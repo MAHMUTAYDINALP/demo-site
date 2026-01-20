@@ -6,7 +6,16 @@
   <title>Ürün Detayı | Kırgıl Çakmak</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="detail-page-body">
+<body>
+  <div id="contact-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeContact()">&times;</span>
+      <h2>Kırgıl Çakmak İletişim</h2>
+      <p>Telefon: 0505 069 6639</p>
+      <a href="https://wa.me/905050696639" class="whatsapp-link" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+
   <header class="header-wrapper">
     <div class="header-grid">
       <div class="grid-spacer"></div>
@@ -15,42 +24,41 @@
           <div class="logo-container"><img src="img/logo.png" alt="Logo" class="logo"></div>
         </a>
       </div>
-      <div class="grid-spacer" style="grid-column: span 6;"></div>
+      <div class="grid-search">
+        <div class="search-box">
+          <input type="text" id="search" placeholder="Model veya marka ara...">
+          <button id="search-btn" onclick="performSearchFromDetail()">🔍</button>
+        </div>
+      </div>
       <div class="grid-contact">
-        <a href="index.html" class="contact-btn">Geri Dön</a>
+        <button class="contact-btn" onclick="openContact()">İletişim</button>
       </div>
       <div class="grid-spacer"></div>
     </div>
   </header>
 
   <main class="product-detail-container">
-    <div class="detail-left">
-      <img id="detail-img" src="" alt="Ürün Görseli">
-    </div>
+    <div class="detail-left"><img id="detail-img" src="" alt=""></div>
     <div class="detail-right">
       <h1 id="detail-title">Yükleniyor...</h1>
       <p id="detail-brand" class="detail-brand-label"></p>
-      <div class="detail-desc-box">
-        <h3>Ürün Açıklaması</h3>
-        <p id="detail-desc"></p>
-      </div>
-      <a id="whatsapp-btn" href="" target="_blank" class="whatsapp-detail-btn">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
-        WhatsApp ile Bilgi Al
-      </a>
+      <div class="detail-desc-box"><h3>Ürün Açıklaması</h3><p id="detail-desc"></p></div>
+      <a id="whatsapp-btn" href="" target="_blank" class="whatsapp-detail-btn">WhatsApp ile Bilgi Al</a>
     </div>
   </main>
 
   <script src="js/product.js"></script>
   <script>
-    // Sayfa yüklendiğinde URL'den ismi al ve veriyi getir
     document.addEventListener("DOMContentLoaded", () => {
         const params = new URLSearchParams(window.location.search);
         const productName = params.get("name");
-        if (productName) {
-            loadProductDetail(productName);
-        }
+        if (productName) loadProductDetail(productName);
     });
+    // Detay sayfasında arama yapılırsa ana sayfaya yönlendirir
+    function performSearchFromDetail() {
+        const term = document.getElementById("search").value;
+        window.location.href = `index.html?search=${encodeURIComponent(term)}`;
+    }
   </script>
 </body>
 </html>

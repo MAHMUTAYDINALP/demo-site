@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kırgıl Çakmak | Ürün Kataloğu</title>
+  <title>Kırgıl Çakmak | Katalog</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
@@ -26,45 +26,39 @@
   <div class="header-wrapper">
     <header class="header-grid">
       <div class="grid-spacer"></div>
-
       <div class="grid-logo">
         <a href="index.html" class="logo-link">
-          <div class="logo-container">
-            <img src="img/logo.png" alt="Kırgıl Çakmak Logo" class="logo">
-          </div>
+          <div class="logo-container"><img src="img/logo.png" alt="Logo" class="logo"></div>
         </a>
       </div>
-
       <div class="grid-search">
         <div class="search-box">
           <input type="text" id="search" placeholder="Model veya marka ara...">
-          <button id="search-btn">🔍</button>
+          <button id="search-btn" onclick="performSearch()">🔍</button>
         </div>
       </div>
-
       <div class="grid-contact">
         <button class="contact-btn" onclick="openContact()">İletişim</button>
       </div>
-
       <div class="grid-spacer"></div>
     </header>
 
     <nav class="main-nav-container">
       <div class="nav-8-12">
         <div class="nav-item" onmouseenter="showBrands('Plastik Çakmak')" onclick="filterByCategory('Plastik Çakmak')">
-          Plastik Çakmak ᐯ <span class="nav-arrow">⌄</span>
+          Plastik Çakmak <span class="nav-arrow">⌄</span>
           <div class="brand-dropdown" id="brands-Plastik"></div>
         </div>
         <div class="nav-item" onmouseenter="showBrands('Promosyon Çakmak')" onclick="filterByCategory('Promosyon Çakmak')">
-          Promosyon Çakmak ᐯ <span class="nav-arrow">⌄</span>
+          Promosyon Çakmak <span class="nav-arrow">⌄</span>
           <div class="brand-dropdown" id="brands-Promosyon"></div>
         </div>
         <div class="nav-item" onmouseenter="showBrands('Metal Çakmak')" onclick="filterByCategory('Metal Çakmak')">
-          Metal Çakmak ᐯ <span class="nav-arrow">⌄</span>
+          Metal Çakmak <span class="nav-arrow">⌄</span>
           <div class="brand-dropdown" id="brands-Metal"></div>
         </div>
         <div class="nav-item" onmouseenter="showBrands('Diğer Modeller')" onclick="filterByCategory('Diğer Modeller')">
-          Diğer Modeller ᐯ <span class="nav-arrow">⌄</span>
+          Diğer Modeller <span class="nav-arrow">⌄</span>
           <div class="brand-dropdown" id="brands-Diger"></div>
         </div>
       </div>
@@ -81,19 +75,19 @@
       <div class="cat-image-grid">
         <div class="cat-card" onclick="filterByCategory('Plastik Çakmak')">
           <img src="img/cat-plastik.jpg" alt="Plastik">
-          <div class="cat-label">Plastik Çakmak </div>
+          <div class="cat-label">Plastik Çakmak</div>
         </div>
         <div class="cat-card" onclick="filterByCategory('Promosyon Çakmak')">
           <img src="img/cat-promosyon.jpg" alt="Promosyon">
-          <div class="cat-label">Promosyon Çakmak </div>
+          <div class="cat-label">Promosyon Çakmak</div>
         </div>
         <div class="cat-card" onclick="filterByCategory('Metal Çakmak')">
           <img src="img/cat-metal.jpg" alt="Metal">
-          <div class="cat-label">Metal Çakmak </div>
+          <div class="cat-label">Metal Çakmak</div>
         </div>
         <div class="cat-card" onclick="filterByCategory('Diğer Modeller')">
           <img src="img/cat-diger.jpg" alt="Diğer Modeller">
-          <div class="cat-label">Diğer Modeller </div>
+          <div class="cat-label">Diğer Modeller</div>
         </div>
       </div>
     </section>
