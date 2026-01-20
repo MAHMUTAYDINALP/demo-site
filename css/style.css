@@ -15,7 +15,7 @@ body {
     background: #f4f4f4; 
     border-bottom: 1px solid #ddd; 
     /* En üste istediğin gri çizgi eklendi */
-    border-top: 5px solid #666; 
+    border-top: 20px solid #3d3d3d; 
 }
 
 .header-grid { 
