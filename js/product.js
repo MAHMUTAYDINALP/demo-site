@@ -1,6 +1,7 @@
 let allProducts = [];
 let popularSets = [];
 let currentSetIndex = 0;
+let sliderInterval;
 
 document.addEventListener("DOMContentLoaded", () => {
     fetch("data/product.json")
@@ -8,25 +9,20 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             allProducts = data.products || [];
             
-            // ANA SAYFA KONTROLÜ
             if (document.getElementById("popular-layout")) {
                 const populars = allProducts.filter(p => p.p_pop === true);
-                
-                // Ürünleri 3'erli gruplara ayır
                 for (let i = 0; i < populars.length; i += 3) {
-                    const chunk = populars.slice(i, i + 3);
-                    if(chunk.length === 3) popularSets.push(chunk);
+                    if(populars.slice(i, i + 3).length === 3) popularSets.push(populars.slice(i, i + 3));
                 }
-
                 if (popularSets.length > 0) {
-                    renderHero(popularSets[0]);
-                    // Eğer birden fazla 3'lü set varsa slider'ı başlat (7 Saniye)
+                    // İlk seti render et
+                    renderHeroInitial(popularSets[0]);
+                    // Birden fazla set varsa slider'ı başlat (7sn)
                     if (popularSets.length > 1) {
-                        setInterval(nextSlide, 7000);
+                        sliderInterval = setInterval(nextSlide, 7000);
                     }
                 }
 
-                // Detay sayfasından arama yaparak dönüldüyse
                 const urlParams = new URLSearchParams(window.location.search);
                 const searchTerm = urlParams.get("search");
                 if (searchTerm) {
@@ -35,43 +31,58 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             setupSearch();
-        })
-        .catch(err => console.error("Veri yüklenemedi:", err));
+        });
 });
 
-function renderHero(products) {
+// SADECE İLK AÇILIŞTA HTML YAPISINI KURAR
+function renderHeroInitial(products) {
     const container = document.getElementById("popular-layout");
     if (!container) return;
-    
-    // Asimetrik Grid: İlk ürün 'item-big' sınıfını alır
     container.innerHTML = products.map((p, index) => `
         <div class="hero-item ${index === 0 ? 'item-big' : ''}" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_url || p.p_img}" alt="${p.p_name}">
+            <img src="${p.p_url || p.p_img}" alt="${p.p_name}" class="hero-img">
         </div>
     `).join('');
 }
 
+// YENİ SLIDER FONKSİYONU (KAYMA EFEKTİ)
 function nextSlide() {
-    const grid = document.getElementById("popular-layout");
-    if (!grid) return;
+    const images = document.querySelectorAll('.hero-img');
+    if (images.length === 0) return;
 
-    // Yumuşak geçiş için önce opacity düşür
-    grid.style.opacity = "0";
-    
+    // 1. Mevcut resimleri sola kaydırarak çıkar
+    images.forEach(img => img.classList.add('slide-out'));
+
+    // 2. Animasyon bitince (600ms sonra)
     setTimeout(() => {
         currentSetIndex = (currentSetIndex + 1) % popularSets.length;
-        renderHero(popularSets[currentSetIndex]);
-        // Yeni resimler yüklenince opacity geri getir
-        grid.style.opacity = "1";
-    }, 600); // CSS transition süresiyle uyumlu (0.5s + 0.1s buffer)
+        const nextProducts = popularSets[currentSetIndex];
+        const heroItems = document.querySelectorAll('.hero-item');
+
+        // 3. Görünmezken yeni resimleri yükle ve sağdan gelme sınıfını ekle
+        heroItems.forEach((item, index) => {
+            const img = item.querySelector('img');
+            img.src = nextProducts[index].p_url || nextProducts[index].p_img;
+            img.alt = nextProducts[index].p_name;
+            item.setAttribute('onclick', `goToDetail('${nextProducts[index].p_name}')`);
+            
+            img.classList.remove('slide-out');
+            img.classList.add('slide-in');
+        });
+
+        // 4. Sağdan gelme animasyonu bitince sınıfı temizle (bir sonraki tur için)
+        setTimeout(() => {
+            images.forEach(img => img.classList.remove('slide-in'));
+        }, 600);
+
+    }, 600); // CSS animasyon süresiyle eşleşmeli
 }
 
+
+// --- DİĞER FONKSİYONLAR (Aynı kaldı) ---
 function showBrands(category) {
     const brands = [...new Set(allProducts.filter(p => p.p_cat === category).map(p => p.p_brand))];
-    let id = category.includes("Plastik") ? "brands-Plastik" : 
-             category.includes("Promosyon") ? "brands-Promosyon" : 
-             category.includes("Metal") ? "brands-Metal" : "brands-Diger";
-    
+    let id = category.includes("Plastik") ? "brands-Plastik" : category.includes("Promosyon") ? "brands-Promosyon" : category.includes("Metal") ? "brands-Metal" : "brands-Diger";
     const dropdown = document.getElementById(id);
     if (dropdown) {
         dropdown.innerHTML = brands.map(b => `
@@ -90,16 +101,12 @@ function setupSearch() {
 }
 
 function performSearch() {
-    const input = document.getElementById("search");
-    if (!input) return;
-    const term = input.value.toLowerCase();
-    
-    // Eğer detay sayfasındaysak index.html'e parametreyle gönder
+    const term = document.getElementById("search").value.toLowerCase();
+    if (!term) return;
     if (!document.getElementById("popular-hero-area")) {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
     }
-    
     const filtered = allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term));
     renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
@@ -123,7 +130,8 @@ function renderGeneralList(products, title) {
     document.getElementById("general-list").innerHTML = products.map(p => `
         <div class="product-card" onclick="goToDetail('${p.p_name}')">
             <img src="${p.p_url || p.p_img}">
-            <h4 style="font-size:15px; margin: 8px 0;">${p.p_name}</h4>
+            <small style="color:#999; text-transform:uppercase; font-size:10px;">${p.p_brand}</small>
+            <h4 style="margin:8px 0; font-size: 15px;">${p.p_name}</h4>
         </div>
     `).join('');
     window.scrollTo({ top: 300, behavior: 'smooth' });
