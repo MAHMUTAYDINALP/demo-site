@@ -14,6 +14,8 @@ body {
     z-index: 1000; 
     background: #f4f4f4; 
     border-bottom: 1px solid #ddd; 
+    /* En üste istediğin gri çizgi eklendi */
+    border-top: 5px solid #666; 
 }
 
 .header-grid { 
@@ -84,7 +86,7 @@ body {
     text-decoration: none; 
 }
 
-/* --- NAVİGASYON --- */
+/* --- NAVİGASYON & MARKA PANELİ --- */
 .main-nav-container { 
     display: flex; 
     justify-content: center; 
@@ -147,12 +149,11 @@ body {
     transition: 0.3s; 
 }
 
-.brand-img-link:hover { border-color: #e31e24; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .brand-img-link img { max-width: 85%; max-height: 85%; object-fit: contain; }
 
-/* --- MANUEL KAYDIRILABİLİR KESİNTİSİZ SLIDER --- */
+/* --- SLIDER (HERO GRID) - %10 KÜÇÜLTÜLMÜŞ --- */
 .popular-section { 
-    width: 96%; 
+    width: 90%; /* Genişlik %96'dan %90'a çekilerek yanlardan daraltıldı */
     margin: 20px auto; 
     overflow: hidden; 
     position: relative; 
@@ -164,21 +165,19 @@ body {
     grid-template-columns: 1.5fr 1fr; 
     grid-template-rows: 1fr 1fr; 
     gap: 15px; 
-    height: 520px; 
-    cursor: grab;
-    user-select: none;
+    height: 470px; /* Yükseklik 520px'den 470px'e çekildi (%10 küçültme) */
+    cursor: grab; 
     -webkit-user-drag: none;
 }
-.hero-grid:active { 
-    cursor: grabbing; 
-}
+
+.hero-grid:active { cursor: grabbing; }
 
 .hero-item { 
     position: relative; 
     overflow: hidden; 
     border-radius: 12px; 
     box-shadow: 0 3px 10px rgba(0,0,0,0.08); 
-    background: #222; /* Beyaz boşluk yerine siyah zemin */
+    background: #222; 
 }
 
 .hero-item img { 
@@ -186,7 +185,8 @@ body {
     top: 0; left: 0; 
     width: 100%; height: 100%; 
     object-fit: cover; 
-    pointer-events: none; /* Mouse olayları kapsayıcıya (hero-item) geçsin */
+    pointer-events: none; /* Manuel kaydırmanın bozulmaması için kritik */
+    user-drag: none;
     -webkit-user-drag: none;
 }
 
@@ -203,7 +203,7 @@ body {
 @keyframes slideRightOut { from { transform: translateX(0); } to { transform: translateX(100%); } }
 @keyframes slideRightIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 
-/* --- ÜRÜN LİSTESİ --- */
+/* --- ÜRÜN LİSTELERİ & KARTLAR --- */
 .general-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
@@ -223,12 +223,11 @@ body {
 }
 
 .product-card:hover { transform: translateY(-3px); }
-.product-card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 10px; }
+.product-card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
 
-/* --- KATEGORİ KARTLARI --- */
 .cat-images-section { padding: 30px 5%; background: #fff; }
 .cat-image-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.cat-card { position: relative; border-radius: 15px; overflow: hidden; cursor: pointer; height: 240px; }
+.cat-card { position: relative; border-radius: 15px; overflow: hidden; cursor: pointer; height: 220px; }
 .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
 .cat-card:hover img { transform: scale(1.08); }
 .cat-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 15px; text-align: center; font-size: 15px; font-weight: bold; }
@@ -276,9 +275,6 @@ body {
     margin-top: 15px; 
     transition: 0.3s; 
 }
-
-.whatsapp-detail-btn:hover { background: #1ebd58; transform: scale(1.05); }
-.whatsapp-detail-btn img { width: 22px; }
 
 /* --- MODAL --- */
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
