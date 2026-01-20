@@ -3,8 +3,6 @@ let popularSets = [];
 let currentSetIndex = 0;
 let sliderInterval;
 let isAnimating = false;
-
-// Manuel Kaydırma (Swipe) Değişkenleri
 let startX = 0;
 let isDragging = false;
 
@@ -18,22 +16,26 @@ document.addEventListener("DOMContentLoaded", () => {
             if (popularLayout) {
                 const populars = allProducts.filter(p => p.p_pop === true);
                 
-                // Ürünleri 3'erli gruplara ayır (Slider Mantığı)
+                // POPÜLER SETLERİ OLUŞTUR
                 popularSets = [];
                 for (let i = 0; i < populars.length; i += 3) {
                     const set = populars.slice(i, i + 3);
-                    // Sadece tam 3 ürünü olan grupları al (Asimetrik grid bozulmasın)
                     if(set.length === 3) popularSets.push(set);
                 }
 
+                // DEBUG: Konsola bak, kaç set oluştuğunu gör
+                console.log("Oluşan Popüler Set Sayısı:", popularSets.length);
+
                 if (popularSets.length > 0) {
-                    renderHeroSet(popularSets[0]);
+                    renderHeroSet(popularSets[0]); // İlk seti bas
                     
-                    // Birden fazla 3'lü set varsa hem otomatik hem manuel kontrolü aç
                     if (popularSets.length > 1) {
+                        console.log("Slider Motoru Başlatıldı.");
                         startAutoSlider();
                         initManualSwipe();
                     }
+                } else {
+                    console.error("HATA: Popüler ürün sayısı 3'ten az olduğu için slider başlamadı!");
                 }
             }
             setupSearch();
@@ -41,13 +43,21 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
-// Otomatik Slider'ı Başlat (7 Saniye)
+function renderHeroSet(products) {
+    const container = document.getElementById("popular-layout");
+    if (!container) return;
+    container.innerHTML = products.map((p, index) => `
+        <div class="hero-item ${index === 0 ? 'item-big' : ''}" onclick="goToDetail('${p.p_name}')">
+            <img src="${p.p_url || p.p_img}" alt="${p.p_name}">
+        </div>
+    `).join('');
+}
+
 function startAutoSlider() {
     clearInterval(sliderInterval);
     sliderInterval = setInterval(() => moveSlider(1), 7000);
 }
 
-// Slider'ı Kaydıran Ana Motor
 function moveSlider(direction) {
     if (isAnimating || popularSets.length < 2) return;
     isAnimating = true;
@@ -59,24 +69,25 @@ function moveSlider(direction) {
     heroItems.forEach((item, i) => {
         const currentImg = item.querySelector('img');
         
-        // Yeni Resmi Hazırla
+        // YENİ GÖRSELİ OLUŞTUR VE HAZIRLA
         const nextImg = document.createElement('img');
         nextImg.src = nextSet[i].p_url || nextSet[i].p_img;
         nextImg.alt = nextSet[i].p_name;
         
-        // Yöne göre animasyon sınıfı ekle
+        // Animasyon Sınıfları (CSS ile birebir aynı olmalı)
         nextImg.className = direction > 0 ? 'slide-left-in' : 'slide-right-in';
         item.appendChild(nextImg);
 
-        // Mevcut resme çıkış animasyonu ver
         if (currentImg) {
             currentImg.className = direction > 0 ? 'slide-left-out' : 'slide-right-out';
         }
 
-        // Animasyon bitince (700ms) temizlik yap
+        // Animasyon bitiminde temizlik
         setTimeout(() => {
             if (currentImg) currentImg.remove();
-            nextImg.className = ''; // Animasyon bitti, görseli sabitle
+            nextImg.className = ''; 
+            item.setAttribute('onclick', `goToDetail('${nextSet[i].p_name}')`);
+            
             if (i === heroItems.length - 1) {
                 currentSetIndex = nextIndex;
                 isAnimating = false;
@@ -85,60 +96,46 @@ function moveSlider(direction) {
     });
 }
 
-// Manuel Kaydırma (Swipe/Drag) Sistemi
 function initManualSwipe() {
     const layout = document.getElementById("popular-layout");
     if (!layout) return;
     
-    // Fare Olayları
+    // MOUSE OLAYLARI
     layout.addEventListener('mousedown', (e) => {
         startX = e.pageX;
         isDragging = true;
         clearInterval(sliderInterval);
     });
 
+    // Mouse bırakıldığında veya alan dışına çıktığında
     window.addEventListener('mouseup', (e) => {
         if (!isDragging) return;
         handleSwipeEnd(e.pageX);
     });
-    
-    // Dokunmatik (Mobil) Olaylar
+
+    // DOKUNMATİK (MOBİL)
     layout.addEventListener('touchstart', (e) => {
         startX = e.touches[0].pageX;
         isDragging = true;
         clearInterval(sliderInterval);
-    });
+    }, {passive: true});
 
     layout.addEventListener('touchend', (e) => {
         if (!isDragging) return;
         handleSwipeEnd(e.changedTouches[0].pageX);
-    });
+    }, {passive: true});
 }
 
 function handleSwipeEnd(endX) {
     isDragging = false;
     const diff = startX - endX;
-
-    // Hassasiyet (50px)
     if (Math.abs(diff) > 50) {
         moveSlider(diff > 0 ? 1 : -1);
     }
-    // Kaydırma işleminden sonra otomatiği yeniden kur
     startAutoSlider();
 }
 
-// Sayfa İlk Açıldığında Hero Alanını Doldurur
-function renderHeroSet(products) {
-    const container = document.getElementById("popular-layout");
-    if (!container) return;
-    container.innerHTML = products.map((p, index) => `
-        <div class="hero-item ${index === 0 ? 'item-big' : ''}" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_url || p.p_img}" alt="${p.p_name}">
-        </div>
-    `).join('');
-}
-
-// --- DİĞER TEMEL FONKSİYONLAR ---
+// DİĞER FONKSİYONLAR
 function setupSearch() {
     const btn = document.getElementById("search-btn");
     const input = document.getElementById("search");
@@ -147,17 +144,13 @@ function setupSearch() {
 }
 
 function performSearch() {
-    const input = document.getElementById("search");
-    if (!input) return;
-    const term = input.value.toLowerCase();
-    
+    const term = document.getElementById("search").value.toLowerCase();
+    if (!term) return;
     if (!document.getElementById("popular-hero-area")) {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
     }
-    
-    const filtered = allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term));
-    renderGeneralList(filtered, `"${term}" Sonuçları`);
+    renderGeneralList(allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term)), `"${term}" Sonuçları`);
 }
 
 function filterByCategory(cat) {
@@ -175,11 +168,11 @@ function filterByBrand(brand, cat) {
 function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");
     if (!area) return;
-    area.innerHTML = `<h2 style="text-align:center; font-size: 22px; margin-bottom: 20px;">${title}</h2><div class="general-grid" id="general-list"></div>`;
+    area.innerHTML = `<h2 style="text-align:center;">${title}</h2><div class="general-grid" id="general-list"></div>`;
     document.getElementById("general-list").innerHTML = products.map(p => `
         <div class="product-card" onclick="goToDetail('${p.p_name}')">
             <img src="${p.p_url || p.p_img}">
-            <h4 style="font-size:15px; margin: 8px 0;">${p.p_name}</h4>
+            <h4 style="font-size:14px; margin: 10px 0;">${p.p_name}</h4>
         </div>
     `).join('');
     window.scrollTo({ top: 300, behavior: 'smooth' });
