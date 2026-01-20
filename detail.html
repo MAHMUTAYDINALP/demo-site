@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ürün Detayı | Kırgıl Çakmak</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="detail-page-body">
+  <header class="header-wrapper">
+    <div class="header-grid">
+      <div class="grid-spacer"></div>
+      <div class="grid-logo">
+        <a href="index.html" class="logo-link">
+          <div class="logo-container"><img src="img/logo.png" alt="Logo" class="logo"></div>
+        </a>
+      </div>
+      <div class="grid-spacer" style="grid-column: span 6;"></div>
+      <div class="grid-contact">
+        <a href="index.html" class="contact-btn">Geri Dön</a>
+      </div>
+      <div class="grid-spacer"></div>
+    </div>
+  </header>
+
+  <main class="product-detail-container">
+    <div class="detail-left">
+      <img id="detail-img" src="" alt="Ürün Görseli">
+    </div>
+    <div class="detail-right">
+      <h1 id="detail-title">Yükleniyor...</h1>
+      <p id="detail-brand" class="detail-brand-label"></p>
+      <div class="detail-desc-box">
+        <h3>Ürün Açıklaması</h3>
+        <p id="detail-desc"></p>
+      </div>
+      <a id="whatsapp-btn" href="" target="_blank" class="whatsapp-detail-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
+        WhatsApp ile Bilgi Al
+      </a>
+    </div>
+  </main>
+
+  <script src="js/product.js"></script>
+  <script>
+    // Sayfa yüklendiğinde URL'den ismi al ve veriyi getir
+    document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const productName = params.get("name");
+        if (productName) {
+            loadProductDetail(productName);
+        }
+    });
+  </script>
+</body>
+</html>
