@@ -43,7 +43,7 @@
       "p_brand": "Kasai",
       "p_img": "img/kasai-promosyon.jpg",
       "p_url": "",
-      "p_pop": false
+      "p_pop": true
     },
     {
       "p_name": "Clipper Metal Gold Edition",
@@ -61,7 +61,7 @@
       "p_brand": "Koko",
       "p_img": "img/koko-metal.jpg",
       "p_url": "",
-      "p_pop": false
+      "p_pop": true
     },
     {
       "p_name": "Copper Bakır Kaplama",
@@ -79,7 +79,25 @@
       "p_brand": "Diğer",
       "p_img": "img/diger-model.jpg",
       "p_url": "",
-      "p_pop": false
+      "p_pop": true
+    },
+    {
+      "p_name": "Tokai Jet Alev Test",
+      "p_desc": "Slider testi için eklenen 7. ürün.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Tokai",
+      "p_img": "img/tokai-jet.jpg",
+      "p_url": "",
+      "p_pop": true
+    },
+    {
+      "p_name": "Str Metalik Mavi",
+      "p_desc": "Slider testi için eklenen 8. ürün.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Str",
+      "p_img": "img/str-blue.jpg",
+      "p_url": "",
+      "p_pop": true
     }
   ]
 }

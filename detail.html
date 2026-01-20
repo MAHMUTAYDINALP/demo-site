@@ -11,8 +11,13 @@
     <div class="modal-content">
       <span class="close-modal" onclick="closeContact()">&times;</span>
       <h2>Kırgıl Çakmak İletişim</h2>
-      <p>Telefon: 0505 069 6639</p>
-      <a href="https://wa.me/905050696639" class="whatsapp-link" target="_blank">WhatsApp</a>
+      <div class="contact-info">
+        <p><strong>Telefon:</strong> 0505 069 6639</p>
+        <p><strong>E-posta:</strong> bakirkirgil@gmail.com</p>
+        <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye ŞANLIURFA</p>
+        <hr>
+        <a href="https://wa.me/905050696639" class="whatsapp-link" target="_blank">WhatsApp Destek Hattı</a>
+      </div>
     </div>
   </div>
 
@@ -38,7 +43,7 @@
   </header>
 
   <main class="product-detail-container">
-    <div class="detail-left"><img id="detail-img" src="" alt=""></div>
+    <div class="detail-left"><img id="detail-img" src="" alt="Ürün Görseli"></div>
     <div class="detail-right">
       <h1 id="detail-title">Yükleniyor...</h1>
       <p id="detail-brand" class="detail-brand-label"></p>
@@ -54,7 +59,7 @@
         const productName = params.get("name");
         if (productName) loadProductDetail(productName);
     });
-    // Detay sayfasında arama yapılırsa ana sayfaya yönlendirir
+
     function performSearchFromDetail() {
         const term = document.getElementById("search").value;
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;

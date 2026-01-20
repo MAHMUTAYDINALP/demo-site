@@ -8,18 +8,25 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             allProducts = data.products || [];
             
-            // Eğer ana sayfadaysak slider'ı ve aramayı başlat
+            // ANA SAYFA KONTROLÜ
             if (document.getElementById("popular-layout")) {
                 const populars = allProducts.filter(p => p.p_pop === true);
+                
+                // Ürünleri 3'erli gruplara ayır
                 for (let i = 0; i < populars.length; i += 3) {
-                    if(populars.slice(i, i + 3).length === 3) popularSets.push(populars.slice(i, i + 3));
-                }
-                if (popularSets.length > 0) {
-                    renderHero(popularSets[0]);
-                    if (popularSets.length > 1) setInterval(nextSlide, 7000);
+                    const chunk = populars.slice(i, i + 3);
+                    if(chunk.length === 3) popularSets.push(chunk);
                 }
 
-                // URL'den gelen bir arama parametresi var mı? (Detaydan dönünce lazım)
+                if (popularSets.length > 0) {
+                    renderHero(popularSets[0]);
+                    // Eğer birden fazla 3'lü set varsa slider'ı başlat (7 Saniye)
+                    if (popularSets.length > 1) {
+                        setInterval(nextSlide, 7000);
+                    }
+                }
+
+                // Detay sayfasından arama yaparak dönüldüyse
                 const urlParams = new URLSearchParams(window.location.search);
                 const searchTerm = urlParams.get("search");
                 if (searchTerm) {
@@ -28,15 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             setupSearch();
-        });
+        })
+        .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
 function renderHero(products) {
     const container = document.getElementById("popular-layout");
     if (!container) return;
-    container.innerHTML = products.map(p => `
-        <div class="hero-item ${products.indexOf(p) === 0 ? 'item-big' : ''}" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_url || p.p_img}">
+    
+    // Asimetrik Grid: İlk ürün 'item-big' sınıfını alır
+    container.innerHTML = products.map((p, index) => `
+        <div class="hero-item ${index === 0 ? 'item-big' : ''}" onclick="goToDetail('${p.p_name}')">
+            <img src="${p.p_url || p.p_img}" alt="${p.p_name}">
         </div>
     `).join('');
 }
@@ -44,17 +54,24 @@ function renderHero(products) {
 function nextSlide() {
     const grid = document.getElementById("popular-layout");
     if (!grid) return;
+
+    // Yumuşak geçiş için önce opacity düşür
     grid.style.opacity = "0";
+    
     setTimeout(() => {
         currentSetIndex = (currentSetIndex + 1) % popularSets.length;
         renderHero(popularSets[currentSetIndex]);
+        // Yeni resimler yüklenince opacity geri getir
         grid.style.opacity = "1";
-    }, 500);
+    }, 600); // CSS transition süresiyle uyumlu (0.5s + 0.1s buffer)
 }
 
 function showBrands(category) {
     const brands = [...new Set(allProducts.filter(p => p.p_cat === category).map(p => p.p_brand))];
-    let id = category.includes("Plastik") ? "brands-Plastik" : category.includes("Promosyon") ? "brands-Promosyon" : category.includes("Metal") ? "brands-Metal" : "brands-Diger";
+    let id = category.includes("Plastik") ? "brands-Plastik" : 
+             category.includes("Promosyon") ? "brands-Promosyon" : 
+             category.includes("Metal") ? "brands-Metal" : "brands-Diger";
+    
     const dropdown = document.getElementById(id);
     if (dropdown) {
         dropdown.innerHTML = brands.map(b => `
@@ -73,8 +90,16 @@ function setupSearch() {
 }
 
 function performSearch() {
-    const term = document.getElementById("search").value.toLowerCase();
-    if (!term) return;
+    const input = document.getElementById("search");
+    if (!input) return;
+    const term = input.value.toLowerCase();
+    
+    // Eğer detay sayfasındaysak index.html'e parametreyle gönder
+    if (!document.getElementById("popular-hero-area")) {
+        window.location.href = `index.html?search=${encodeURIComponent(term)}`;
+        return;
+    }
+    
     const filtered = allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term));
     renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
@@ -94,13 +119,14 @@ function filterByBrand(brand, cat) {
 function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");
     if (!area) return;
-    area.innerHTML = `<h2 style="text-align:center;">${title}</h2><div class="general-grid" id="general-list"></div>`;
+    area.innerHTML = `<h2 style="text-align:center; font-size: 22px; margin-bottom: 20px;">${title}</h2><div class="general-grid" id="general-list"></div>`;
     document.getElementById("general-list").innerHTML = products.map(p => `
         <div class="product-card" onclick="goToDetail('${p.p_name}')">
             <img src="${p.p_url || p.p_img}">
-            <h4 style="font-size:14px;">${p.p_name}</h4>
+            <h4 style="font-size:15px; margin: 8px 0;">${p.p_name}</h4>
         </div>
     `).join('');
+    window.scrollTo({ top: 300, behavior: 'smooth' });
 }
 
 function goToDetail(name) { window.location.href = `detail.html?name=${encodeURIComponent(name)}`; }
