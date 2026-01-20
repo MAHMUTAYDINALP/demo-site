@@ -8,8 +8,8 @@ let isAnimating = false;
 let startX = 0;
 let startTime = 0;
 let isDragging = false;
-const timeThreshold = 200; // 200ms'den uzun basışlar sürükleme sayılır
-const moveThreshold = 5;   // 5px'den fazla hareket sürükleme sayılır
+const timeThreshold = 200; 
+const moveThreshold = 5;   
 
 document.addEventListener("DOMContentLoaded", () => {
     fetch("data/product.json")
@@ -18,7 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
             allProducts = data.products || [];
             const popularLayout = document.getElementById("popular-layout");
 
+            // 1. URL Parametre Kontrolü (Kategori veya Arama ile mi gelindi?)
+            const urlParams = new URLSearchParams(window.location.search);
+            const catParam = urlParams.get("cat");
+            const searchParam = urlParams.get("search");
+
             if (popularLayout) {
+                // Popüler setleri hazırla
                 const populars = allProducts.filter(p => p.p_pop === true);
                 popularSets = [];
                 for (let i = 0; i < populars.length; i += 3) {
@@ -26,7 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     if(set.length === 3) popularSets.push(set);
                 }
 
-                if (popularSets.length > 0) {
+                if (catParam) {
+                    // Kategori parametresi varsa listele
+                    filterByCategory(catParam);
+                } else if (searchParam) {
+                    // Arama parametresi varsa listele
+                    document.getElementById("search").value = searchParam;
+                    performSearch();
+                } else if (popularSets.length > 0) {
+                    // Normal açılışta ilk seti bas ve slider başlat
                     renderHeroSet(popularSets[0]);
                     if (popularSets.length > 1) {
                         startAutoSlider();
@@ -35,8 +49,56 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             setupSearch();
-        });
+        })
+        .catch(err => console.error("Veri yüklenemedi:", err));
 });
+
+// --- LİSTELEME FONKSİYONLARI ---
+
+function filterByCategory(cat) {
+    const area = document.getElementById("popular-hero-area");
+    // Eğer detay sayfasındaysak ana sayfaya yönlendir
+    if (!area) {
+        window.location.href = `index.html?cat=${encodeURIComponent(cat)}`;
+        return;
+    }
+    const filtered = allProducts.filter(p => p.p_cat === cat);
+    renderGeneralList(filtered, cat);
+}
+
+function filterByBrand(brand, cat) {
+    const area = document.getElementById("popular-hero-area");
+    if (!area) {
+        window.location.href = `index.html?search=${encodeURIComponent(brand)}`;
+        return;
+    }
+    const filtered = allProducts.filter(p => p.p_brand === brand && p.p_cat === cat);
+    renderGeneralList(filtered, `${cat} > ${brand}`);
+}
+
+function renderGeneralList(products, title) {
+    const area = document.getElementById("popular-hero-area");
+    if (!area) return;
+    
+    // Hero alanını temizle ve liste yapısını kur
+    area.innerHTML = `
+        <h2 id="section-title" style="text-align:center; font-size: 22px; margin-bottom: 20px;">${title}</h2>
+        <div class="general-grid" id="general-list"></div>
+    `;
+    
+    const list = document.getElementById("general-list");
+    list.innerHTML = products.map(p => `
+        <div class="product-card" onclick="goToDetail('${p.p_name}')">
+            <img src="${p.p_url || p.p_img}" draggable="false">
+            <small style="color:#999; text-transform:uppercase; font-size:10px;">${p.p_brand}</small>
+            <h4 style="margin:8px 0; font-size: 15px;">${p.p_name}</h4>
+        </div>
+    `).join('');
+    
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+}
+
+// --- SLIDER MOTORU ---
 
 function renderHeroSet(products) {
     const container = document.getElementById("popular-layout");
@@ -66,7 +128,6 @@ function moveSlider(direction) {
         const nextImg = document.createElement('img');
         nextImg.src = nextSet[i].p_url || nextSet[i].p_img;
         nextImg.setAttribute('draggable', 'false');
-        
         nextImg.className = direction > 0 ? 'slide-left-in' : 'slide-right-in';
         item.appendChild(nextImg);
 
@@ -84,94 +145,61 @@ function moveSlider(direction) {
     });
 }
 
+// --- EVENT HANDLERS ---
+
 function initManualSwipe() {
     const layout = document.getElementById("popular-layout");
     if (!layout) return;
     
-    // MOUSE OLAYLARI
     layout.addEventListener('mousedown', (e) => {
         e.preventDefault();
         startX = e.pageX;
-        startTime = Date.now(); // Basıldığı anı kaydet
-        isDragging = false;
-        clearInterval(sliderInterval);
-    });
-
-    // Hareket kontrolü: Çok az bile oynatsa sürükleme başlasın
-    layout.addEventListener('mousemove', (e) => {
-        if (startTime === 0) return;
-        if (Math.abs(e.pageX - startX) > moveThreshold) {
-            isDragging = true;
-        }
-    });
-
-    window.addEventListener('mouseup', (e) => {
-        if (startTime === 0) return;
-        handleActionEnd(e.pageX, e.target);
-        startTime = 0; // Sıfırla
-    });
-
-    // MOBİL (TOUCH) OLAYLARI
-    layout.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX;
         startTime = Date.now();
         isDragging = false;
         clearInterval(sliderInterval);
     });
 
-    layout.addEventListener('touchend', (e) => {
+    layout.addEventListener('mousemove', (e) => {
         if (startTime === 0) return;
-        handleActionEnd(e.changedTouches[0].pageX, e.target);
+        if (Math.abs(e.pageX - startX) > moveThreshold) isDragging = true;
+    });
+
+    window.addEventListener('mouseup', (e) => {
+        if (startTime === 0) return;
+        handleActionEnd(e.pageX, e.target);
         startTime = 0;
     });
 }
 
-// ASIL KARAR MEKANİZMASI
 function handleActionEnd(endX, targetElement) {
-    const endTime = Date.now();
-    const duration = endTime - startTime;
+    const duration = Date.now() - startTime;
     const diff = startX - endX;
     const absDiff = Math.abs(diff);
 
-    // KURAL 1: Süre çok kısaysa VE hareket çok azsa TIKLAMA say.
-    // KURAL 2: Süre uzunsa VEYA hareket çoksa sürükleme (yönüne göre) veya iptal say.
     if (duration < timeThreshold && absDiff < moveThreshold) {
         const heroItem = targetElement.closest('.hero-item');
-        if (heroItem) {
-            const productName = heroItem.getAttribute('data-name');
-            goToDetail(productName);
-        }
+        if (heroItem) goToDetail(heroItem.getAttribute('data-name'));
     } else if (absDiff >= 50) {
-        // 50px'den fazla kaydıysa seti değiştir
         moveSlider(diff > 0 ? 1 : -1);
     }
-    
     startAutoSlider();
 }
 
-// DİĞER FONKSİYONLAR (Arama, Filtre vb. Değişmedi)
-function performSearch() {
+function setupSearch() {
+    const btn = document.getElementById("search-btn");
     const input = document.getElementById("search");
-    if (!input) return;
-    const term = input.value.toLowerCase();
+    if (btn) btn.onclick = performSearch;
+    if (input) input.onkeypress = (e) => { if (e.key === 'Enter') performSearch(); };
+}
+
+function performSearch() {
+    const term = document.getElementById("search").value.toLowerCase();
+    if (!term) return;
     if (!document.getElementById("popular-hero-area")) {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
     }
     renderGeneralList(allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term)), `"${term}" Sonuçları`);
-}
-
-function renderGeneralList(products, title) {
-    const area = document.getElementById("popular-hero-area");
-    if (!area) return;
-    area.innerHTML = `<h2 style="text-align:center;">${title}</h2><div class="general-grid" id="general-list"></div>`;
-    document.getElementById("general-list").innerHTML = products.map(p => `
-        <div class="product-card" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_url || p.p_img}">
-            <h4 style="font-size:14px; margin: 10px 0;">${p.p_name}</h4>
-        </div>
-    `).join('');
-    window.scrollTo({ top: 300, behavior: 'smooth' });
 }
 
 function showBrands(category) {
@@ -204,9 +232,3 @@ function loadProductDetail(name) {
 
 function openContact() { document.getElementById("contact-modal").style.display = "block"; }
 function closeContact() { document.getElementById("contact-modal").style.display = "none"; }
-function setupSearch() {
-    const btn = document.getElementById("search-btn");
-    const input = document.getElementById("search");
-    if (btn) btn.onclick = performSearch;
-    if (input) input.onkeypress = (e) => { if (e.key === 'Enter') performSearch(); };
-}
