@@ -43,19 +43,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
+// ... (üst kısımdaki değişkenler aynı kalacak)
+
 function renderHeroSet(products) {
     const container = document.getElementById("popular-layout");
     if (!container) return;
     container.innerHTML = products.map((p, index) => `
         <div class="hero-item ${index === 0 ? 'item-big' : ''}" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_url || p.p_img}" alt="${p.p_name}">
+            <img src="${p.p_url || p.p_img}" alt="${p.p_name}" draggable="false">
         </div>
     `).join('');
-}
-
-function startAutoSlider() {
-    clearInterval(sliderInterval);
-    sliderInterval = setInterval(() => moveSlider(1), 7000);
 }
 
 function moveSlider(direction) {
@@ -69,12 +66,11 @@ function moveSlider(direction) {
     heroItems.forEach((item, i) => {
         const currentImg = item.querySelector('img');
         
-        // YENİ GÖRSELİ OLUŞTUR VE HAZIRLA
         const nextImg = document.createElement('img');
         nextImg.src = nextSet[i].p_url || nextSet[i].p_img;
         nextImg.alt = nextSet[i].p_name;
+        nextImg.setAttribute('draggable', 'false'); // Yeni resimlere de eklendi
         
-        // Animasyon Sınıfları (CSS ile birebir aynı olmalı)
         nextImg.className = direction > 0 ? 'slide-left-in' : 'slide-right-in';
         item.appendChild(nextImg);
 
@@ -82,7 +78,6 @@ function moveSlider(direction) {
             currentImg.className = direction > 0 ? 'slide-left-out' : 'slide-right-out';
         }
 
-        // Animasyon bitiminde temizlik
         setTimeout(() => {
             if (currentImg) currentImg.remove();
             nextImg.className = ''; 
@@ -95,6 +90,14 @@ function moveSlider(direction) {
         }, 700);
     });
 }
+// ... (initManualSwipe ve diğer fonksiyonlar aynı kalacak)
+
+function startAutoSlider() {
+    clearInterval(sliderInterval);
+    sliderInterval = setInterval(() => moveSlider(1), 7000);
+}
+
+
 
 function initManualSwipe() {
     const layout = document.getElementById("popular-layout");

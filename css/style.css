@@ -167,32 +167,32 @@ body {
     user-select: none; 
 }
 
-.hero-grid { 
-    display: grid; 
-    grid-template-columns: 1.5fr 1fr; 
-    grid-template-rows: 1fr 1fr; 
-    gap: 15px; 
-    height: 520px; 
-    cursor: grab; 
+/* SLIDER ALANI GÜNCELLEME */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px;
+    height: 520px;
+    cursor: grab; /* El işareti görünür */
+    user-select: none; /* Metin seçmeyi engelle */
+    -webkit-user-drag: none; /* Tarayıcı sürüklemesini engelle */
 }
 
-.hero-grid:active { cursor: grabbing; }
-
-.hero-item { 
-    position: relative; 
-    overflow: hidden; 
-    border-radius: 12px; 
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08); 
-    background: #333; /* Beyaz flash etkisini engellemek için */
+.hero-grid:active {
+    cursor: grabbing; /* Tutunca el kapanır */
 }
 
-.hero-item img { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
+.hero-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* RESİM FAREYİ BLOKLAMAZ, EVENT ALTTAKİ DIV'E GEÇER */
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .item-big { grid-row: 1 / span 2; }
