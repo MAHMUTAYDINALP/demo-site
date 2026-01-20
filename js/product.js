@@ -16,15 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
             allProducts = data.products || [];
-            const popularLayout = document.getElementById("popular-layout");
-
-            // 1. URL Parametre Kontrolü (Kategori veya Arama ile mi gelindi?)
+            
+            // 1. URL Parametrelerini Kontrol Et
             const urlParams = new URLSearchParams(window.location.search);
             const catParam = urlParams.get("cat");
             const searchParam = urlParams.get("search");
 
+            // 2. Sayfada "popular-layout" var mı? (Yani index.html'de miyiz?)
+            const popularLayout = document.getElementById("popular-layout");
+
             if (popularLayout) {
-                // Popüler setleri hazırla
+                // Popüler setleri hazırla (Slider için)
                 const populars = allProducts.filter(p => p.p_pop === true);
                 popularSets = [];
                 for (let i = 0; i < populars.length; i += 3) {
@@ -32,11 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     if(set.length === 3) popularSets.push(set);
                 }
 
+                // EĞER URL'DE PARAMETRE VARSA DOĞRUDAN FİLTRELE
                 if (catParam) {
-                    // Kategori parametresi varsa listele
                     filterByCategory(catParam);
                 } else if (searchParam) {
-                    // Arama parametresi varsa listele
                     document.getElementById("search").value = searchParam;
                     performSearch();
                 } else if (popularSets.length > 0) {
@@ -47,17 +48,20 @@ document.addEventListener("DOMContentLoaded", () => {
                         initManualSwipe();
                     }
                 }
+            } else {
+                // Detay sayfasındaysak (detail.html)
+                // Mevcut loadProductDetail fonksiyonu burada çalışmaya devam eder
             }
             setupSearch();
         })
         .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
-// --- LİSTELEME FONKSİYONLARI ---
+// --- KRİTİK LİSTELEME FONKSİYONLARI ---
 
 function filterByCategory(cat) {
     const area = document.getElementById("popular-hero-area");
-    // Eğer detay sayfasındaysak ana sayfaya yönlendir
+    // Eğer index.html'de değilsek (detay sayfasındaysak), parametreyle ana sayfaya git
     if (!area) {
         window.location.href = `index.html?cat=${encodeURIComponent(cat)}`;
         return;
@@ -80,9 +84,12 @@ function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");
     if (!area) return;
     
-    // Hero alanını temizle ve liste yapısını kur
+    // Slider'ı durdur
+    clearInterval(sliderInterval);
+    
+    // ALANI TEMİZLE VE LİSTEYİ BAS
     area.innerHTML = `
-        <h2 id="section-title" style="text-align:center; font-size: 22px; margin-bottom: 20px;">${title}</h2>
+        <h2 id="section-title" style="text-align:center; font-size: 20px; margin-bottom: 20px;">${title}</h2>
         <div class="general-grid" id="general-list"></div>
     `;
     
@@ -91,14 +98,14 @@ function renderGeneralList(products, title) {
         <div class="product-card" onclick="goToDetail('${p.p_name}')">
             <img src="${p.p_url || p.p_img}" draggable="false">
             <small style="color:#999; text-transform:uppercase; font-size:10px;">${p.p_brand}</small>
-            <h4 style="margin:8px 0; font-size: 15px;">${p.p_name}</h4>
+            <h4 style="margin:8px 0; font-size: 14px;">${p.p_name}</h4>
         </div>
     `).join('');
     
     window.scrollTo({ top: 300, behavior: 'smooth' });
 }
 
-// --- SLIDER MOTORU ---
+// --- SLIDER FONKSİYONLARI (KAYDIRMA KORUNDU) ---
 
 function renderHeroSet(products) {
     const container = document.getElementById("popular-layout");
@@ -145,7 +152,7 @@ function moveSlider(direction) {
     });
 }
 
-// --- EVENT HANDLERS ---
+// --- EVENT HANDLERS (CLICK & DRAG AYRIMI) ---
 
 function initManualSwipe() {
     const layout = document.getElementById("popular-layout");
@@ -185,6 +192,8 @@ function handleActionEnd(endX, targetElement) {
     startAutoSlider();
 }
 
+// --- DİĞER TEMEL FONKSİYONLAR ---
+
 function setupSearch() {
     const btn = document.getElementById("search-btn");
     const input = document.getElementById("search");
@@ -195,11 +204,13 @@ function setupSearch() {
 function performSearch() {
     const term = document.getElementById("search").value.toLowerCase();
     if (!term) return;
-    if (!document.getElementById("popular-hero-area")) {
+    const area = document.getElementById("popular-hero-area");
+    if (!area) {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
     }
-    renderGeneralList(allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term)), `"${term}" Sonuçları`);
+    const filtered = allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term));
+    renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
 function showBrands(category) {
@@ -224,7 +235,7 @@ function loadProductDetail(name) {
             document.getElementById("detail-img").src = p.p_url || p.p_img;
             document.getElementById("detail-title").innerText = p.p_name;
             document.getElementById("detail-brand").innerText = p.p_brand;
-            document.getElementById("detail-desc").innerText = p.p_desc || "WhatsApp'tan ulaşın.";
+            document.getElementById("detail-desc").innerText = p.p_desc || "Detaylar için WhatsApp'tan ulaşın.";
             document.getElementById("whatsapp-btn").href = `https://wa.me/905050696639?text=${encodeURIComponent(p.p_name + ' hakkında bilgi alabilir miyim?')}`;
         }
     });
