@@ -71,12 +71,11 @@ function moveSlider(direction) {
 }
 
 function initManualSwipe() {
-    const layout = document.getElementById("popular-layout");
+   const layout = document.getElementById("popular-layout");
     if (!layout) return;
     
-    // MOUSE OLAYLARI
     layout.addEventListener('mousedown', (e) => {
-        e.preventDefault(); // Tarayıcının varsayılan görsel sürüklemesini DURDURUR
+        e.preventDefault(); // BU SATIR RESMİ TUTUP SÜRÜKLEMEYİ (BROWSER DRAG) ENGELLER
         startX = e.pageX;
         isDragging = true;
         clearInterval(sliderInterval);
