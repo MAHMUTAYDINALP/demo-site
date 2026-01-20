@@ -4,7 +4,7 @@ let currentSetIndex = 0;
 let sliderInterval;
 let isAnimating = false;
 
-// Manuel Kaydırma Değişkenleri
+// Manuel Kaydırma (Swipe) Değişkenleri
 let startX = 0;
 let isDragging = false;
 
@@ -13,30 +13,41 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
             allProducts = data.products || [];
-            if (document.getElementById("popular-layout")) {
+            const popularLayout = document.getElementById("popular-layout");
+
+            if (popularLayout) {
                 const populars = allProducts.filter(p => p.p_pop === true);
+                
+                // Ürünleri 3'erli gruplara ayır (Slider Mantığı)
+                popularSets = [];
                 for (let i = 0; i < populars.length; i += 3) {
                     const set = populars.slice(i, i + 3);
+                    // Sadece tam 3 ürünü olan grupları al (Asimetrik grid bozulmasın)
                     if(set.length === 3) popularSets.push(set);
                 }
+
                 if (popularSets.length > 0) {
                     renderHeroSet(popularSets[0]);
-                    startAutoSlider();
-                    initManualSwipe();
+                    
+                    // Birden fazla 3'lü set varsa hem otomatik hem manuel kontrolü aç
+                    if (popularSets.length > 1) {
+                        startAutoSlider();
+                        initManualSwipe();
+                    }
                 }
             }
             setupSearch();
-        });
+        })
+        .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
+// Otomatik Slider'ı Başlat (7 Saniye)
 function startAutoSlider() {
-    if (popularSets.length > 1) {
-        clearInterval(sliderInterval);
-        sliderInterval = setInterval(() => moveSlider(1), 7000);
-    }
+    clearInterval(sliderInterval);
+    sliderInterval = setInterval(() => moveSlider(1), 7000);
 }
 
-// Ana Kaydırma Fonksiyonu (Yön: 1 İleri, -1 Geri)
+// Slider'ı Kaydıran Ana Motor
 function moveSlider(direction) {
     if (isAnimating || popularSets.length < 2) return;
     isAnimating = true;
@@ -46,22 +57,26 @@ function moveSlider(direction) {
     const nextSet = popularSets[nextIndex];
 
     heroItems.forEach((item, i) => {
-        // Mevcut resmi hazırla
         const currentImg = item.querySelector('img');
         
-        // Yeni resmi oluştur ve arkaya/yana koy
+        // Yeni Resmi Hazırla
         const nextImg = document.createElement('img');
         nextImg.src = nextSet[i].p_url || nextSet[i].p_img;
+        nextImg.alt = nextSet[i].p_name;
+        
+        // Yöne göre animasyon sınıfı ekle
         nextImg.className = direction > 0 ? 'slide-left-in' : 'slide-right-in';
         item.appendChild(nextImg);
 
         // Mevcut resme çıkış animasyonu ver
-        currentImg.className = direction > 0 ? 'slide-left-out' : 'slide-right-out';
+        if (currentImg) {
+            currentImg.className = direction > 0 ? 'slide-left-out' : 'slide-right-out';
+        }
 
-        // Animasyon bitince temizlik yap
+        // Animasyon bitince (700ms) temizlik yap
         setTimeout(() => {
-            currentImg.remove();
-            nextImg.className = ''; // Sınıfı temizle (statik hale getir)
+            if (currentImg) currentImg.remove();
+            nextImg.className = ''; // Animasyon bitti, görseli sabitle
             if (i === heroItems.length - 1) {
                 currentSetIndex = nextIndex;
                 isAnimating = false;
@@ -70,30 +85,49 @@ function moveSlider(direction) {
     });
 }
 
-// Manuel Kaydırma (Swipe) Başlatıcı
+// Manuel Kaydırma (Swipe/Drag) Sistemi
 function initManualSwipe() {
     const layout = document.getElementById("popular-layout");
+    if (!layout) return;
     
-    // Mouse Olayları
-    layout.onmousedown = (e) => { startX = e.pageX; isDragging = true; clearInterval(sliderInterval); };
-    layout.onmouseup = (e) => { handleSwipeEnd(e.pageX); };
+    // Fare Olayları
+    layout.addEventListener('mousedown', (e) => {
+        startX = e.pageX;
+        isDragging = true;
+        clearInterval(sliderInterval);
+    });
+
+    window.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        handleSwipeEnd(e.pageX);
+    });
     
-    // Dokunmatik Olaylar
-    layout.ontouchstart = (e) => { startX = e.touches[0].pageX; isDragging = true; clearInterval(sliderInterval); };
-    layout.ontouchend = (e) => { handleSwipeEnd(e.changedTouches[0].pageX); };
+    // Dokunmatik (Mobil) Olaylar
+    layout.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX;
+        isDragging = true;
+        clearInterval(sliderInterval);
+    });
+
+    layout.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        handleSwipeEnd(e.changedTouches[0].pageX);
+    });
 }
 
 function handleSwipeEnd(endX) {
-    if (!isDragging) return;
     isDragging = false;
     const diff = startX - endX;
 
-    if (Math.abs(diff) > 50) { // 50px'den fazla kaydıysa değiştir
+    // Hassasiyet (50px)
+    if (Math.abs(diff) > 50) {
         moveSlider(diff > 0 ? 1 : -1);
     }
-    startAutoSlider(); // Kaydırma bittikten sonra otomatiği geri başlat
+    // Kaydırma işleminden sonra otomatiği yeniden kur
+    startAutoSlider();
 }
 
+// Sayfa İlk Açıldığında Hero Alanını Doldurur
 function renderHeroSet(products) {
     const container = document.getElementById("popular-layout");
     if (!container) return;
@@ -104,7 +138,7 @@ function renderHeroSet(products) {
     `).join('');
 }
 
-// --- DİĞER FONKSİYONLAR (Arama, Filtreleme vb. Değişmedi) ---
+// --- DİĞER TEMEL FONKSİYONLAR ---
 function setupSearch() {
     const btn = document.getElementById("search-btn");
     const input = document.getElementById("search");
@@ -113,13 +147,17 @@ function setupSearch() {
 }
 
 function performSearch() {
-    const term = document.getElementById("search").value.toLowerCase();
-    if (!term) return;
+    const input = document.getElementById("search");
+    if (!input) return;
+    const term = input.value.toLowerCase();
+    
     if (!document.getElementById("popular-hero-area")) {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
     }
-    renderGeneralList(allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term)), `"${term}" Sonuçları`);
+    
+    const filtered = allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term));
+    renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
 function filterByCategory(cat) {
@@ -137,14 +175,14 @@ function filterByBrand(brand, cat) {
 function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");
     if (!area) return;
-    area.innerHTML = `<h2 style="text-align:center;">${title}</h2><div class="general-grid" id="general-list"></div>`;
+    area.innerHTML = `<h2 style="text-align:center; font-size: 22px; margin-bottom: 20px;">${title}</h2><div class="general-grid" id="general-list"></div>`;
     document.getElementById("general-list").innerHTML = products.map(p => `
         <div class="product-card" onclick="goToDetail('${p.p_name}')">
             <img src="${p.p_url || p.p_img}">
-            <h4 style="font-size:14px;">${p.p_name}</h4>
+            <h4 style="font-size:15px; margin: 8px 0;">${p.p_name}</h4>
         </div>
     `).join('');
-    window.scrollTo({ top: 400, behavior: 'smooth' });
+    window.scrollTo({ top: 300, behavior: 'smooth' });
 }
 
 function showBrands(category) {
