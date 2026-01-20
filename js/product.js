@@ -15,44 +15,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (popularLayout) {
                 const populars = allProducts.filter(p => p.p_pop === true);
-                
-                // POPÜLER SETLERİ OLUŞTUR
                 popularSets = [];
                 for (let i = 0; i < populars.length; i += 3) {
                     const set = populars.slice(i, i + 3);
                     if(set.length === 3) popularSets.push(set);
                 }
 
-                // DEBUG: Konsola bak, kaç set oluştuğunu gör
-                console.log("Oluşan Popüler Set Sayısı:", popularSets.length);
-
                 if (popularSets.length > 0) {
-                    renderHeroSet(popularSets[0]); // İlk seti bas
-                    
+                    renderHeroSet(popularSets[0]);
                     if (popularSets.length > 1) {
-                        console.log("Slider Motoru Başlatıldı.");
                         startAutoSlider();
                         initManualSwipe();
                     }
-                } else {
-                    console.error("HATA: Popüler ürün sayısı 3'ten az olduğu için slider başlamadı!");
                 }
             }
             setupSearch();
-        })
-        .catch(err => console.error("Veri yüklenemedi:", err));
+        });
 });
 
-// ... (üst kısımdaki değişkenler aynı kalacak)
-
-function renderHeroSet(products) {
-    const container = document.getElementById("popular-layout");
-    if (!container) return;
-    container.innerHTML = products.map((p, index) => `
-        <div class="hero-item ${index === 0 ? 'item-big' : ''}" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_url || p.p_img}" alt="${p.p_name}" draggable="false">
-        </div>
-    `).join('');
+function startAutoSlider() {
+    clearInterval(sliderInterval);
+    sliderInterval = setInterval(() => moveSlider(1), 7000);
 }
 
 function moveSlider(direction) {
@@ -65,24 +48,20 @@ function moveSlider(direction) {
 
     heroItems.forEach((item, i) => {
         const currentImg = item.querySelector('img');
-        
         const nextImg = document.createElement('img');
         nextImg.src = nextSet[i].p_url || nextSet[i].p_img;
         nextImg.alt = nextSet[i].p_name;
-        nextImg.setAttribute('draggable', 'false'); // Yeni resimlere de eklendi
+        nextImg.setAttribute('draggable', 'false');
         
         nextImg.className = direction > 0 ? 'slide-left-in' : 'slide-right-in';
         item.appendChild(nextImg);
 
-        if (currentImg) {
-            currentImg.className = direction > 0 ? 'slide-left-out' : 'slide-right-out';
-        }
+        if (currentImg) currentImg.className = direction > 0 ? 'slide-left-out' : 'slide-right-out';
 
         setTimeout(() => {
             if (currentImg) currentImg.remove();
             nextImg.className = ''; 
             item.setAttribute('onclick', `goToDetail('${nextSet[i].p_name}')`);
-            
             if (i === heroItems.length - 1) {
                 currentSetIndex = nextIndex;
                 isAnimating = false;
@@ -90,14 +69,6 @@ function moveSlider(direction) {
         }, 700);
     });
 }
-// ... (initManualSwipe ve diğer fonksiyonlar aynı kalacak)
-
-function startAutoSlider() {
-    clearInterval(sliderInterval);
-    sliderInterval = setInterval(() => moveSlider(1), 7000);
-}
-
-
 
 function initManualSwipe() {
     const layout = document.getElementById("popular-layout");
@@ -105,18 +76,18 @@ function initManualSwipe() {
     
     // MOUSE OLAYLARI
     layout.addEventListener('mousedown', (e) => {
+        e.preventDefault(); // Tarayıcının varsayılan görsel sürüklemesini DURDURUR
         startX = e.pageX;
         isDragging = true;
         clearInterval(sliderInterval);
     });
 
-    // Mouse bırakıldığında veya alan dışına çıktığında
     window.addEventListener('mouseup', (e) => {
         if (!isDragging) return;
         handleSwipeEnd(e.pageX);
     });
 
-    // DOKUNMATİK (MOBİL)
+    // DOKUNMATİK OLAYLAR
     layout.addEventListener('touchstart', (e) => {
         startX = e.touches[0].pageX;
         isDragging = true;
@@ -132,13 +103,21 @@ function initManualSwipe() {
 function handleSwipeEnd(endX) {
     isDragging = false;
     const diff = startX - endX;
-    if (Math.abs(diff) > 50) {
-        moveSlider(diff > 0 ? 1 : -1);
-    }
+    if (Math.abs(diff) > 50) moveSlider(diff > 0 ? 1 : -1);
     startAutoSlider();
 }
 
-// DİĞER FONKSİYONLAR
+function renderHeroSet(products) {
+    const container = document.getElementById("popular-layout");
+    if (!container) return;
+    container.innerHTML = products.map((p, index) => `
+        <div class="hero-item ${index === 0 ? 'item-big' : ''}" onclick="goToDetail('${p.p_name}')">
+            <img src="${p.p_url || p.p_img}" alt="${p.p_name}" draggable="false">
+        </div>
+    `).join('');
+}
+
+// --- DİĞER TEMEL FONKSİYONLAR ---
 function setupSearch() {
     const btn = document.getElementById("search-btn");
     const input = document.getElementById("search");
@@ -153,7 +132,8 @@ function performSearch() {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
     }
-    renderGeneralList(allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term)), `"${term}" Sonuçları`);
+    const filtered = allProducts.filter(p => p.p_name.toLowerCase().includes(term) || p.p_brand.toLowerCase().includes(term));
+    renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
 function filterByCategory(cat) {
