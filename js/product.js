@@ -99,6 +99,34 @@ function filterByCategory(cat) {
 }
 
 // --- MARKA DROPDOWN İÇERİĞİ ---
+function executeBrandSearch(brandName, categoryName) {
+    const searchInput = document.getElementById("search");
+    if (searchInput) searchInput.value = brandName;
+
+    const sBrand = normalizeText(brandName);
+    const sCat = normalizeText(categoryName);
+
+    // KATEGORİ VE MARKA BİRLİKTE SIKICA KONTROL EDİLİYOR
+    const filtered = allProducts.filter(p => {
+        const pBrand = normalizeText(p.p_brand);
+        const pCat = normalizeText(p.p_cat);
+        
+        // Marka tam eşleşmeli
+        const isBrandMatch = (pBrand === sBrand);
+        // Kategori ismi JSON'daki p_cat ile veya kategori başlığının ilk kelimesiyle uyuşmalı
+        const catFirstWord = sCat.split(' ')[0]; 
+        const isCatMatch = pCat.includes(catFirstWord) || catFirstWord.includes(pCat);
+        
+        return isBrandMatch && isCatMatch;
+    });
+
+    // Başlığı güncelle ve SADECE bu 28 ürünü (veya kaç taneyse) listeye dök
+    renderGeneralList(filtered, `${categoryName} > ${brandName}`);
+}
+
+// --- MARKA + KATEGORİ ÖZEL ARAMA (DÜZELTİLDİ) ---
+// --- MARKA + KATEGORİ ÖZEL ARAMA (KESİN VE NET SÜZGEÇ) ---
+// --- MARKA DROPDOWN (Dosya isimlerindeki "=" sorununu çözer) ---
 function showBrands(category) {
     const searchCat = normalizeText(category);
     const filteredProducts = allProducts.filter(p => {
@@ -113,39 +141,16 @@ function showBrands(category) {
 
     const dropdown = document.getElementById(id);
     if (dropdown) {
-        dropdown.innerHTML = brands.map(b => `
-            <a href="javascript:void(0)" class="brand-img-link" onclick="executeBrandSearch('${b}', '${category}')">
-                <img src="brands/${normalizeText(b)}.png" onerror="this.src='img/logo.png'">
-            </a>
-        `).join('');
+        dropdown.innerHTML = brands.map(b => {
+            // İsimdeki "=" karakterini tireye çevirip öyle aratıyoruz
+            let fileName = normalizeText(b).replace('=', '-');
+            return `
+                <a href="javascript:void(0)" class="brand-img-link" onclick="executeBrandSearch('${b}', '${category}')">
+                    <img src="brands/${fileName}.png" onerror="this.src='img/logo.png'">
+                </a>
+            `;
+        }).join('');
     }
-}
-
-// --- MARKA + KATEGORİ ÖZEL ARAMA (DÜZELTİLDİ) ---
-// --- MARKA + KATEGORİ ÖZEL ARAMA (KESİN VE NET SÜZGEÇ) ---
-function executeBrandSearch(brandName, categoryName) {
-    const searchInput = document.getElementById("search");
-    if (searchInput) searchInput.value = brandName;
-
-    const sBrand = normalizeText(brandName);
-    const sCat = normalizeText(categoryName);
-
-    const filtered = allProducts.filter(p => {
-        const pBrand = normalizeText(p.p_brand);
-        const pCat = normalizeText(p.p_cat);
-        
-        // Marka birebir uymalı
-        const isBrandMatch = (pBrand === sBrand);
-        
-        // Kategori başlığın ilk kelimesiyle uyuşmalı
-        const catFirstWord = sCat.split(' ')[0]; 
-        const isCatMatch = pCat.includes(catFirstWord) || catFirstWord.includes(pCat);
-        
-        return isBrandMatch && isCatMatch;
-    });
-
-    // Başlığı hem kategori hem marka ismiyle güncelliyoruz
-    renderGeneralList(filtered, `${categoryName} > ${brandName}`);
 }
 
 // --- LİSTE OLUŞTURMA ---
