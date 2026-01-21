@@ -1,98 +1,118 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kırgıl Çakmak | Ürün Kataloğu</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kırgıl Çakmak | Ürün Kataloğu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
-  <div id="contact-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeContact()">&times;</span>
-      <h2>Kırgıl Çakmak İletişim</h2>
-      <div class="contact-info">
-        <p><strong>Telefon:</strong> 0505 069 6639</p>
-        <p><strong>E-posta:</strong> bakirkirgil@gmail.com</p>
-        <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye ŞANLIURFA (Topçu Meydanı)</p>
-        <hr>
-        <a href="https://wa.me/905050696639" class="whatsapp-link" target="_blank">WhatsApp Destek Hattı</a>
-      </div>
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeContact()">&times;</span>
+            <h2>Kırgıl Çakmak İletişim</h2>
+            <div class="contact-info">
+                <p><strong>Telefon:</strong> 0505 069 6639</p>
+                <p><strong>E-posta:</strong> bakirkirgil@gmail.com</p>
+                <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye ŞANLIURFA (Topçu Meydanı)</p>
+                <hr>
+                <a href="https://wa.me/905050696639" class="whatsapp-link" target="_blank">WhatsApp Destek Hattı</a>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="header-wrapper">
-    <header class="header-grid">
-      <div class="grid-spacer"></div>
-      <div class="grid-logo">
-        <a href="index.html" class="logo-link">
-          <div class="logo-container"><img src="img/logo.png" alt="Logo" class="logo"></div>
-        </a>
-      </div>
-      <div class="grid-search">
-        <div class="search-box">
-          <input type="text" id="search" placeholder="Model veya marka ara...">
-          <button id="search-btn" onclick="performSearch()">🔍</button>
-        </div>
-      </div>
-      <div class="grid-contact">
-        <button class="contact-btn" onclick="openContact()">İletişim</button>
-      </div>
-      <div class="grid-spacer"></div>
-    </header>
+    <div class="header-wrapper">
+        <header class="header-grid">
+            <div class="grid-spacer"></div>
+            <div class="grid-logo">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-container"><img src="img/logo.png" alt="Logo" class="logo"></div>
+                </a>
+            </div>
+            <div class="grid-search">
+                <div class="search-box">
+                    <input type="text" id="search" placeholder="Model veya marka ara...">
+                    <button id="search-btn" onclick="performSearch()">🔍</button>
+                </div>
+            </div>
+            <div class="grid-contact">
+                <button class="contact-btn" onclick="openContact()">İletişim</button>
+            </div>
+            <div class="grid-spacer"></div>
+        </header>
 
-    <nav class="main-nav-container">
-      <div class="nav-8-12">
-        <div class="nav-item" onmouseenter="showBrands('Plastik Çakmak')" onclick="filterByCategory('Plastik Çakmak')">
-          Plastik Çakmak <span class="nav-arrow">⌄</span>
-          <div class="brand-dropdown" id="brands-Plastik"></div>
-        </div>
-        <div class="nav-item" onmouseenter="showBrands('Promosyon Çakmak')" onclick="filterByCategory('Promosyon Çakmak')">
-          Promosyon Çakmak <span class="nav-arrow">⌄</span>
-          <div class="brand-dropdown" id="brands-Promosyon"></div>
-        </div>
-        <div class="nav-item" onmouseenter="showBrands('Metal Çakmak')" onclick="filterByCategory('Metal Çakmak')">
-          Metal Çakmak <span class="nav-arrow">⌄</span>
-          <div class="brand-dropdown" id="brands-Metal"></div>
-        </div>
-        <div class="nav-item" onmouseenter="showBrands('Diğer Modeller')" onclick="filterByCategory('Diğer Modeller')">
-          Diğer Modeller <span class="nav-arrow">⌄</span>
-          <div class="brand-dropdown" id="brands-Diger"></div>
-        </div>
-      </div>
-    </nav>
-  </div>
+        <nav class="main-nav-container">
+            <div class="nav-8-12">
+                <div class="nav-item" onmouseenter="showBrands('Plastik Çakmak')" onclick="filterByCategory('Plastik Çakmak')">
+                    Plastik Çakmak <span class="nav-arrow">⌄</span>
+                    <div class="brand-dropdown" id="brands-Plastik"></div>
+                </div>
+                <div class="nav-item" onmouseenter="showBrands('Promosyon Çakmak')" onclick="filterByCategory('Promosyon Çakmak')">
+                    Promosyon Çakmak <span class="nav-arrow">⌄</span>
+                    <div class="brand-dropdown" id="brands-Promosyon"></div>
+                </div>
+                <div class="nav-item" onmouseenter="showBrands('Metal Çakmak')" onclick="filterByCategory('Metal Çakmak')">
+                    Metal Çakmak <span class="nav-arrow">⌄</span>
+                    <div class="brand-dropdown" id="brands-Metal"></div>
+                </div>
+                <div class="nav-item" onmouseenter="showBrands('Diğer Modeller')" onclick="filterByCategory('Diğer Modeller')">
+                    Diğer Modeller <span class="nav-arrow">⌄</span>
+                    <div class="brand-dropdown" id="brands-Diger"></div>
+                </div>
+            </div>
+        </nav>
+    </div>
 
-  <main>
-    <section class="popular-section" id="popular-hero-area">
-      <h2 id="section-title">Popüler Modellerimiz</h2>
-      <div id="popular-layout" class="hero-grid"></div>
-    </section>
+    <main>
+        <section class="popular-section" id="popular-hero-area">
+            <h2 id="section-title">Popüler Modellerimiz</h2>
+            <div id="popular-layout" class="hero-grid"></div>
+        </section>
 
-    <section class="cat-images-section">
-      <div class="cat-image-grid">
-        <div class="cat-card" onclick="filterByCategory('Plastik Çakmak')">
-          <img src="img/cat-plastik.jpg" alt="Plastik">
-          <div class="cat-label">Plastik Çakmak</div>
-        </div>
-        <div class="cat-card" onclick="filterByCategory('Promosyon Çakmak')">
-          <img src="img/cat-promosyon.jpg" alt="Promosyon">
-          <div class="cat-label">Promosyon Çakmak</div>
-        </div>
-        <div class="cat-card" onclick="filterByCategory('Metal Çakmak')">
-          <img src="img/cat-metal.jpg" alt="Metal">
-          <div class="cat-label">Metal Çakmak</div>
-        </div>
-        <div class="cat-card" onclick="filterByCategory('Diğer Modeller')">
-          <img src="img/cat-diger.jpg" alt="Diğer Modeller">
-          <div class="cat-label">Diğer Modeller</div>
-        </div>
-      </div>
-    </section>
-  </main>
+        <section class="cat-images-section">
+            <div class="cat-image-grid">
+                <div class="cat-card" onclick="filterByCategory('Plastik Çakmak')">
+                    <img src="img/plastik.jpg" alt="Plastik">
+                    <div class="cat-label">Plastik Çakmak</div>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Promosyon Çakmak')">
+                    <img src="img/promosyon.jpg" alt="Promosyon">
+                    <div class="cat-label">Promosyon Çakmak</div>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Metal Çakmak')">
+                    <img src="img/metalcakmak.jpg" alt="Metal">
+                    <div class="cat-label">Metal Çakmak</div>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Diğer Modeller')">
+                    <img src="img/diger.jpg" alt="Diğer Modeller">
+                    <div class="cat-label">Diğer Modeller</div>
+                </div>
+            </div>
+        </section>
 
-  <script src="js/product.js"></script>
+        <section class="ticker-section">
+            <div class="ticker-wrapper right" id="ticker-right"></div>
+            <div class="ticker-wrapper left" id="ticker-left"></div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="img/logo.png" alt="Kırgıl Çakmak Logo">
+            </div>
+            <div class="footer-info">
+                <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye / ŞANLIURFA</p>
+                <p><strong>Telefon:</strong> 0505 069 6639 | <strong>E-posta:</strong> bakirkirgil@gmail.com</p>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Kırgıl Çakmak - Tüm Hakları Saklıdır.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/product.js"></script>
 </body>
 </html>

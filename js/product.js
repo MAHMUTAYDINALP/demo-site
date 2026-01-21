@@ -10,7 +10,6 @@ let isDragging = false;
 const timeThreshold = 200; 
 const moveThreshold = 5; 
 
-// --- TÜRKÇE KARAKTERLERİ TAMAMEN TEMİZLEYEN FONKSİYON (KÖKTEN ÇÖZÜM) ---
 function normalizeText(text) {
     if (!text) return "";
     return text.toString()
@@ -21,8 +20,7 @@ function normalizeText(text) {
         .replace(/Ş/g, 's').replace(/ş/g, 's')
         .replace(/Ö/g, 'o').replace(/ö/g, 'o')
         .replace(/Ç/g, 'c').replace(/ç/g, 'c')
-        .toLowerCase()
-        .trim();
+        .toLowerCase().trim();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -31,6 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             allProducts = data.products || data || [];
             
+            // Şeritleri (Ticker) Başlat
+            initTickers();
+
             const urlParams = new URLSearchParams(window.location.search);
             const catParam = urlParams.get("cat");
             const searchParam = urlParams.get("search");
@@ -62,21 +63,41 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
+// --- YENİ: HAREKETLİ ŞERİT MANTIĞI ---
+function initTickers() {
+    const rightTicker = document.getElementById("ticker-right");
+    const leftTicker = document.getElementById("ticker-left");
+    if (!rightTicker || !leftTicker) return;
+
+    // Tüm ürünlerden rastgele 12 tane seç
+    const randomSet = [...allProducts].sort(() => 0.5 - Math.random()).slice(0, 12);
+    
+    // Sonsuz döngü için ürünleri ikişer kez ekliyoruz (Marquee mantığı)
+    const tickerContent = randomSet.map(p => `
+        <div class="ticker-item" onclick="goToDetail('${p.p_name}')">
+            <img src="${p.p_img}" onerror="this.src='img/logo.png'">
+        </div>
+    `).join('') + randomSet.map(p => `
+        <div class="ticker-item" onclick="goToDetail('${p.p_name}')">
+            <img src="${p.p_img}" onerror="this.src='img/logo.png'">
+        </div>
+    `).join('');
+
+    rightTicker.innerHTML = tickerContent;
+    leftTicker.innerHTML = tickerContent;
+}
+
 function filterByCategory(cat) {
     const area = document.getElementById("popular-hero-area");
     if (!area) {
         window.location.href = `index.html?cat=${encodeURIComponent(cat)}`;
         return;
     }
-
-    const searchCatNormalized = normalizeText(cat); // örn: "diger modeller" -> "diger modeller"
-
+    const searchCatNormalized = normalizeText(cat);
     const filtered = allProducts.filter(p => {
-        const productCatNormalized = normalizeText(p.p_cat); // örn: "DİGER" -> "diger"
-        // Birbirlerinin içinde geçme kontrolü
+        const productCatNormalized = normalizeText(p.p_cat);
         return searchCatNormalized.includes(productCatNormalized) || productCatNormalized.includes(searchCatNormalized.split(' ')[0]);
     });
-
     renderGeneralList(filtered, cat);
 }
 
@@ -86,7 +107,6 @@ function filterByBrand(brand, categoryTitle) {
         window.location.href = `index.html?search=${encodeURIComponent(brand)}`;
         return;
     }
-
     const filtered = allProducts.filter(p => {
         const brandMatch = normalizeText(p.p_brand) === normalizeText(brand);
         const pCat = normalizeText(p.p_cat);
@@ -94,21 +114,17 @@ function filterByBrand(brand, categoryTitle) {
         const catMatch = sCat.includes(pCat) || pCat.includes(sCat.split(' ')[0]);
         return brandMatch && catMatch;
     });
-
     renderGeneralList(filtered, `${categoryTitle} > ${brand}`);
 }
 
 function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");
     if (!area) return;
-    
     clearInterval(sliderInterval);
-    
     area.innerHTML = `
         <h2 id="section-title" style="text-align:center; font-size: 20px; margin-bottom: 20px;">${title}</h2>
         <div class="general-grid" id="general-list"></div>
     `;
-    
     const list = document.getElementById("general-list");
     list.innerHTML = products.map(p => `
         <div class="product-card" onclick="goToDetail('${p.p_name}')">
@@ -117,34 +133,26 @@ function renderGeneralList(products, title) {
             <h4 style="margin:8px 0; font-size: 14px;">${p.p_name}</h4>
         </div>
     `).join('');
-    
-    // Header altında kalma sorununu çözen dinamik kaydırma
     const header = document.querySelector('.header-wrapper');
     const headerHeight = header ? header.offsetHeight : 120;
     const targetPos = area.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
-
     window.scrollTo({ top: targetPos, behavior: 'smooth' });
 }
 
 function showBrands(category) {
     const searchCat = normalizeText(category);
-    
     const filteredProducts = allProducts.filter(p => {
         const productCat = normalizeText(p.p_cat);
         return searchCat.includes(productCat) || productCat.includes(searchCat.split(' ')[0]);
     });
-
     const brands = [...new Set(filteredProducts.map(p => p.p_brand))];
-
     let id = "";
     if (searchCat.includes("plastik")) id = "brands-Plastik";
     else if (searchCat.includes("promosyon")) id = "brands-Promosyon";
     else if (searchCat.includes("metal")) id = "brands-Metal";
     else id = "brands-Diger";
-
     const dropdown = document.getElementById(id);
     if (dropdown) {
-        // İsimleri kaldırdık, sadece görsel bıraktık
         dropdown.innerHTML = brands.map(b => `
             <a href="#" class="brand-img-link" onclick="filterByBrand('${b}', '${category}')" title="${b}">
                 <img src="brands/${b}.png" onerror="this.src='img/logo.png'">
@@ -171,21 +179,16 @@ function startAutoSlider() {
 function moveSlider(direction) {
     if (isAnimating || popularSets.length < 2) return;
     isAnimating = true;
-
     const heroItems = document.querySelectorAll('.hero-item');
     const nextIndex = (currentSetIndex + direction + popularSets.length) % popularSets.length;
     const nextSet = popularSets[nextIndex];
-
     heroItems.forEach((item, i) => {
         const currentImg = item.querySelector('img');
         const nextImg = document.createElement('img');
         nextImg.src = nextSet[i].p_img;
-        nextImg.setAttribute('draggable', 'false');
         nextImg.className = direction > 0 ? 'slide-left-in' : 'slide-right-in';
         item.appendChild(nextImg);
-
         if (currentImg) currentImg.className = direction > 0 ? 'slide-left-out' : 'slide-right-out';
-
         setTimeout(() => {
             if (currentImg) currentImg.remove();
             nextImg.className = ''; 
@@ -201,7 +204,6 @@ function moveSlider(direction) {
 function initManualSwipe() {
     const layout = document.getElementById("popular-layout");
     if (!layout) return;
-    
     layout.addEventListener('mousedown', (e) => {
         e.preventDefault();
         startX = e.pageX;
@@ -209,12 +211,10 @@ function initManualSwipe() {
         isDragging = false;
         clearInterval(sliderInterval);
     });
-
     layout.addEventListener('mousemove', (e) => {
         if (startTime === 0) return;
         if (Math.abs(e.pageX - startX) > moveThreshold) isDragging = true;
     });
-
     window.addEventListener('mouseup', (e) => {
         if (startTime === 0) return;
         handleActionEnd(e.pageX, e.target);
@@ -226,7 +226,6 @@ function handleActionEnd(endX, targetElement) {
     const duration = Date.now() - startTime;
     const diff = startX - endX;
     const absDiff = Math.abs(diff);
-
     if (duration < timeThreshold && absDiff < moveThreshold) {
         const heroItem = targetElement.closest('.hero-item');
         if (heroItem) goToDetail(heroItem.getAttribute('data-name'));
@@ -246,18 +245,15 @@ function setupSearch() {
 function performSearch() {
     const term = normalizeText(document.getElementById("search").value);
     if (!term) return;
-
     const area = document.getElementById("popular-hero-area");
     if (!area) {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
     }
-
     const filtered = allProducts.filter(p => 
         normalizeText(p.p_name).includes(term) || 
         normalizeText(p.p_brand).includes(term)
     );
-
     renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
