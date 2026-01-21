@@ -2,7 +2,7 @@
 body { 
     margin: 0; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background: #fff; 
+    
     color: #222; 
     overflow-x: hidden;
     /* ARKA PLAN DESENİ */
@@ -343,4 +343,5 @@ body {
 #popular-hero-area {
     scroll-margin-top: 150px; 
     padding-top: 20px;
+
 }
