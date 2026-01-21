@@ -148,17 +148,18 @@ body {
 .brand-img-link img { max-width: 85%; max-height: 85%; object-fit: contain; }
 
 /* --- POPÜLER MODELLER (SLIDER) --- */
+/* --- POPÜLER MODELLER (SLIDER) - SİMETRİK 50/50 GÖRÜNÜM --- */
 .popular-section { 
     width: 90%; 
     margin: 20px auto; 
     overflow: hidden; 
     position: relative; 
-    user-select: none; 
 }
 
 .hero-grid { 
     display: grid; 
-    grid-template-columns: 1.5fr 1fr; 
+    /* 1.5fr 1fr yerine 1fr 1fr yaparak alanı tam ikiye böldük */
+    grid-template-columns: 1fr 1fr; 
     grid-template-rows: 1fr 1fr; 
     gap: 15px; 
     height: 470px; 
@@ -173,6 +174,11 @@ body {
     background: #222; 
 }
 
+/* Sol taraftaki büyük resim */
+.item-big { 
+    grid-row: 1 / span 2; 
+}
+
 .hero-item img { 
     position: absolute; 
     top: 0; left: 0; 
@@ -180,8 +186,6 @@ body {
     object-fit: cover; 
     pointer-events: none; 
 }
-
-.item-big { grid-row: 1 / span 2; }
 
 /* KAYMA ANİMASYONLARI */
 .slide-left-out { animation: slideLeftOut 0.7s forwards; }
