@@ -1,4 +1,6 @@
-[
+{
+  "products":
+  [
   {
     "p_name": "TAŞLI BEYAZ PROMOSYON",
     "p_brand": "MRY",
@@ -95,35 +97,41 @@
     "p_brand": "MRY",
     "p_cat": "PLASTİK",
     "p_img": "img/14.png",
-    "p_desc": "M 2020 RÜZGAR SARGILI KÖPEK"
+    "p_desc": "M 2020 RÜZGAR SARGILI KÖPEK",
+    "p_pop": true
+    
   },
   {
     "p_name": "RÜZGAR SARGILI KEDİ",
     "p_brand": "MRY",
     "p_cat": "PLASTİK",
     "p_img": "img/15.png",
-    "p_desc": "M 2020 RÜZGAR SARGILI KEDİ"
+    "p_desc": "M 2020 RÜZGAR SARGILI KEDİ",
+    "p_pop": true
   },
   {
     "p_name": "RÜZGAR SARGILI KARTALLI",
     "p_brand": "MRY",
     "p_cat": "PLASTİK",
     "p_img": "img/16.png",
-    "p_desc": "M 2020 RÜZGAR SARGILI KARTALLI"
+    "p_desc": "M 2020 RÜZGAR SARGILI KARTALLI",
+    "p_pop": true
   },
   {
     "p_name": "RÜZGAR SARGILI ARABA",
     "p_brand": "MRY",
     "p_cat": "PLASTİK",
     "p_img": "img/17.png",
-    "p_desc": "M 2020 RÜZGAR SARGILI ARABA"
+    "p_desc": "M 2020 RÜZGAR SARGILI ARABA",
+    "p_pop": true
   },
   {
     "p_name": "RÜZGAR SARGILI KORSAN",
     "p_brand": "MRY",
     "p_cat": "PLASTİK",
     "p_img": "img/18.png",
-    "p_desc": "M 2020 RÜZGAR SARGILI KORSAN"
+    "p_desc": "M 2020 RÜZGAR SARGILI KORSAN",
+    "p_pop": true
   },
   {
     "p_name": "RÜZGAR SARGILI BAYRAK",
@@ -1033,20 +1041,24 @@
     "p_brand": "KASAİ",
     "p_cat": "PLASTİK",
     "p_img": "img/148.png",
-    "p_desc": "F4010 TAŞLI SARGIILI HAYVAN DESENLİ"
+    "p_desc": "F4010 TAŞLI SARGIILI HAYVAN DESENLİ",
+    "p_pop": true
   },
   {
     "p_name": "TAŞLI SARGILI ŞEFFAF",
     "p_brand": "KASAİ",
     "p_cat": "PLASTİK",
     "p_img": "img/149.png",
-    "p_desc": "F4010 TAŞLI SARGILI ŞEFFAF"
+    "p_desc": "F4010 TAŞLI SARGILI ŞEFFAF",
+    "p_pop": true
   },
   {
     "p_name": "UZUN METAL",
     "p_brand": "BK-JET",
     "p_cat": "METAL",
     "p_img": "img/150.png",
-    "p_desc": "1900 UZUN METAL"
+    "p_desc": "1900 UZUN METAL",
+    "p_pop": true
   }
 ]
+}

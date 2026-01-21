@@ -61,12 +61,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function filterByCategory(cat) {
     const area = document.getElementById("popular-hero-area");
-    // Eğer index.html'de değilsek (detay sayfasındaysak), parametreyle ana sayfaya git
     if (!area) {
         window.location.href = `index.html?cat=${encodeURIComponent(cat)}`;
         return;
     }
-    const filtered = allProducts.filter(p => p.p_cat === cat);
+    // Eşleşmeyi kolaylaştırmak için include ve toLowerCase kullanalım
+    const filtered = allProducts.filter(p => 
+        cat.toLowerCase().includes(p.p_cat.toLowerCase()) || 
+        p.p_cat.toLowerCase().includes(cat.toLowerCase())
+    );
     renderGeneralList(filtered, cat);
 }
 
