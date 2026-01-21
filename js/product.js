@@ -111,13 +111,12 @@ function filterByBrand(brand, categoryTitle) {
     const searchBrand = normalizeText(brand);
     const searchCat = normalizeText(categoryTitle);
 
-    // Listeyi hem marka hem kategori uyuşmasına göre filtrele
     const filtered = allProducts.filter(p => {
         const productBrand = normalizeText(p.p_brand);
         const productCat = normalizeText(p.p_cat);
 
+        // Marka birebir aynı olmalı, kategori ise içinde geçmeli
         const isBrandMatch = productBrand === searchBrand;
-        // Kategori ismi JSON'daki p_cat ile veya buton metni ile eşleşmeli
         const isCatMatch = searchCat.includes(productCat) || productCat.includes(searchCat.split(' ')[0]);
         
         return isBrandMatch && isCatMatch;
