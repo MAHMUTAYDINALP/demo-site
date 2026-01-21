@@ -100,8 +100,7 @@ function filterByCategory(cat) {
     });
     renderGeneralList(filtered, cat);
 }
-
-// --- MARKA FİLTRELEME DÜZELTİLDİ ---
+// --- MARKA FİLTRELEME FONKSİYONU (KESİN ÇÖZÜM) ---
 function filterByBrand(brand, categoryTitle) {
     const area = document.getElementById("popular-hero-area");
     if (!area) {
@@ -109,16 +108,16 @@ function filterByBrand(brand, categoryTitle) {
         return;
     }
 
-    // Normalleştirilmiş marka ve kategori isimleri
     const searchBrand = normalizeText(brand);
     const searchCat = normalizeText(categoryTitle);
 
+    // Listeyi hem marka hem kategori uyuşmasına göre filtrele
     const filtered = allProducts.filter(p => {
         const productBrand = normalizeText(p.p_brand);
         const productCat = normalizeText(p.p_cat);
 
-        // Hem marka tam eşleşmeli, hem de kategori ismi uyuşmalı
         const isBrandMatch = productBrand === searchBrand;
+        // Kategori ismi JSON'daki p_cat ile veya buton metni ile eşleşmeli
         const isCatMatch = searchCat.includes(productCat) || productCat.includes(searchCat.split(' ')[0]);
         
         return isBrandMatch && isCatMatch;
@@ -126,6 +125,7 @@ function filterByBrand(brand, categoryTitle) {
 
     renderGeneralList(filtered, `${categoryTitle} > ${brand}`);
 }
+
 
 function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");

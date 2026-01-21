@@ -203,6 +203,7 @@ body {
 @keyframes slideRightIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 
 /* --- TICKER (HAREKETLİ ŞERİTLER) - BÜYÜTÜLDÜ --- */
+/* --- TICKER (HAREKETLİ ŞERİTLER) - ŞEFFAF VE TEMİZ --- */
 .ticker-section { 
     margin: 60px 0; 
     overflow: hidden; 
@@ -215,30 +216,28 @@ body {
     margin-bottom: 30px; 
 }
 
-/* Görseller 280px yüksekliğe çıkarıldı */
 .ticker-item { 
-    flex: 0 0 35vw; 
-    height: 280px; 
-    padding: 15px; 
+    flex: 0 0 30vw; /* Boyutu biraz daha dengeli yaptık */
+    height: 300px; 
+    padding: 0 20px; /* Sadece yanlardan boşluk bıraktık */
     box-sizing: border-box; 
     cursor: pointer; 
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
 }
 
-.ticker-item:hover { transform: scale(1.05); }
+.ticker-item:hover { transform: scale(1.1); }
 
 .ticker-item img { 
     width: 100%; 
     height: 100%; 
     object-fit: contain; 
-    background: rgba(255,255,255,0.95); 
-    border-radius: 15px; 
-    border: 1px solid #ddd;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background: transparent; /* Beyaz kutuyu sildik */
+    border: none; /* Kenarlığı sildik */
+    box-shadow: none; /* Gölgeyi sildik */
 }
 
-.ticker-wrapper.right { animation: marquee-right 40s linear infinite; }
-.ticker-wrapper.left { animation: marquee-left 40s linear infinite; }
+.ticker-wrapper.right { animation: marquee-right 35s linear infinite; }
+.ticker-wrapper.left { animation: marquee-left 35s linear infinite; }
 
 @keyframes marquee-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 @keyframes marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
