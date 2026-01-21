@@ -348,7 +348,7 @@ body {
     padding: 1px 0 !important;
     background-color: #3d3d3d; /* Arka plan rengine göre koyu bir ton */
     color: #777;
-    font-size: 13px;
+    font-size: 14px;
     border-top: 1px solid #333;
     line-height: 1.6;
 }
@@ -363,7 +363,7 @@ body {
 .developer-credit p {
     margin: 2px 0 !important;    /* Paragraflar arasındaki dış boşluğu minimize eder */
     line-height: 1.2 !important;  /* Satır yüksekliğini daraltarak yazıları birbirine yaklaştırır */
-    font-size: 12px;              /* Yazı boyutunu hafif küçültmek de alanı dar gösterir */
+    font-size: 14px;              /* Yazı boyutunu hafif küçültmek de alanı dar gösterir */
 }
 .dev-link {
     color: #b1b1b1; /* Altın sarısı tonu profesyonel durur */
