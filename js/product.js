@@ -149,6 +149,7 @@ function renderGeneralList(products, title) {
     window.scrollTo({ top: targetPos, behavior: 'smooth' });
 }
 
+// --- MARKA DROPDOWN İÇERİĞİ (GÜNCELLENDİ) ---
 function showBrands(category) {
     const searchCat = normalizeText(category);
     const filteredProducts = allProducts.filter(p => {
@@ -164,11 +165,34 @@ function showBrands(category) {
     const dropdown = document.getElementById(id);
     if (dropdown) {
         dropdown.innerHTML = brands.map(b => `
-            <a href="javascript:void(0)" class="brand-img-link" onclick="searchByBrandName('${b}')">
+            <a href="javascript:void(0)" class="brand-img-link" onclick="executeBrandSearch('${b}', '${category}')">
                 <img src="brands/${b}.png" onerror="this.src='img/logo.png'">
             </a>
         `).join('');
     }
+}
+
+// --- YENİ: OTOMATİK ARAMA VE LİSTELEME ---
+function executeBrandSearch(brandName, categoryName) {
+    // 1. Arama çubuğuna ismi yazdır
+    const searchInput = document.getElementById("search");
+    if (searchInput) searchInput.value = brandName;
+
+    // 2. Hem markaya hem de kategoriye göre filtrele
+    const sBrand = normalizeText(brandName);
+    const sCat = normalizeText(categoryName);
+
+    const filtered = allProducts.filter(p => {
+        const pBrand = normalizeText(p.p_brand);
+        const pCat = normalizeText(p.p_cat);
+        // Hem marka tutmalı hem de seçilen kategorinin içinde olmalı
+        const isBrandMatch = pBrand === sBrand;
+        const isCatMatch = sCat.includes(pCat) || pCat.includes(sCat.split(' ')[0]);
+        return isBrandMatch && isCatMatch;
+    });
+
+    // 3. Ekrana yazdır (Arama butonuna basılmış gibi)
+    renderGeneralList(filtered, `${categoryName} > ${brandName}`);
 }
 
 

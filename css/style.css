@@ -1,13 +1,9 @@
 /* --- GENEL AYARLAR & SIFIRLAMA --- */
-body { 
-    margin: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background-color: #fff;
-    /* Dosya yolu style.css içindeyse ../img/ kullan, değilse img/ kullan */
-    background-image: url('../img/arkaplan.jpg'); 
-    background-repeat: repeat; 
-    background-attachment: fixed;
-    background-size: auto;
+body {
+    background-image: url(../img/bg-pattern.png) !important;
+    background-repeat: repeat !important;
+    background-attachment: fixed !important;
+    background-color: #641818; /* Resim yüklenene kadar beyaz kalsın */
 }
 
 /* --- HEADER & GRID SİSTEMİ --- */
