@@ -3,7 +3,7 @@ body {
     background-image: url(../arkaplan_resim/arkaplan2.jpg) !important;
     background-repeat: repeat !important;
     background-attachment: fixed !important;
-    background-color: #641818; /* Resim yüklenene kadar beyaz kalsın */
+    background-color: #ffffff; /* Resim yüklenene kadar beyaz kalsın */
 }
 
 /* --- HEADER & GRID SİSTEMİ --- */
@@ -345,7 +345,7 @@ body {
 
 .developer-credit {
     text-align: center;
-    padding: 2px 0;
+    padding: 1px 0 !important;
     background-color: #3d3d3d; /* Arka plan rengine göre koyu bir ton */
     color: #777;
     font-size: 13px;
@@ -358,9 +358,13 @@ body {
 }
 
 .dev-contact {
-    margin-top: 1px;
+    margin-top: 1px !important;
 }
-
+.developer-credit p {
+    margin: 2px 0 !important;    /* Paragraflar arasındaki dış boşluğu minimize eder */
+    line-height: 1.2 !important;  /* Satır yüksekliğini daraltarak yazıları birbirine yaklaştırır */
+    font-size: 12px;              /* Yazı boyutunu hafif küçültmek de alanı dar gösterir */
+}
 .dev-link {
     color: #b1b1b1; /* Altın sarısı tonu profesyonel durur */
     text-decoration: none;
