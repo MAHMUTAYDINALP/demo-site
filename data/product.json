@@ -1,102 +1,1203 @@
 {
   "products": [
     {
-      "p_name": "Clipper Klasik Plastik",
-      "p_desc": "Yeniden doldurulabilir ikonik plastik model.",
+      "p_name": "MRY Model No: 1001",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/1.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1002",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
       "p_cat": "Plastik Çakmak",
       "p_brand": "Clipper",
-      "p_img": "img/clipper-plastik.jpg",
-      "p_url": "",
-      "p_pop": true
+      "p_img": "img/2.png",
+      "p_pop": false
     },
     {
-      "p_name": "Tokai Standart Model",
-      "p_desc": "Dayanıklı ve ekonomik günlük kullanım.",
+      "p_name": "Tokai Model No: 1003",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
       "p_cat": "Plastik Çakmak",
       "p_brand": "Tokai",
-      "p_img": "img/tokai-plastik.jpg",
-      "p_url": "",
+      "p_img": "img/3.png",
       "p_pop": false
     },
     {
-      "p_name": "Str Şeffaf Seri",
-      "p_desc": "Gaz seviyesi görülebilir şeffaf gövde.",
+      "p_name": "Kasai Model No: 1004",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
       "p_cat": "Plastik Çakmak",
-      "p_brand": "Str",
-      "p_img": "img/str-plastik.jpg",
-      "p_url": "",
-      "p_pop": false
-    },
-    {
-      "p_name": "Mry Promosyon Baskılı",
-      "p_desc": "Logonuzun basılabileceği promosyonel ürün.",
-      "p_cat": "Promosyon Çakmak",
-      "p_brand": "Mry",
-      "p_img": "img/mry-promosyon.jpg",
-      "p_url": "",
-      "p_pop": true
-    },
-    {
-      "p_name": "Kasai Mıknatıslı Model",
-      "p_desc": "Özel tasarım promosyon çakmak.",
-      "p_cat": "Promosyon Çakmak",
       "p_brand": "Kasai",
-      "p_img": "img/kasai-promosyon.jpg",
-      "p_url": "",
-      "p_pop": true
+      "p_img": "img/4.png",
+      "p_pop": false
     },
     {
-      "p_name": "Clipper Metal Gold Edition",
-      "p_desc": "Özel altın rengi metal gövde.",
-      "p_cat": "Metal Çakmak",
+      "p_name": "STR Model No: 1005",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/5.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1006",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/6.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1007",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
       "p_brand": "Clipper",
-      "p_img": "img/clipper-metal.jpg",
-      "p_url": "",
-      "p_pop": true
+      "p_img": "img/7.png",
+      "p_pop": false
     },
     {
-      "p_name": "Koko Jet Alevli Metal",
-      "p_desc": "Rüzgarda sönmeyen güçlü alev.",
-      "p_cat": "Metal Çakmak",
-      "p_brand": "Koko",
-      "p_img": "img/koko-metal.jpg",
-      "p_url": "",
-      "p_pop": true
-    },
-    {
-      "p_name": "Copper Bakır Kaplama",
-      "p_desc": "Nostaljik bakır görünümlü koleksiyonluk.",
-      "p_cat": "Diğer Modeller",
-      "p_brand": "Copper",
-      "p_img": "img/copper-diger.jpg",
-      "p_url": "",
-      "p_pop": true
-    },
-    {
-      "p_name": "Özel Tasarım Tabaka Çakmak",
-      "p_desc": "Hem tabaka hem çakmak bir arada.",
-      "p_cat": "Diğer Modeller",
-      "p_brand": "Diğer",
-      "p_img": "img/diger-model.jpg",
-      "p_url": "",
-      "p_pop": true
-    },
-    {
-      "p_name": "Tokai Jet Alev Test",
-      "p_desc": "Slider testi için eklenen 7. ürün.",
+      "p_name": "Tokai Model No: 1008",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
       "p_cat": "Plastik Çakmak",
       "p_brand": "Tokai",
-      "p_img": "img/tokai-jet.jpg",
-      "p_url": "",
+      "p_img": "img/8.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Kasai Model No: 1009",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Kasai",
+      "p_img": "img/9.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1010",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/10.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1011",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/11.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1012",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/12.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Tokai Model No: 1013",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Tokai",
+      "p_img": "img/13.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Kasai Model No: 1014",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Kasai",
+      "p_img": "img/14.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1015",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/15.png",
       "p_pop": true
     },
     {
-      "p_name": "Str Metalik Mavi",
-      "p_desc": "Slider testi için eklenen 8. ürün.",
+      "p_name": "MRY Model No: 1016",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/16.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1017",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/17.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Tokai Model No: 1018",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Tokai",
+      "p_img": "img/18.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Kasai Model No: 1019",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Kasai",
+      "p_img": "img/19.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1020",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/20.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1021",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/21.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1022",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/22.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Tokai Model No: 1023",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Tokai",
+      "p_img": "img/23.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Kasai Model No: 1024",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Kasai",
+      "p_img": "img/24.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1025",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/25.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1026",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/26.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1027",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/27.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Tokai Model No: 1028",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Tokai",
+      "p_img": "img/28.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Kasai Model No: 1029",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Kasai",
+      "p_img": "img/29.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1030",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/30.png",
+      "p_pop": true
+    },
+    {
+      "p_name": "MRY Model No: 1031",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/31.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1032",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/32.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Tokai Model No: 1033",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Tokai",
+      "p_img": "img/33.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Kasai Model No: 1034",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Kasai",
+      "p_img": "img/34.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1035",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/35.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1036",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/36.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1037",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/37.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Tokai Model No: 1038",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Tokai",
+      "p_img": "img/38.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Kasai Model No: 1039",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Kasai",
+      "p_img": "img/39.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1040",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/40.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1041",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/41.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1042",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/42.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Tokai Model No: 1043",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Tokai",
+      "p_img": "img/43.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Kasai Model No: 1044",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Kasai",
+      "p_img": "img/44.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1045",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/45.png",
+      "p_pop": true
+    },
+    {
+      "p_name": "MRY Model No: 1046",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/46.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1047",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/47.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Tokai Model No: 1048",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Tokai",
+      "p_img": "img/48.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Kasai Model No: 1049",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "Kasai",
+      "p_img": "img/49.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1050",
+      "p_desc": "Günlük kullanım için dayanıklı ve ekonomik plastik model.",
+      "p_cat": "Plastik Çakmak",
+      "p_brand": "STR",
+      "p_img": "img/50.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1051",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
       "p_cat": "Metal Çakmak",
-      "p_brand": "Str",
-      "p_img": "img/str-blue.jpg",
-      "p_url": "",
+      "p_brand": "Zippo",
+      "p_img": "img/51.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1052",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/52.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1053",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/53.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1054",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/54.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1055",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/55.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1056",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/56.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1057",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/57.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1058",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/58.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1059",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/59.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1060",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/60.png",
+      "p_pop": true
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1061",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/61.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1062",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/62.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1063",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/63.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1064",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/64.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1065",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/65.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1066",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/66.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1067",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/67.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1068",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/68.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1069",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/69.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1070",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/70.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1071",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/71.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1072",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/72.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1073",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/73.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1074",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/74.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1075",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/75.png",
+      "p_pop": true
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1076",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/76.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1077",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/77.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1078",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/78.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1079",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/79.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1080",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/80.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1081",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/81.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1082",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/82.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1083",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/83.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1084",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/84.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1085",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/85.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1086",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/86.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1087",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/87.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1088",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/88.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1089",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/89.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1090",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/90.png",
+      "p_pop": true
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1091",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/91.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1092",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/92.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1093",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/93.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1094",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/94.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1095",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/95.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1096",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/96.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1097",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/97.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "BK-JET Model No: 1098",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "BK-JET",
+      "p_img": "img/98.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Zippo Model No: 1099",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Zippo",
+      "p_img": "img/99.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Silvio Monetti Model No: 1100",
+      "p_desc": "Şık tasarımlı, uzun ömürlü metal gövde ve güçlü alev.",
+      "p_cat": "Metal Çakmak",
+      "p_brand": "Silvio Monetti",
+      "p_img": "img/100.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1101",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/101.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1102",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/102.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1103",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/103.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1104",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/104.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1105",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/105.png",
+      "p_pop": true
+    },
+    {
+      "p_name": "MRY Model No: 1106",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/106.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1107",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/107.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1108",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/108.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1109",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/109.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1110",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/110.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1111",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/111.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1112",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/112.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1113",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/113.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1114",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/114.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1115",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/115.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1116",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/116.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1117",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/117.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1118",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/118.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1119",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/119.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1120",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/120.png",
+      "p_pop": true
+    },
+    {
+      "p_name": "Clipper Model No: 1121",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/121.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1122",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/122.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1123",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/123.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1124",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/124.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1125",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/125.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1126",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/126.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1127",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/127.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1128",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/128.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Clipper Model No: 1129",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "Clipper",
+      "p_img": "img/129.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "MRY Model No: 1130",
+      "p_desc": "Logonuzun basılabileceği, etkili reklam ve tanıtım ürünü.",
+      "p_cat": "Promosyon Çakmak",
+      "p_brand": "MRY",
+      "p_img": "img/130.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1131",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/131.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Alaska Model No: 1132",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/132.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1133",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/133.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Alaska Model No: 1134",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/134.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1135",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/135.png",
+      "p_pop": true
+    },
+    {
+      "p_name": "Alaska Model No: 1136",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/136.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1137",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/137.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Alaska Model No: 1138",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/138.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1139",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/139.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Alaska Model No: 1140",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/140.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1141",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/141.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Alaska Model No: 1142",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/142.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1143",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/143.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Alaska Model No: 1144",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/144.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1145",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/145.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Alaska Model No: 1146",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/146.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1147",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/147.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Alaska Model No: 1148",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/148.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "STR Model No: 1149",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "STR",
+      "p_img": "img/149.png",
+      "p_pop": false
+    },
+    {
+      "p_name": "Alaska Model No: 1150",
+      "p_desc": "Mutfak, kamp ve teknik kullanıma uygun özel tasarım.",
+      "p_cat": "Diğer Modeller",
+      "p_brand": "Alaska",
+      "p_img": "img/150.png",
       "p_pop": true
     }
   ]
