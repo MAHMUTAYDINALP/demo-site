@@ -2,14 +2,12 @@
 body { 
     margin: 0; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    
-    color: #222; 
-    overflow-x: hidden;
-    /* ARKA PLAN DESENİ */
-    background-image: url("../img/bg-pattern.png") !important; 
+    background-color: #fff;
+    /* Dosya yolu style.css içindeyse ../img/ kullan, değilse img/ kullan */
+    background-image: url('../img/bg-pattern.png'); 
     background-repeat: repeat; 
-    background-size: auto; 
-    background-attachment: fixed; 
+    background-attachment: fixed;
+    background-size: auto;
 }
 
 /* --- HEADER & GRID SİSTEMİ --- */
@@ -343,5 +341,4 @@ body {
 #popular-hero-area {
     scroll-margin-top: 150px; 
     padding-top: 20px;
-
 }

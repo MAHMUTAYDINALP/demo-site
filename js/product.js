@@ -164,11 +164,39 @@ function showBrands(category) {
     const dropdown = document.getElementById(id);
     if (dropdown) {
         dropdown.innerHTML = brands.map(b => `
-            <a href="javascript:void(0)" class="brand-img-link" onclick="filterByBrand('${b}', '${category}')">
+            <a href="javascript:void(0)" class="brand-img-link" onclick="searchByBrandName('${b}')">
                 <img src="brands/${b}.png" onerror="this.src='img/logo.png'">
             </a>
         `).join('');
     }
+}
+
+
+function searchByBrandName(brandName) {
+    const searchInput = document.getElementById("search");
+    if (searchInput) {
+        searchInput.value = brandName; // Marka ismini arama kutusuna yazar
+        performSearch(); // Mevcut arama fonksiyonunu çalıştırır
+    }
+}
+
+/* performSearch fonksiyonun içindeki normalizeText kullanımının doğru olduğundan emin ol */
+function performSearch() {
+    const term = normalizeText(document.getElementById("search").value);
+    if (!term) return;
+
+    const area = document.getElementById("popular-hero-area");
+    if (!area) {
+        window.location.href = `index.html?search=${encodeURIComponent(term)}`;
+        return;
+    }
+
+    const filtered = allProducts.filter(p => 
+        normalizeText(p.p_name).includes(term) || 
+        normalizeText(p.p_brand).includes(term)
+    );
+
+    renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
 function renderHeroSet(products) {
