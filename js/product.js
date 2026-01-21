@@ -107,11 +107,9 @@ function showBrands(category) {
     });
 
     const brands = [...new Set(filteredProducts.map(p => p.p_brand))];
-    let id = "";
-    if (searchCat.includes("plastik")) id = "brands-Plastik";
-    else if (searchCat.includes("promosyon")) id = "brands-Promosyon";
-    else if (searchCat.includes("metal")) id = "brands-Metal";
-    else id = "brands-Diger";
+    let id = searchCat.includes("plastik") ? "brands-Plastik" : 
+             searchCat.includes("promosyon") ? "brands-Promosyon" : 
+             searchCat.includes("metal") ? "brands-Metal" : "brands-Diger";
 
     const dropdown = document.getElementById(id);
     if (dropdown) {
@@ -129,29 +127,24 @@ function executeBrandSearch(brandName, categoryName) {
     const searchInput = document.getElementById("search");
     if (searchInput) searchInput.value = brandName;
 
-    // Normalleştirme yapalım
     const sBrand = normalizeText(brandName);
     const sCat = normalizeText(categoryName);
 
-    // FİLTRELEME: Sadece seçilen markanın, seçilen kategorideki ürünlerini getir
     const filtered = allProducts.filter(p => {
         const pBrand = normalizeText(p.p_brand);
         const pCat = normalizeText(p.p_cat);
         
-        // Kural 1: Marka tam olarak aynı olmalı
+        // Marka birebir uymalı
         const isBrandMatch = (pBrand === sBrand);
         
-        // Kural 2: Kategori eşleşmeli (Örn: "plastik" kelimesi p_cat içinde geçmeli)
-        const catKeyword = sCat.split(' ')[0]; 
-        const isCatMatch = pCat.includes(catKeyword) || catKeyword.includes(pCat);
+        // Kategori başlığın ilk kelimesiyle uyuşmalı
+        const catFirstWord = sCat.split(' ')[0]; 
+        const isCatMatch = pCat.includes(catFirstWord) || catFirstWord.includes(pCat);
         
-        // İKİSİ DE DOĞRUYSA LİSTEYE AL
         return isBrandMatch && isCatMatch;
     });
 
-    console.log("Filtrelenen Ürün Sayısı:", filtered.length); // Kaç ürün geldiğini F12'den gör
-
-    // Title kısmını güncelle ve listeyi bas
+    // Başlığı hem kategori hem marka ismiyle güncelliyoruz
     renderGeneralList(filtered, `${categoryName} > ${brandName}`);
 }
 
