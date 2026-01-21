@@ -102,27 +102,28 @@ function filterByCategory(cat) {
 }
 // --- MARKA FİLTRELEME FONKSİYONU (KESİN ÇÖZÜM) ---
 function filterByBrand(brand, categoryTitle) {
+    // Sayfada popular-hero-area yoksa (detay sayfasındaysak) index'e yönlendir
     const area = document.getElementById("popular-hero-area");
     if (!area) {
         window.location.href = `index.html?search=${encodeURIComponent(brand)}`;
         return;
     }
 
-    const searchBrand = normalizeText(brand);
-    const searchCat = normalizeText(categoryTitle);
+    const sBrand = normalizeText(brand);
+    const sCat = normalizeText(categoryTitle);
 
     const filtered = allProducts.filter(p => {
-        const productBrand = normalizeText(p.p_brand);
-        const productCat = normalizeText(p.p_cat);
-
-        // Marka birebir aynı olmalı, kategori ise içinde geçmeli
-        const isBrandMatch = productBrand === searchBrand;
-        const isCatMatch = searchCat.includes(productCat) || productCat.includes(searchCat.split(' ')[0]);
-        
-        return isBrandMatch && isCatMatch;
+        const pBrand = normalizeText(p.p_brand);
+        const pCat = normalizeText(p.p_cat);
+        // Marka tam eşleşmeli, kategori ise buton metninde geçmeli
+        return pBrand === sBrand && (sCat.includes(pCat) || pCat.includes(sCat.split(' ')[0]));
     });
 
-    renderGeneralList(filtered, `${categoryTitle} > ${brand}`);
+    if (filtered.length > 0) {
+        renderGeneralList(filtered, `${categoryTitle} > ${brand}`);
+    } else {
+        console.warn("Eşleşen ürün bulunamadı:", brand, categoryTitle);
+    }
 }
 
 
@@ -154,16 +155,16 @@ function showBrands(category) {
         const productCat = normalizeText(p.p_cat);
         return searchCat.includes(productCat) || productCat.includes(searchCat.split(' ')[0]);
     });
+
     const brands = [...new Set(filteredProducts.map(p => p.p_brand))];
-    let id = "";
-    if (searchCat.includes("plastik")) id = "brands-Plastik";
-    else if (searchCat.includes("promosyon")) id = "brands-Promosyon";
-    else if (searchCat.includes("metal")) id = "brands-Metal";
-    else id = "brands-Diger";
+    let id = searchCat.includes("plastik") ? "brands-Plastik" : 
+             searchCat.includes("promosyon") ? "brands-Promosyon" : 
+             searchCat.includes("metal") ? "brands-Metal" : "brands-Diger";
+
     const dropdown = document.getElementById(id);
     if (dropdown) {
         dropdown.innerHTML = brands.map(b => `
-            <a href="#" class="brand-img-link" onclick="filterByBrand('${b}', '${category}')" title="${b}">
+            <a href="javascript:void(0)" class="brand-img-link" onclick="filterByBrand('${b}', '${category}')">
                 <img src="brands/${b}.png" onerror="this.src='img/logo.png'">
             </a>
         `).join('');
