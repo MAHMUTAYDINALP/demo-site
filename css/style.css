@@ -4,7 +4,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     background-color: #fff;
     /* Dosya yolu style.css içindeyse ../img/ kullan, değilse img/ kullan */
-    background-image: url('../img/bg-pattern.png'); 
+    background-image: url('../img/arkaplan.jpg'); 
     background-repeat: repeat; 
     background-attachment: fixed;
     background-size: auto;
