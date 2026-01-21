@@ -273,8 +273,8 @@ body {
 .main-footer { 
     background: #3d3d3d; 
     color: #fff; 
-    padding: 40px 0 20px 0; 
-    margin-top: 50px; 
+    padding: 20px 0 20px 0; 
+    margin-top: 20px; 
 }
 
 .footer-content { 
@@ -345,7 +345,7 @@ body {
 
 .developer-credit {
     text-align: center;
-    padding: 25px 0;
+    padding: 5px 0;
     background-color: #3d3d3d; /* Arka plan rengine göre koyu bir ton */
     color: #777;
     font-size: 13px;
@@ -358,11 +358,11 @@ body {
 }
 
 .dev-contact {
-    margin-top: 5px;
+    margin-top: 2px;
 }
 
 .dev-link {
-    color: #4a1c1c; /* Altın sarısı tonu profesyonel durur */
+    color: #b1b1b1; /* Altın sarısı tonu profesyonel durur */
     text-decoration: none;
     font-weight: 500;
     margin: 0 5px;
