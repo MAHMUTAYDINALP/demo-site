@@ -97,8 +97,8 @@
     "p_brand": "MRY",
     "p_cat": "PLASTİK",
     "p_img": "img/14.png",
-    "p_desc": "M 2020 RÜZGAR SARGILI KÖPEK",
-    "p_pop": true
+    "p_desc": "M 2020 RÜZGAR SARGILI KÖPEK"
+    
     
   },
   {
@@ -106,8 +106,7 @@
     "p_brand": "MRY",
     "p_cat": "PLASTİK",
     "p_img": "img/15.png",
-    "p_desc": "M 2020 RÜZGAR SARGILI KEDİ",
-    "p_pop": true
+    "p_desc": "M 2020 RÜZGAR SARGILI KEDİ"
   },
   {
     "p_name": "RÜZGAR SARGILI KARTALLI",
@@ -122,8 +121,7 @@
     "p_brand": "MRY",
     "p_cat": "PLASTİK",
     "p_img": "img/17.png",
-    "p_desc": "M 2020 RÜZGAR SARGILI ARABA",
-    "p_pop": true
+    "p_desc": "M 2020 RÜZGAR SARGILI ARABA"
   },
   {
     "p_name": "RÜZGAR SARGILI KORSAN",
@@ -236,7 +234,8 @@
     "p_brand": "CLİPPER",
     "p_cat": "PLASTİK",
     "p_img": "img/33.png",
-    "p_desc": "POCKET POCKET YUVARLAK"
+    "p_desc": "POCKET POCKET YUVARLAK",
+    "p_pop": true
   },
   {
     "p_name": "TAŞLI ŞEFFAF",
@@ -271,7 +270,8 @@
     "p_brand": "GOLF",
     "p_cat": "DİGER",
     "p_img": "img/38.png",
-    "p_desc": "127ML 127 ML BENZİN"
+    "p_desc": "127ML 127 ML BENZİN",
+    "p_pop": true
   },
   {
     "p_name": "LÜX TAŞLI SARGILI KEDİ",
@@ -292,21 +292,24 @@
     "p_brand": "STR",
     "p_cat": "PLASTİK",
     "p_img": "img/41.png",
-    "p_desc": "804 LÜX TAŞLI SARGILI  KARE"
+    "p_desc": "804 LÜX TAŞLI SARGILI  KARE",
+    "p_pop": true
   },
   {
     "p_name": "LÜX TAŞLI SARGILI KARE TAKIMLI",
     "p_brand": "STR",
     "p_cat": "PLASTİK",
     "p_img": "img/42.png",
-    "p_desc": "804 LÜX TAŞLI SARGILI KARE TAKIMLI"
+    "p_desc": "804 LÜX TAŞLI SARGILI KARE TAKIMLI",
+    "p_pop": true
   },
   {
     "p_name": "LÜX TAŞLI SARGILI  ..",
     "p_brand": "STR",
     "p_cat": "PLASTİK",
     "p_img": "img/43.png",
-    "p_desc": "804 LÜX TAŞLI SARGILI  .."
+    "p_desc": "804 LÜX TAŞLI SARGILI  ..",
+    "p_pop": true
   },
   {
     "p_name": "LÜX TAŞLI SARGILI TÜRK BAYRAGI",
@@ -327,7 +330,8 @@
     "p_brand": "STR",
     "p_cat": "PLASTİK",
     "p_img": "img/46.png",
-    "p_desc": "804 LÜX TAŞLI SARGILI  DESENLİ"
+    "p_desc": "804 LÜX TAŞLI SARGILI  DESENLİ",
+    "p_pop": true
   },
   {
     "p_name": "LÜX TAŞLI SARGILI İSTANBUL",
@@ -355,7 +359,8 @@
     "p_brand": "STR",
     "p_cat": "DİGER",
     "p_img": "img/50.png",
-    "p_desc": "DMR-525 PÜRMÜZ 6 RENK"
+    "p_desc": "DMR-525 PÜRMÜZ 6 RENK",
+    "p_pop": true
   },
   {
     "p_name": "UZUN MUTFAK ÇAKMAGI",
@@ -467,7 +472,8 @@
     "p_brand": "STR",
     "p_cat": "METAL",
     "p_img": "img/66.png",
-    "p_desc": "803 METAL TAŞLI METAL MAT GRADYAN RENKLİ"
+    "p_desc": "803 METAL TAŞLI METAL MAT GRADYAN RENKLİ",
+    "p_pop": true
   },
   {
     "p_name": "MANYETOLU METAL PARLAK RENKLİ",
@@ -740,7 +746,8 @@
     "p_brand": "STR",
     "p_cat": "METAL",
     "p_img": "img/105.png",
-    "p_desc": "TRCH 2025 TORCH METAL MAT GRADYAN RENKLİ"
+    "p_desc": "TRCH 2025 TORCH METAL MAT GRADYAN RENKLİ",
+    "p_pop": true
   },
   {
     "p_name": "TORCH METAL GOLD DESENLİ",
@@ -859,7 +866,8 @@
     "p_brand": "STR",
     "p_cat": "METAL",
     "p_img": "img/122.png",
-    "p_desc": "804 LÜX TAŞLI METAL MAT GRADYAN RENKLİ"
+    "p_desc": "804 LÜX TAŞLI METAL MAT GRADYAN RENKLİ",
+    "p_pop": true
   },
   {
     "p_name": "LÜX TAŞLI METAL PARLAK RENKLİ",
