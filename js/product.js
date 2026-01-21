@@ -11,26 +11,27 @@ let isDragging = false;
 const timeThreshold = 200; 
 const moveThreshold = 5; 
 
-// --- YARDIMCI FONKSİYON: TÜRKÇE KARAKTER NORMALİZASYONU ---
+// --- TÜRKÇE KARAKTER NORMALİZASYONU ---
 function normalizeText(text) {
-    return (text || "").toLocaleLowerCase('tr-TR').trim();
+    return (text || "").toLocaleLowerCase('tr-TR')
+        .replace(/ı/g, 'i') // I ve i karmaşasını önlemek için
+        .trim();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Veri yolunu kontrol et (data/product.json veya product.json)
     fetch("data/product.json")
         .then(res => res.json())
         .then(data => {
-            // JSON yapısındaki "products" anahtarını veya direkt listeyi kontrol et
             allProducts = data.products || data || [];
             
             const urlParams = new URLSearchParams(window.location.search);
             const catParam = urlParams.get("cat");
             const searchParam = urlParams.get("search");
-
             const popularLayout = document.getElementById("popular-layout");
 
             if (popularLayout) {
-                // Popüler setleri hazırla (p_pop: true olanlar)
+                // p_pop: true olan ürünleri filtrele
                 const populars = allProducts.filter(p => p.p_pop === true);
                 popularSets = [];
                 for (let i = 0; i < populars.length; i += 3) {
@@ -56,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
-// --- LİSTELEME VE FİLTRELEME ---
+// --- KRİTİK LİSTELEME FONKSİYONLARI ---
 
 function filterByCategory(cat) {
     const area = document.getElementById("popular-hero-area");
@@ -69,8 +70,9 @@ function filterByCategory(cat) {
 
     const filtered = allProducts.filter(p => {
         const productCat = normalizeText(p.p_cat);
-        // "Diğer Modeller" içindeki "diğer" ile JSON'daki "diger" eşleşmesini sağlar
-        return searchCat.includes(productCat) || productCat.includes(searchCat.split(' ')[0]);
+        // "Diğer Modeller" butonuna basınca JSON'daki "DİGER" verisini bulması için:
+        if (searchCat.includes("diger") && productCat.includes("diger")) return true;
+        return productCat.includes(searchCat) || searchCat.includes(productCat);
     });
 
     renderGeneralList(filtered, cat);
@@ -85,30 +87,13 @@ function filterByBrand(brand, categoryTitle) {
 
     const filtered = allProducts.filter(p => {
         const brandMatch = normalizeText(p.p_brand) === normalizeText(brand);
-        const catMatch = normalizeText(categoryTitle).includes(normalizeText(p.p_cat)) || 
-                         normalizeText(p.p_cat).includes(normalizeText(categoryTitle).split(' ')[0]);
+        const pCat = normalizeText(p.p_cat);
+        const sCat = normalizeText(categoryTitle);
+        const catMatch = sCat.includes(pCat) || pCat.includes(sCat.split(' ')[0]);
         return brandMatch && catMatch;
     });
 
     renderGeneralList(filtered, `${categoryTitle} > ${brand}`);
-}
-
-function performSearch() {
-    const term = normalizeText(document.getElementById("search").value);
-    if (!term) return;
-
-    const area = document.getElementById("popular-hero-area");
-    if (!area) {
-        window.location.href = `index.html?search=${encodeURIComponent(term)}`;
-        return;
-    }
-
-    const filtered = allProducts.filter(p => 
-        normalizeText(p.p_name).includes(term) || 
-        normalizeText(p.p_brand).includes(term)
-    );
-
-    renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
 function renderGeneralList(products, title) {
@@ -116,6 +101,7 @@ function renderGeneralList(products, title) {
     if (!area) return;
     
     clearInterval(sliderInterval);
+    
     area.innerHTML = `
         <h2 id="section-title" style="text-align:center; font-size: 20px; margin-bottom: 20px;">${title}</h2>
         <div class="general-grid" id="general-list"></div>
@@ -130,7 +116,11 @@ function renderGeneralList(products, title) {
         </div>
     `).join('');
     
-    window.scrollTo({ top: 300, behavior: 'smooth' });
+    // Sayfanın header altında kalmasını önlemek için dinamik kaydırma
+    const headerHeight = document.querySelector('.header-wrapper').offsetHeight || 120;
+    const targetPos = area.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+
+    window.scrollTo({ top: targetPos, behavior: 'smooth' });
 }
 
 // --- MENÜDE MARKA GÖSTERİMİ ---
@@ -138,9 +128,9 @@ function renderGeneralList(products, title) {
 function showBrands(category) {
     const searchCat = normalizeText(category);
     
-    // Sadece bu kategoriye ait markaları filtrele
     const filteredProducts = allProducts.filter(p => {
         const productCat = normalizeText(p.p_cat);
+        if (searchCat.includes("diger") && productCat.includes("diger")) return true;
         return searchCat.includes(productCat) || productCat.includes(searchCat.split(' ')[0]);
     });
 
@@ -155,15 +145,15 @@ function showBrands(category) {
     const dropdown = document.getElementById(id);
     if (dropdown) {
         dropdown.innerHTML = brands.map(b => `
-            <a href="#" class="brand-img-link" onclick="filterByBrand('${b}', '${category}')" title="${b}">
-                <img src="img/brands/${b}.png" onerror="this.src='img/logo.png'">
+            <a href="#" class="brand-img-link" onclick="filterByBrand('${b}', '${category}')">
+                <img src="brands/${b}.png" onerror="this.src='img/logo.png'">
                 <span style="font-size:10px; display:block; color:#333; text-align:center;">${b}</span>
             </a>
         `).join('');
     }
 }
 
-// --- SLIDER VE DİĞER FONKSİYONLAR ---
+// --- SLIDER FONKSİYONLARI ---
 
 function renderHeroSet(products) {
     const container = document.getElementById("popular-layout");
@@ -210,6 +200,8 @@ function moveSlider(direction) {
     });
 }
 
+// --- EVENT HANDLERS ---
+
 function initManualSwipe() {
     const layout = document.getElementById("popular-layout");
     if (!layout) return;
@@ -253,6 +245,24 @@ function setupSearch() {
     const input = document.getElementById("search");
     if (btn) btn.onclick = performSearch;
     if (input) input.onkeypress = (e) => { if (e.key === 'Enter') performSearch(); };
+}
+
+function performSearch() {
+    const term = normalizeText(document.getElementById("search").value);
+    if (!term) return;
+
+    const area = document.getElementById("popular-hero-area");
+    if (!area) {
+        window.location.href = `index.html?search=${encodeURIComponent(term)}`;
+        return;
+    }
+
+    const filtered = allProducts.filter(p => 
+        normalizeText(p.p_name).includes(term) || 
+        normalizeText(p.p_brand).includes(term)
+    );
+
+    renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
 function goToDetail(name) { window.location.href = `detail.html?name=${encodeURIComponent(name)}`; }
