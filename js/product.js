@@ -121,26 +121,31 @@ function showBrands(category) {
     }
 }
 
-// --- MARKA + KATEGORİ ÖZEL ARAMA (DÜZELTİLDİ) ---
+// --- MARKA + KATEGORİ ÖZEL ARAMA (KESİN FİLTRELEME) ---
 function executeBrandSearch(brandName, categoryName) {
+    // 1. Arama kutusuna marka adını yaz (Kullanıcı neyi aradığını görsün)
     const searchInput = document.getElementById("search");
     if (searchInput) searchInput.value = brandName;
 
     const sBrand = normalizeText(brandName);
     const sCat = normalizeText(categoryName);
 
-    // KATEGORİ VE MARKA BİRLİKTE KONTROL EDİLİYOR
+    // 2. Filtrelemeyi başlat
     const filtered = allProducts.filter(p => {
         const pBrand = normalizeText(p.p_brand);
         const pCat = normalizeText(p.p_cat);
         
-        // Marka birebir uymalı, Kategori ise kelime içinde geçmeli
+        // Marka tam eşleşmeli
         const isBrandMatch = pBrand === sBrand;
-        const isCatMatch = sCat.includes(pCat) || pCat.includes(sCat.split(' ')[0]);
+        
+        // Kategori eşleşmesi: JSON'daki "PLASTIK" ile başlık "Plastik Çakmak" eşleşmeli
+        const catFirstWord = sCat.split(' ')[0]; // Örn: "plastik"
+        const isCatMatch = pCat.includes(catFirstWord) || catFirstWord.includes(pCat);
         
         return isBrandMatch && isCatMatch;
     });
 
+    // 3. Mevcut ürün listesi alanını temizle ve sadece bu ürünleri bas
     renderGeneralList(filtered, `${categoryName} > ${brandName}`);
 }
 
@@ -148,21 +153,29 @@ function executeBrandSearch(brandName, categoryName) {
 function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");
     if (!area) return;
+    
+    // Slider'ı durdur (filtreleme yapıldığında slider görünmemeli)
     clearInterval(sliderInterval);
+    
     area.innerHTML = `
         <h2 id="section-title" style="text-align:center; font-size: 20px; margin-bottom: 20px;">${title}</h2>
         <div class="general-grid" id="general-list"></div>
     `;
-    const list = document.getElementById("general-list");
-    list.innerHTML = products.map(p => `
-        <div class="product-card" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_img}" draggable="false" onerror="this.src='img/logo.png'">
-            <small style="color:#999; text-transform:uppercase; font-size:10px;">${p.p_brand}</small>
-            <h4 style="margin:8px 0; font-size: 14px;">${p.p_name}</h4>
-        </div>
-    `).join('');
     
-    // Header altında kalma sorununu çözen dinamik kaydırma
+    const list = document.getElementById("general-list");
+    if (products.length === 0) {
+        list.innerHTML = `<p style="text-align:center; grid-column: 1/-1; padding: 50px;">Bu markaya ait ürün bulunamadı.</p>`;
+    } else {
+        list.innerHTML = products.map(p => `
+            <div class="product-card" onclick="goToDetail('${p.p_name}')">
+                <img src="${p.p_img}" draggable="false" onerror="this.src='img/logo.png'">
+                <small style="color:#999; text-transform:uppercase; font-size:10px;">${p.p_brand}</small>
+                <h4 style="margin:8px 0; font-size: 14px;">${p.p_name}</h4>
+            </div>
+        `).join('');
+    }
+    
+    // Kaydırma
     const header = document.querySelector('.header-wrapper');
     const headerHeight = header ? header.offsetHeight : 120;
     const targetPos = area.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
@@ -188,7 +201,7 @@ function performSearch() {
     renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
-// --- SLIDER VE DİĞERLERİ ---
+// --- SLIDER VE DİĞER FONKSİYONLAR (DEĞİŞMEDİ) ---
 function renderHeroSet(products) {
     const container = document.getElementById("popular-layout");
     if (!container) return;
