@@ -342,3 +342,34 @@ body {
     scroll-margin-top: 150px; 
     padding-top: 20px;
 }
+
+.developer-credit {
+    text-align: center;
+    padding: 25px 0;
+    background-color: #111; /* Arka plan rengine göre koyu bir ton */
+    color: #777;
+    font-size: 13px;
+    border-top: 1px solid #333;
+    line-height: 1.6;
+}
+
+.developer-credit strong {
+    color: #aaa;
+}
+
+.dev-contact {
+    margin-top: 5px;
+}
+
+.dev-link {
+    color: #f1c40f; /* Altın sarısı tonu profesyonel durur */
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+}
+
+.dev-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
