@@ -65,11 +65,15 @@ function filterByCategory(cat) {
         window.location.href = `index.html?cat=${encodeURIComponent(cat)}`;
         return;
     }
-    // Eşleşmeyi kolaylaştırmak için include ve toLowerCase kullanalım
-    const filtered = allProducts.filter(p => 
-        cat.toLowerCase().includes(p.p_cat.toLowerCase()) || 
-        p.p_cat.toLowerCase().includes(cat.toLowerCase())
-    );
+
+    // Hem JSON'daki p_cat'i hem gelen cat parametresini küçük harfe çevirip kıyaslıyoruz
+    const filtered = allProducts.filter(p => {
+        const productCat = (p.p_cat || "").toLocaleLowerCase('tr-TR');
+        const searchCat = cat.toLocaleLowerCase('tr-TR');
+        // Birbirlerinin içinde geçiyorlarsa kabul et (Örn: "PLASTİK" ve "Plastik Çakmak")
+        return productCat.includes(searchCat) || searchCat.includes(productCat);
+    });
+
     renderGeneralList(filtered, cat);
 }
 
@@ -216,14 +220,30 @@ function performSearch() {
     renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
+
 function showBrands(category) {
-    const brands = [...new Set(allProducts.filter(p => p.p_cat === category).map(p => p.p_brand))];
-    let id = category.includes("Plastik") ? "brands-Plastik" : category.includes("Promosyon") ? "brands-Promosyon" : category.includes("Metal") ? "brands-Metal" : "brands-Diger";
+    const filteredProducts = allProducts.filter(p => {
+        const productCat = (p.p_cat || "").toLocaleLowerCase('tr-TR');
+        const searchCat = category.toLocaleLowerCase('tr-TR');
+        return productCat.includes(searchCat) || searchCat.includes(productCat);
+    });
+
+    const brands = [...new Set(filteredProducts.map(p => p.p_brand))];
+    
+    // Kategoriye göre doğru dropdown ID'sini bul
+    let id = "";
+    const lowerCat = category.toLowerCase();
+    if (lowerCat.includes("plastik")) id = "brands-Plastik";
+    else if (lowerCat.includes("promosyon")) id = "brands-Promosyon";
+    else if (lowerCat.includes("metal")) id = "brands-Metal";
+    else id = "brands-Diger";
+
     const dropdown = document.getElementById(id);
-    if (dropdown) {
+    if (dropdown && brands.length > 0) {
         dropdown.innerHTML = brands.map(b => `
             <a href="#" class="brand-img-link" onclick="filterByBrand('${b}', '${category}')">
                 <img src="img/brands/${b}.png" onerror="this.src='img/logo.png'">
+                <span style="font-size:10px; display:block; color:#333;">${b}</span>
             </a>
         `).join('');
     }
@@ -233,9 +253,11 @@ function goToDetail(name) { window.location.href = `detail.html?name=${encodeURI
 
 function loadProductDetail(name) {
     fetch("data/product.json").then(res => res.json()).then(data => {
-        const p = data.products.find(x => x.p_name === name);
+        // JSON yapına göre data veya data.products olarak kontrol et
+        const list = data.products ? data.products : data; 
+        const p = list.find(x => x.p_name === name);
         if (p) {
-            document.getElementById("detail-img").src = p.p_url || p.p_img;
+            document.getElementById("detail-img").src = p.p_img;
             document.getElementById("detail-title").innerText = p.p_name;
             document.getElementById("detail-brand").innerText = p.p_brand;
             document.getElementById("detail-desc").innerText = p.p_desc || "Detaylar için WhatsApp'tan ulaşın.";
