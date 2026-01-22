@@ -10,7 +10,7 @@ let isDragging = false;
 const timeThreshold = 200; 
 const moveThreshold = 5; 
 
-// --- TÜRKÇE KARAKTERLERİ DÜZELTEN GÜÇLÜ FONKSİYON ---
+// --- 1. TÜRKÇE KARAKTER VE TEMİZLİK FONKSİYONU ---
 function normalizeText(text) {
     if (!text) return "";
     return text.toString()
@@ -24,6 +24,7 @@ function normalizeText(text) {
         .toLowerCase().trim();
 }
 
+// --- 2. SİSTEM BAŞLATICI ---
 document.addEventListener("DOMContentLoaded", () => {
     fetch("data/product.json")
         .then(res => res.json())
@@ -62,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
-// --- ŞERİT (TICKER) ---
+// --- 3. ŞERİT (TICKER) - LAZY LOADING EKLENDİ ---
 function initTickers() {
     const rightTicker = document.getElementById("ticker-right");
     const leftTicker = document.getElementById("ticker-left");
@@ -71,11 +72,11 @@ function initTickers() {
     const randomSet = [...allProducts].sort(() => 0.5 - Math.random()).slice(0, 12);
     const tickerContent = randomSet.map(p => `
         <div class="ticker-item" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_img}" onerror="this.src='img/logo.png'">
+            <img src="${p.p_img}" loading="lazy" onerror="this.src='img/logo.png'">
         </div>
     `).join('') + randomSet.map(p => `
         <div class="ticker-item" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_img}" onerror="this.src='img/logo.png'">
+            <img src="${p.p_img}" loading="lazy" onerror="this.src='img/logo.png'">
         </div>
     `).join('');
 
@@ -83,7 +84,7 @@ function initTickers() {
     leftTicker.innerHTML = tickerContent;
 }
 
-// --- KATEGORİ FİLTRELEME ---
+// --- 4. KATEGORİ FİLTRELEME ---
 function filterByCategory(cat) {
     const area = document.getElementById("popular-hero-area");
     if (!area) {
@@ -98,9 +99,7 @@ function filterByCategory(cat) {
     renderGeneralList(filtered, cat);
 }
 
-
-
-// --- MARKA DROPDOWN İÇERİĞİ (GÜNCELLENDİ) ---
+// --- 5. MARKA DROPDOWN İÇERİĞİ ---
 function showBrands(category) {
     const searchCat = normalizeText(category);
     const filteredProducts = allProducts.filter(p => {
@@ -115,54 +114,47 @@ function showBrands(category) {
 
     const dropdown = document.getElementById(id);
     if (dropdown) {
-        // javascript:void(0) ve event.stopPropagation() ekleyerek çakışmayı önledik
-        dropdown.innerHTML = brands.map(b => `
-            <a href="javascript:void(0)" class="brand-img-link" 
-               onclick="event.stopPropagation(); executeBrandSearch('${b}', '${category}')">
-                <img src="brands/${normalizeText(b).replace(/\s/g, '-')}.png" onerror="this.src='img/logo.png'">
-            </a>
-        `).join('');
+        dropdown.innerHTML = brands.map(b => {
+            // Dosya isimlerinde "=" yerine "-" kullanarak çağırıyoruz
+            let fileName = normalizeText(b).replace(/=/g, '-').replace(/\s+/g, '-');
+            return `
+                <a href="javascript:void(0)" class="brand-img-link" 
+                   onclick="event.stopPropagation(); executeBrandSearch('${b}', '${category}')">
+                    <img src="brands/${fileName}.png" loading="lazy" onerror="this.src='img/logo.png'">
+                </a>
+            `;
+        }).join('');
     }
 }
 
-// --- MARKA ÖNCELİKLİ ARAMA (KESİN ÇÖZÜM) ---
+// --- 6. KESİN MARKA FİLTRELEME (SADECE O MARKAYI GETİRİR) ---
 function executeBrandSearch(brandName, categoryName) {
-    // 1. Arama çubuğunu güncelle
     const searchInput = document.getElementById("search");
     if (searchInput) searchInput.value = brandName;
 
     const sBrand = normalizeText(brandName);
     const sCat = normalizeText(categoryName);
 
-    // 2. Filtreleme: Önce markayı, sonra kategoriyi doğrula
     const filtered = allProducts.filter(p => {
         const pBrand = normalizeText(p.p_brand);
         const pCat = normalizeText(p.p_cat);
         
-        // Marka birebir tutmalı
         const isBrandMatch = (pBrand === sBrand);
-        
-        // Kategori ismi JSON'daki p_cat ile veya kategori başlığının ilk kelimesiyle uyuşmalı
         const catFirstWord = sCat.split(' ')[0]; 
         const isCatMatch = pCat.includes(catFirstWord) || catFirstWord.includes(pCat);
         
         return isBrandMatch && isCatMatch;
     });
 
-    // 3. Ekrana Yazdır: renderGeneralList'i doğrudan çağırarak kategori fonksiyonunu eziyoruz
     renderGeneralList(filtered, `${categoryName} > ${brandName}`);
-    
-    // Dropdown'ı kapatmak için manuel tetik (isteğe bağlı)
-    const allDropdowns = document.querySelectorAll('.brand-dropdown');
-    allDropdowns.forEach(d => d.style.display = 'none');
-    setTimeout(() => { allDropdowns.forEach(d => d.style.display = ''); }, 100);
 }
 
-// --- LİSTE OLUŞTURMA ---
+// --- 7. GENEL LİSTE OLUŞTURMA (RENDER) ---
 function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");
     if (!area) return;
     
+    // Filtreleme anında slider durmalı
     clearInterval(sliderInterval);
     
     area.innerHTML = `
@@ -172,11 +164,11 @@ function renderGeneralList(products, title) {
     
     const list = document.getElementById("general-list");
     if (products.length === 0) {
-        list.innerHTML = `<p style="text-align:center; grid-column: 1/-1; padding: 50px;">Bu markaya ait ürün bulunamadı.</p>`;
+        list.innerHTML = `<p style="text-align:center; grid-column: 1/-1; padding: 50px;">Ürün bulunamadı.</p>`;
     } else {
         list.innerHTML = products.map(p => `
             <div class="product-card" onclick="goToDetail('${p.p_name}')">
-                <img src="${p.p_img}" draggable="false" onerror="this.src='img/logo.png'">
+                <img src="${p.p_img}" loading="lazy" draggable="false" onerror="this.src='img/logo.png'">
                 <small style="color:#999; text-transform:uppercase; font-size:10px;">${p.p_brand}</small>
                 <h4 style="margin:8px 0; font-size: 14px;">${p.p_name}</h4>
             </div>
@@ -189,7 +181,7 @@ function renderGeneralList(products, title) {
     window.scrollTo({ top: targetPos, behavior: 'smooth' });
 }
 
-// --- GENEL ARAMA ---
+// --- 8. ARAMA FONKSİYONLARI ---
 function performSearch() {
     const term = normalizeText(document.getElementById("search").value);
     if (!term) return;
@@ -208,13 +200,20 @@ function performSearch() {
     renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
-// --- SLIDER FONKSİYONLARI ---
+function setupSearch() {
+    const btn = document.getElementById("search-btn");
+    const input = document.getElementById("search");
+    if (btn) btn.onclick = performSearch;
+    if (input) input.onkeypress = (e) => { if (e.key === 'Enter') performSearch(); };
+}
+
+// --- 9. SLIDER (POPÜLER ÜRÜNLER) ---
 function renderHeroSet(products) {
     const container = document.getElementById("popular-layout");
     if (!container) return;
     container.innerHTML = products.map((p, index) => `
         <div class="hero-item ${index === 0 ? 'item-big' : ''}" data-name="${p.p_name}">
-            <img src="${p.p_img}" alt="${p.p_name}" draggable="false" onerror="this.src='img/logo.png'">
+            <img src="${p.p_img}" alt="${p.p_name}" draggable="false" loading="lazy" onerror="this.src='img/logo.png'">
         </div>
     `).join('');
 }
@@ -246,6 +245,23 @@ function moveSlider(direction) {
                 isAnimating = false;
             }
         }, 700);
+    });
+}
+
+// --- 10. DETAY SAYFASI VE DİĞERLERİ ---
+function goToDetail(name) { window.location.href = `detail.html?name=${encodeURIComponent(name)}`; }
+
+function loadProductDetail(name) {
+    fetch("data/product.json").then(res => res.json()).then(data => {
+        const list = data.products || data || []; 
+        const p = list.find(x => normalizeText(x.p_name) === normalizeText(name));
+        if (p) {
+            document.getElementById("detail-img").src = p.p_img;
+            document.getElementById("detail-title").innerText = p.p_name;
+            document.getElementById("detail-brand").innerText = p.p_brand;
+            document.getElementById("detail-desc").innerText = p.p_desc || "Detaylar için WhatsApp'tan ulaşın.";
+            document.getElementById("whatsapp-btn").href = `https://wa.me/905050696639?text=${encodeURIComponent(p.p_name + ' hakkında bilgi alabilir miyim?')}`;
+        }
     });
 }
 
@@ -281,29 +297,6 @@ function handleActionEnd(endX, targetElement) {
         moveSlider(diff > 0 ? 1 : -1);
     }
     startAutoSlider();
-}
-
-function setupSearch() {
-    const btn = document.getElementById("search-btn");
-    const input = document.getElementById("search");
-    if (btn) btn.onclick = performSearch;
-    if (input) input.onkeypress = (e) => { if (e.key === 'Enter') performSearch(); };
-}
-
-function goToDetail(name) { window.location.href = `detail.html?name=${encodeURIComponent(name)}`; }
-
-function loadProductDetail(name) {
-    fetch("data/product.json").then(res => res.json()).then(data => {
-        const list = data.products || data || []; 
-        const p = list.find(x => normalizeText(x.p_name) === normalizeText(name));
-        if (p) {
-            document.getElementById("detail-img").src = p.p_img;
-            document.getElementById("detail-title").innerText = p.p_name;
-            document.getElementById("detail-brand").innerText = p.p_brand;
-            document.getElementById("detail-desc").innerText = p.p_desc || "Detaylar için WhatsApp'tan ulaşın.";
-            document.getElementById("whatsapp-btn").href = `https://wa.me/905050696639?text=${encodeURIComponent(p.p_name + ' hakkında bilgi alabilir miyim?')}`;
-        }
-    });
 }
 
 function openContact() { document.getElementById("contact-modal").style.display = "block"; }
