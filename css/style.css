@@ -28,45 +28,7 @@ body {
 
     border-bottom: 1px solid #ddd;
 
-    /* En üstteki kalın gri şerit */
-
-    border-top: 20px solid #3d3d3d;
-
-    background-image: url('../arkaplan_resim/üstdivap.png');
-
-
-
-    /* 2. Resmin tekrar etmesini engelle */
-
-    background-repeat: no-repeat;
-
-
-
-    /* 3. Resmi sola ve dikeyde ortaya hizala (Logo solda olduğu için önemli) */
-
-    background-position: left center;
-
-
-
-    /* 4. Resmin alanı tamamen kaplamasını sağla */
-
-    background-size: cover;
-
-
-
-    /* 5. Yüksekliği tasarıma uygun olarak sabitle */
-
-    height: 120px;
-
-
-
-    /* Mevcut flex yapılarını koru ki içindeki butonlar hizalansın */
-
-    display: flex;
-
-    align-items: center;
-
-    /* justify-content: space-between; gibi mevcut ayarların kalabilir */
+  
 
 }
 
