@@ -1,6 +1,6 @@
 /* --- GENEL AYARLAR & SIFIRLAMA --- */
 body {
-    background-image: url(../arkaplan_resim/arkaplan2.jpg) !important;
+    background-image: url(../arkaplan_resim/arkaplan.jpg) !important;
     background-repeat: repeat !important;
     background-attachment: fixed !important;
     background-color: #ffffff; /* Resim yüklenene kadar beyaz kalsın */
@@ -376,4 +376,5 @@ body {
 .dev-link:hover {
     color: #ffffff;
     text-decoration: underline;
+
 }
