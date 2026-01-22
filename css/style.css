@@ -1,6 +1,8 @@
 /* --- GENEL AYARLAR & SIFIRLAMA --- */
 body {
-    background-image: url(../arkaplan_resim/arkaplan.jpg) !important;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('../arkaplan_resim/arkaplan2.jpg') !important;
     background-repeat: repeat !important;
     background-attachment: fixed !important;
     background-color: #ffffff; /* Resim yüklenene kadar beyaz kalsın */
@@ -15,6 +17,16 @@ body {
     border-bottom: 1px solid #ddd; 
     /* En üstteki kalın gri şerit */
     border-top: 20px solid #3d3d3d; 
+    
+    /* ARKA PLAN RESMİ AYARLARI */
+    background-image: url('../arkaplan_resim/üstdivap.png'); /* Dosya yolunu kontrol et */
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: cover; 
+    height: 120px;
+
+    display: flex;
+    align-items: center;
 }
 
 .header-grid { 
@@ -23,28 +35,20 @@ body {
     align-items: center; 
     padding: 6px 0; 
     gap: 15px; 
+    width: 100%; /* Grid'in tam genişlik kaplaması için */
 }
 
-.logo-container { 
-    background: #e0e0e0; 
-    border-radius: 30px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 75px; 
-    width: 100%; 
-    max-width: 300px; 
-    margin: 0 auto; 
-    overflow: hidden; 
-    cursor: pointer; 
-}
+/* MEVCUT LOGOYU GİZLEME (Çift logo görünümünü engeller) */
+.logo-container { display: none !important; }
+.logo { display: none !important; }
 
-.logo { 
-    height: 75px; 
-    width: 300px; 
-    object-fit: contain; 
-    padding: 4px; 
-    border-radius: 30px; 
+/* GİZLİ ANA SAYFA BUTONU (Arka plandaki logonun üzerine gelir) */
+.hidden-home-link {
+    display: block;
+    width: 250px; /* Logonun genişliğine göre ayarla */
+    height: 80px; /* Logonun yüksekliğine göre ayarla */
+    background: transparent; /* Tamamen şeffaf */
+    cursor: pointer; /* Tıklanabilir olduğunu gösterir */
 }
 
 .search-box { 
@@ -147,7 +151,6 @@ body {
 
 .brand-img-link img { max-width: 85%; max-height: 85%; object-fit: contain; }
 
-/* --- POPÜLER MODELLER (SLIDER) --- */
 /* --- POPÜLER MODELLER (SLIDER) - SİMETRİK 50/50 GÖRÜNÜM --- */
 .popular-section { 
     width: 90%; 
@@ -158,8 +161,7 @@ body {
 
 .hero-grid { 
     display: grid; 
-    /* 1.5fr 1fr yerine 1fr 1fr yaparak alanı tam ikiye böldük */
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: 1fr 1fr; /* Tam simetri */
     grid-template-rows: 1fr 1fr; 
     gap: 15px; 
     height: 470px; 
@@ -174,7 +176,6 @@ body {
     background: #222; 
 }
 
-/* Sol taraftaki büyük resim */
 .item-big { 
     grid-row: 1 / span 2; 
 }
@@ -198,8 +199,7 @@ body {
 @keyframes slideRightOut { from { transform: translateX(0); } to { transform: translateX(100%); } }
 @keyframes slideRightIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 
-/* --- TICKER (HAREKETLİ ŞERİTLER) - ŞEFFAF VE BÜYÜK --- */
-/* --- TICKER (HAREKETLİ ŞERİTLER) - %10 KÜÇÜLTÜLDÜ --- */
+/* --- TICKER (HAREKETLİ ŞERİTLER) --- */
 .ticker-section { 
     margin: 50px 0; 
     overflow: hidden; 
@@ -213,8 +213,8 @@ body {
 }
 
 .ticker-item { 
-    flex: 0 0 28vw; /* Genişliği de biraz daralttık */
-    height: 270px; /* 300px -> 270px (Tam %10 küçülme) */
+    flex: 0 0 28vw; 
+    height: 270px; 
     padding: 0 15px; 
     box-sizing: border-box; 
     cursor: pointer; 
@@ -227,11 +227,10 @@ body {
     width: 100%; 
     height: 100%; 
     object-fit: contain; 
-    background: transparent; 
-    border: none; 
-    box-shadow: none; 
+    background: transparent !important; /* Fazlalık çerçeveleri siler */
+    border: none !important;
+    box-shadow: none !important;
 }
-
 
 .ticker-wrapper.right { animation: marquee-right 35s linear infinite; }
 .ticker-wrapper.left { animation: marquee-left 35s linear infinite; }
@@ -273,7 +272,7 @@ body {
 .main-footer { 
     background: #3d3d3d; 
     color: #fff; 
-    padding: 20px 0 20px 0; 
+    padding: 20px 0 0 0; /* Alt boşluğu sıfırladık */
     margin-top: 20px; 
 }
 
@@ -281,6 +280,7 @@ body {
     width: 90%; 
     margin: 0 auto; 
     text-align: center; 
+    padding-bottom: 20px; /* Üst kısımla alt kısım arasına boşluk */
 }
 
 .footer-info p { 
@@ -289,92 +289,44 @@ body {
     color: #ccc; 
 }
 
-.footer-bottom { 
-    margin-top: 30px; 
-    padding-top: 20px; 
-    border-top: 1px solid #555; 
-    font-size: 12px; 
-    color: #999; 
-}
-
-/* --- ÜRÜN DETAY SAYFASI --- */
-.product-detail-container { 
-    display: flex; 
-    max-width: 1100px; 
-    margin: 40px auto; 
-    gap: 40px; 
-    padding: 30px;
-    background: rgba(255, 255, 255, 0.9); /* Arka plan üzerinde okunabilirlik için */
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    align-items: center;
-}
-
-@media (max-width: 768px) {
-    .product-detail-container { flex-direction: column; width: 95%; }
-}
-
-.detail-left { flex: 1; display: flex; justify-content: center; background: transparent; }
-.detail-left img { width: 100%; height: auto; max-height: 500px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
-.detail-right { flex: 1; display: flex; flex-direction: column; }
-.detail-brand-label { color: #e80000; font-weight: bold; text-transform: uppercase; font-size: 16px; margin-bottom: 10px; }
-.detail-desc-box { margin: 20px 0; padding: 20px; background: #fff; border-radius: 12px; border: 1px solid #eee; font-size: 16px; line-height: 1.6; }
-
-.whatsapp-detail-btn { 
-    background: #25D366; 
-    color: white; 
-    padding: 15px 30px; 
-    border-radius: 40px; 
-    text-decoration: none; 
-    font-weight: bold; 
-    display: inline-flex; 
-    align-items: center; 
-    gap: 10px; 
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
-
-/* --- MODAL & YARDIMCI SINIFLAR --- */
-.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
-.modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 20px; width: 350px; position: relative; text-align: center; }
-.close-modal { position: absolute; right: 15px; top: 10px; cursor: pointer; font-size: 24px; color: #999; }
-
-#popular-hero-area {
-    scroll-margin-top: 150px; 
-    padding-top: 20px;
-}
-
+/* --- GELİŞTİRİCİ İMZASI (GÜNCELLENDİ) --- */
 .developer-credit {
     text-align: center;
-    padding: 1px 0 !important;
-    background-color: #3d3d3d; /* Arka plan rengine göre koyu bir ton */
-    color: #777;
-    font-size: 14px;
-    border-top: 1px solid #333;
-    line-height: 1.6;
+    padding: 10px 0 !important; /* Biraz daha nefes payı verildi */
+    background-color: #2a2a2a; /* Ana footer'dan bir ton koyu */
+    color: #ccc !important; /* Daha parlak bir gri */
+    font-size: 13px !important;
+    border-top: 1px solid #444;
+    line-height: 1.4 !important;
 }
 
 .developer-credit strong {
-    color: #aaa;
+    color: #fff !important; /* İsim tam beyaz */
+}
+
+.developer-credit p {
+    margin: 4px 0 !important;
 }
 
 .dev-contact {
-    margin-top: 1px !important;
+    margin-top: 5px !important;
 }
-.developer-credit p {
-    margin: 2px 0 !important;    /* Paragraflar arasındaki dış boşluğu minimize eder */
-    line-height: 1.2 !important;  /* Satır yüksekliğini daraltarak yazıları birbirine yaklaştırır */
-    font-size: 14px;              /* Yazı boyutunu hafif küçültmek de alanı dar gösterir */
-}
+
 .dev-link {
-    color: #b1b1b1; /* Altın sarısı tonu profesyonel durur */
+    color: #f1c40f !important; /* Altın sarısı (daha dikkat çekici) */
     text-decoration: none;
-    font-weight: 500;
-    margin: 0 2px;
+    font-weight: bold;
+    margin: 0 5px;
     transition: color 0.3s ease;
 }
 
 .dev-link:hover {
-    color: #ffffff;
-    text-decoration: underline;
-
+    color: #fff !important;
+    text-decoration: underline;   
 }
+
+/* --- DİĞER MODAL VE YARDIMCI SINIFLAR (Değişmedi) --- */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+.modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 20px; width: 350px; position: relative; text-align: center; }
+.close-modal { position: absolute; right: 15px; top: 10px; cursor: pointer; font-size: 24px; color: #999; }
+#popular-hero-area { scroll-margin-top: 150px; padding-top: 20px;}

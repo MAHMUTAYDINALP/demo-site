@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kırgıl Çakmak | Ürün Kataloğu</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Poppins', sans-serif; }</style>
 </head>
 <body>
 
@@ -26,11 +27,12 @@
     <div class="header-wrapper">
         <header class="header-grid">
             <div class="grid-spacer"></div>
+            
             <div class="grid-logo">
-                <a href="index.html" class="logo-link">
-                    <div class="logo-container"><img src="img/logo.png" alt="Logo" class="logo"></div>
-                </a>
+                <a href="index.html" class="hidden-home-link" title="Ana Sayfaya Dön">
+                    </a>
             </div>
+
             <div class="grid-search">
                 <div class="search-box">
                     <input type="text" id="search" placeholder="Model veya marka ara...">
@@ -46,15 +48,15 @@
         <nav class="main-nav-container">
             <div class="nav-8-12">
                 <div class="nav-item" onmouseenter="showBrands('Plastik Çakmak')" onclick="filterByCategory('Plastik Çakmak')">
-                    Plastik Çakmak <span class="nav-arrow">  ᐯ</span>
+                    Plastik Çakmak <span class="nav-arrow"> ᐯ</span>
                     <div class="brand-dropdown" id="brands-Plastik"></div>
                 </div>
                 <div class="nav-item" onmouseenter="showBrands('Promosyon Çakmak')" onclick="filterByCategory('Promosyon Çakmak')">
-                    Promosyon Çakmak <span class="nav-arrow">  ᐯ</span>
+                    Promosyon Çakmak <span class="nav-arrow"> ᐯ</span>
                     <div class="brand-dropdown" id="brands-Promosyon"></div>
                 </div>
                 <div class="nav-item" onmouseenter="showBrands('Metal Çakmak')" onclick="filterByCategory('Metal Çakmak')">
-                    Metal Çakmak <span class="nav-arrow">  ᐯ</span>
+                    Metal Çakmak <span class="nav-arrow"> ᐯ</span>
                     <div class="brand-dropdown" id="brands-Metal"></div>
                 </div>
                 <div class="nav-item" onmouseenter="showBrands('Diğer Modeller')" onclick="filterByCategory('Diğer Modeller')">
@@ -67,26 +69,26 @@
 
     <main>
         <section class="popular-section" id="popular-hero-area">
-            <h2 id="section-title">Popüler Modellerimiz</h2>
+            <h2 id="section-title" style="text-align: center; margin-bottom: 20px;">Popüler Modellerimiz</h2>
             <div id="popular-layout" class="hero-grid"></div>
         </section>
 
         <section class="cat-images-section">
             <div class="cat-image-grid">
                 <div class="cat-card" onclick="filterByCategory('Plastik Çakmak')">
-                    <img src="img/plastik.jpg" alt="Plastik">
+                    <img src="img/plastik.jpg" alt="Plastik" loading="lazy">
                     <div class="cat-label">Plastik Çakmak</div>
                 </div>
                 <div class="cat-card" onclick="filterByCategory('Promosyon Çakmak')">
-                    <img src="img/promosyon.jpg" alt="Promosyon">
+                    <img src="img/promosyon.jpg" alt="Promosyon" loading="lazy">
                     <div class="cat-label">Promosyon Çakmak</div>
                 </div>
                 <div class="cat-card" onclick="filterByCategory('Metal Çakmak')">
-                    <img src="img/metal.jpg" alt="Metal">
+                    <img src="img/metal.jpg" alt="Metal" loading="lazy">
                     <div class="cat-label">Metal Çakmak</div>
                 </div>
                 <div class="cat-card" onclick="filterByCategory('Diğer Modeller')">
-                    <img src="img/diger.jpg" alt="Diğer Modeller">
+                    <img src="img/diger.jpg" alt="Diğer Modeller" loading="lazy">
                     <div class="cat-label">Diğer Modeller</div>
                 </div>
             </div>
@@ -107,12 +109,12 @@
             </div>
         </div>
         <div class="developer-credit">
-    <p>Tasarım ve Yazılım: <strong>Alp Yazılım - Mahmut Aydınalp</strong></p>
-    <div class="dev-contact">
-        <a href="aydinalpm288@gmail.com" class="dev-link">mail: aydinalpm288@gmail.com </a> | 
-        <a href="tel:+905426801363" class="dev-link">iletişim: 0542 680 1363</a>
-    </div>
-</div>
+            <p>Tasarım ve Yazılım: <strong>Alp Yazılım - Mahmut Aydınalp</strong></p>
+            <div class="dev-contact">
+                <a href="mailto:aydinalpm288@gmail.com" class="dev-link">E-posta Gönder</a> | 
+                <a href="tel:+905426801363" class="dev-link">Hemen Ara: 0542 680 1363</a>
+            </div>
+        </div>
     </footer>
 
     <script src="js/product.js"></script>
