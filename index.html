@@ -16,7 +16,7 @@
             <div class="contact-info">
                 <p><strong>Telefon:</strong> 0505 069 6639</p>
                 <p><strong>E-posta:</strong> bakirkirgil@gmail.com</p>
-                <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye ŞANLIURFA (Topçu Meydanı)</p>
+                <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye ŞANLIURFA</p>
                 <hr>
                 <a href="https://wa.me/905050696639" class="whatsapp-link" target="_blank">WhatsApp Destek Hattı</a>
             </div>
@@ -25,36 +25,28 @@
 
     <div class="header-wrapper">
         <header class="header-grid">
-            <div class="grid-spacer"></div>
-            <div class="grid-logo">
-                <a href="index.html" class="logo-link">
-                    <div class="logo-container"><img src="img/logo.png" alt="Logo" class="logo"></div>
-                </a>
+            <a href="index.html" class="hidden-home-link" title="Ana Sayfa"></a>
+
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Model veya marka ara...">
+                <button id="search-btn" onclick="performSearch()">🔍</button>
             </div>
-            <div class="grid-search">
-                <div class="search-box">
-                    <input type="text" id="search" placeholder="Model veya marka ara...">
-                    <button id="search-btn" onclick="performSearch()">🔍</button>
-                </div>
-            </div>
-            <div class="grid-contact">
-                <button class="contact-btn" onclick="openContact()">İletişim</button>
-            </div>
-            <div class="grid-spacer"></div>
+
+            <button class="contact-btn" onclick="openContact()">İletişim</button>
         </header>
 
         <nav class="main-nav-container">
             <div class="nav-8-12">
                 <div class="nav-item" onmouseenter="showBrands('Plastik Çakmak')" onclick="filterByCategory('Plastik Çakmak')">
-                    Plastik Çakmak <span class="nav-arrow">  ᐯ</span>
+                    Plastik Çakmak <span class="nav-arrow"> ᐯ</span>
                     <div class="brand-dropdown" id="brands-Plastik"></div>
                 </div>
                 <div class="nav-item" onmouseenter="showBrands('Promosyon Çakmak')" onclick="filterByCategory('Promosyon Çakmak')">
-                    Promosyon Çakmak <span class="nav-arrow">  ᐯ</span>
+                    Promosyon Çakmak <span class="nav-arrow"> ᐯ</span>
                     <div class="brand-dropdown" id="brands-Promosyon"></div>
                 </div>
                 <div class="nav-item" onmouseenter="showBrands('Metal Çakmak')" onclick="filterByCategory('Metal Çakmak')">
-                    Metal Çakmak <span class="nav-arrow">  ᐯ</span>
+                    Metal Çakmak <span class="nav-arrow"> ᐯ</span>
                     <div class="brand-dropdown" id="brands-Metal"></div>
                 </div>
                 <div class="nav-item" onmouseenter="showBrands('Diğer Modeller')" onclick="filterByCategory('Diğer Modeller')">
@@ -67,26 +59,25 @@
 
     <main>
         <section class="popular-section" id="popular-hero-area">
-            <h2 id="section-title">Popüler Modellerimiz</h2>
             <div id="popular-layout" class="hero-grid"></div>
         </section>
 
         <section class="cat-images-section">
             <div class="cat-image-grid">
                 <div class="cat-card" onclick="filterByCategory('Plastik Çakmak')">
-                    <img src="img/plastik.jpg" alt="Plastik">
+                    <img src="img/plastik.jpg" alt="Plastik" loading="lazy">
                     <div class="cat-label">Plastik Çakmak</div>
                 </div>
                 <div class="cat-card" onclick="filterByCategory('Promosyon Çakmak')">
-                    <img src="img/promosyon.jpg" alt="Promosyon">
+                    <img src="img/promosyon.jpg" alt="Promosyon" loading="lazy">
                     <div class="cat-label">Promosyon Çakmak</div>
                 </div>
                 <div class="cat-card" onclick="filterByCategory('Metal Çakmak')">
-                    <img src="img/metal.jpg" alt="Metal">
+                    <img src="img/metal.jpg" alt="Metal" loading="lazy">
                     <div class="cat-label">Metal Çakmak</div>
                 </div>
                 <div class="cat-card" onclick="filterByCategory('Diğer Modeller')">
-                    <img src="img/diger.jpg" alt="Diğer Modeller">
+                    <img src="img/diger.jpg" alt="Diğer Modeller" loading="lazy">
                     <div class="cat-label">Diğer Modeller</div>
                 </div>
             </div>
@@ -101,18 +92,17 @@
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-info">
-                <p><strong>Adres:</strong> Yusupaşa Mh. 886. sk. Özdiker Avrupa Pasajı Giriş Kat No: 3 Eyyübiye / ŞANLIURFA</p>
                 <p><strong>Telefon:</strong> 0505 069 6639 | <strong>E-posta:</strong> bakirkirgil@gmail.com</p>
                 <p>© 2026 Tüm Hakları Saklıdır.</p>
             </div>
         </div>
         <div class="developer-credit">
-    <p>Tasarım ve Yazılım: <strong>Alp Yazılım - Mahmut Aydınalp</strong></p>
-    <div class="dev-contact">
-        <a href="aydinalpm288@gmail.com" class="dev-link">mail: aydinalpm288@gmail.com </a> | 
-        <a href="tel:+905426801363" class="dev-link">iletişim: 0542 680 1363</a>
-    </div>
-</div>
+            <p>Tasarım ve Yazılım: <strong>Alp Yazılım - Mahmut Aydınalp</strong></p>
+            <div class="dev-contact">
+                <a href="mailto:aydinalpm288@gmail.com" class="dev-link">E-posta: aydinalpm288@gmail.com</a> | 
+                <a href="tel:+905426801363" class="dev-link">İletişim: 0542 680 1363</a>
+            </div>
+        </div>
     </footer>
 
     <script src="js/product.js"></script>
