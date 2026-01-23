@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main # GitHub'daki dal ismin main değilse burayı master yap
 
-media_folder: "img"
-public_folder: "/" # JSON'da "img/" olduğu için burası sadece "/" olmalı
+media_folder: "img"      # Görselin GitHub'da yükleneceği yer
+public_folder: "img"     # JSON'a yazılacak yol (Başına / koymuyoruz ki mevcut 150 ürünle aynı formatta olsun)
 
 collections:
   - name: "setup"
