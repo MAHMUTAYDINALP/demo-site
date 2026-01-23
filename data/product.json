@@ -1070,7 +1070,7 @@
       "p_name": "deneme 2",
       "p_desc": "deneme 2 admin paneli",
       "p_cat": "PROMOSYON",
-      "p_img": "/admin-deneme.png",
+      "p_img": "img/admin-deneme.png",
       "p_brand": "clipper"
     }
   ]
