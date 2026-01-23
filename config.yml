@@ -3,7 +3,7 @@ backend:
   branch: main # Burası GitHub dal isminle (main/master) aynı olmalı
 
 media_folder: "img"
-public_folder: "/img"
+public_folder: "/"
 
 collections:
   - name: "setup"
