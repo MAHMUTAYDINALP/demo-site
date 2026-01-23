@@ -5,6 +5,8 @@ backend:
 media_folder: "img"
 public_folder: "/img"
 
+
+
 collections:
   - name: "setup"
     label: "Ürün Yönetimi"
@@ -30,4 +32,5 @@ collections:
                 options: ["Clipper", "Str", "Tokai", "Mry", "Kasai", "Koko", "Copper", "Diğer"]
               - { label: "Görsel (Dosya)", name: "p_img", widget: "image", required: false }
               - { label: "Görsel (URL)", name: "p_url", widget: "string", required: false }
+
               - { label: "Popüler mi?", name: "p_pop", widget: "boolean", default: false }
