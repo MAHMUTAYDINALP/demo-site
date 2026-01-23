@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # Burası GitHub dal isminle (main/master) aynı olmalı
 
 media_folder: "img"
 public_folder: "/img"
@@ -12,18 +12,22 @@ collections:
     files:
       - name: "all_products"
         label: "Tüm Ürünler"
-        file: "data/product.json" # Veri buraya yazılacak
+        file: "data/product.json"
         fields:
-          - label: "Ürünler"
+          - label: "Ürün Listesi"
             name: "products"
             widget: "list"
-           fields:
-              - { label: "Ürün Adı", name: "name", widget: "string" }
-              - { label: "Açıklama", name: "description", widget: "text" }
+            fields:
+              - { label: "Ürün Adı", name: "p_name", widget: "string" }
+              - { label: "Açıklama", name: "p_desc", widget: "text" }
               - label: "Kategori"
-                name: "category"
+                name: "p_cat"
                 widget: "select"
                 options: ["Plastik Çakmak", "Promosyon Çakmak", "Metal Çakmak", "Diğer Modeller"]
-              - { label: "Ürün Görseli (Dosya)", name: "image", widget: "image", required: false } # Bu kalsın
-              - { label: "Ürün Görseli (URL)", name: "image_url", widget: "string", required: false } # Bu kalsın
-              - { label: "Popüler mi?", name: "popular", widget: "boolean", default: false }
+              - label: "Marka"
+                name: "p_brand"
+                widget: "select"
+                options: ["Clipper", "Str", "Tokai", "Mry", "Kasai", "Koko", "Copper", "Diğer"]
+              - { label: "Görsel (Dosya)", name: "p_img", widget: "image", required: false }
+              - { label: "Görsel (URL)", name: "p_url", widget: "string", required: false }
+              - { label: "Popüler mi?", name: "p_pop", widget: "boolean", default: false }
