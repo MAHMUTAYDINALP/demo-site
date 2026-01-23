@@ -1,9 +1,9 @@
 backend:
   name: git-gateway
-  branch: main # GitHub dal isminin 'main' olduğundan emin ol
+  branch: main # GitHub'daki dal ismin main değilse burayı master yap
 
 media_folder: "img"
-public_folder: "/img" # BURAYA DİKKAT: Başındaki / işaretini sakın unutma!
+public_folder: "/" # JSON'da "img/" olduğu için burası sadece "/" olmalı
 
 collections:
   - name: "setup"
@@ -17,11 +17,11 @@ collections:
           - label: "Ürün Listesi"
             name: "products"
             widget: "list"
-            required: false # Listenin kendisini opsiyonel yaptık
+            required: false
             fields:
               - { label: "Ürün Adı", name: "p_name", widget: "string", required: false }
               - { label: "Açıklama", name: "p_desc", widget: "text", required: false }
-              - { label: "Kategori", name: "p_cat", widget: "string", required: false }
+              - { label: "Kategori", name: "p_cat", widget: "select", options: ["PLASTİK", "PROMOSYON", "METAL", "DİĞER"], required: false }
               - { label: "Marka", name: "p_brand", widget: "string", required: false }
               - { label: "Görsel (Dosya)", name: "p_img", widget: "image", required: false }
               - { label: "Görsel (URL)", name: "p_url", widget: "string", required: false }
