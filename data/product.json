@@ -1072,6 +1072,14 @@
       "p_cat": "PROMOSYON",
       "p_img": "img/admin-deneme.png",
       "p_brand": "clipper"
+    },
+    {
+      "p_pop": true,
+      "p_name": "deneme3",
+      "p_desc": "deneme 3 admin paneli testi",
+      "p_cat": "PLASTİK",
+      "p_brand": "fer",
+      "p_img": "/admin-deneme.png"
     }
   ]
 }
