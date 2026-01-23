@@ -1067,10 +1067,11 @@
     },
     {
       "p_pop": true,
-      "p_name": "deneme",
-      "p_desc": "deneme",
-      "p_cat": "PLASTİK",
-      "p_img": "/10.png"
+      "p_name": "deneme 2",
+      "p_desc": "deneme 2 admin paneli",
+      "p_cat": "PROMOSYON",
+      "p_img": "/admin-deneme.png",
+      "p_brand": "clipper"
     }
   ]
 }
