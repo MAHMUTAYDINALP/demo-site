@@ -1,9 +1,9 @@
 backend:
   name: git-gateway
-  branch: main # Burası GitHub dal isminle (main/master) aynı olmalı
+  branch: main # GitHub dal ismin main olduğundan emin ol
 
 media_folder: "img"
-public_folder: "/"
+public_folder: "/img" # Buradaki / işareti 150 görselin admin panelinde görünmesini sağlar
 
 collections:
   - name: "setup"
@@ -19,7 +19,7 @@ collections:
             widget: "list"
             fields:
               - { label: "Ürün Adı", name: "p_name", widget: "string" }
-              - { label: "Açıklama", name: "p_desc", widget: "text" }
+              - { label: "Açıklama", name: "p_desc", widget: "text", required: false } # Hata almamak için opsiyonel yaptık
               - label: "Kategori"
                 name: "p_cat"
                 widget: "select"
