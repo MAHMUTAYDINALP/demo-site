@@ -1,9 +1,9 @@
 backend:
   name: git-gateway
-  branch: main # GitHub dal ismin main olduğundan emin ol
+  branch: main # GitHub dal isminin 'main' olduğundan emin ol
 
 media_folder: "img"
-public_folder: "/img" # Buradaki / işareti 150 görselin admin panelinde görünmesini sağlar
+public_folder: "/img" # BURAYA DİKKAT: Başındaki / işaretini sakın unutma!
 
 collections:
   - name: "setup"
@@ -17,17 +17,12 @@ collections:
           - label: "Ürün Listesi"
             name: "products"
             widget: "list"
+            required: false # Listenin kendisini opsiyonel yaptık
             fields:
-              - { label: "Ürün Adı", name: "p_name", widget: "string" }
-              - { label: "Açıklama", name: "p_desc", widget: "text", required: false } # Hata almamak için opsiyonel yaptık
-              - label: "Kategori"
-                name: "p_cat"
-                widget: "select"
-                options: ["Plastik Çakmak", "Promosyon Çakmak", "Metal Çakmak", "Diğer Modeller"]
-              - label: "Marka"
-                name: "p_brand"
-                widget: "select"
-                options: ["Clipper", "Str", "Tokai", "Mry", "Kasai", "Koko", "Copper", "Diğer"]
+              - { label: "Ürün Adı", name: "p_name", widget: "string", required: false }
+              - { label: "Açıklama", name: "p_desc", widget: "text", required: false }
+              - { label: "Kategori", name: "p_cat", widget: "string", required: false }
+              - { label: "Marka", name: "p_brand", widget: "string", required: false }
               - { label: "Görsel (Dosya)", name: "p_img", widget: "image", required: false }
               - { label: "Görsel (URL)", name: "p_url", widget: "string", required: false }
-              - { label: "Popüler mi?", name: "p_pop", widget: "boolean", default: false }
+              - { label: "Popüler mi?", name: "p_pop", widget: "boolean", default: false, required: false }
