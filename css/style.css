@@ -13,11 +13,11 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-image: url(../arkaplan_resim/üstdivap3.png);
+    background-image: url(../arkaplan_resim/üstdivapson.png);
     background-size: 100% 100%;
     background-position: center;
     border-bottom: 1px solid #ddd;
-    height: 145px; /* Yükseklik sabitlendi, kayma yapmaz */
+    height: 110px; /* Yükseklik sabitlendi, kayma yapmaz */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -50,7 +50,7 @@ body {
 
     /* Birebir hizalamak için buradaki değerlerle oyna: */
     width: 120px;  /* Genişlik */
-    height: 115px;  /* Yükseklik */
+    height: 80px;  /* Yükseklik */
     top: 12px;      /* Yukarıdan uzaklık */
     left: 115px;   /* Soldan uzaklık */
 }
@@ -67,6 +67,7 @@ body {
     border: 1px solid #ccc;
     max-width: 600px;
     width: 550px;
+    height: 25px;
 
     /* BAĞIMSIZ HAREKET İÇİN GEREKLİ AYARLAR: */
     position: absolute; 
@@ -87,6 +88,7 @@ body {
     cursor: pointer;
     font-size: 14px;
     width: 125px;
+    height: 35px;
 
     /* BAĞIMSIZ HAREKET İÇİN GEREKLİ AYARLAR: */
     position: absolute;
@@ -110,6 +112,7 @@ body {
     position: relative;
     border-top: 1px solid rgba(255, 255, 255, 0.4); 
     padding: 12px 30px 0 30px; 
+    top: 20px;
 }
 
 .nav-item {
@@ -186,8 +189,8 @@ body {
 .ticker-item { flex: 0 0 28vw; height: 270px; padding: 0 15px; cursor: pointer; transition: 0.3s; }
 .ticker-item:hover { transform: scale(1.05); }
 .ticker-item img { width: 100%; height: 100%; object-fit: contain; background: transparent; }
-.ticker-wrapper.right { animation: marquee-right 35s linear infinite; }
-.ticker-wrapper.left { animation: marquee-left 35s linear infinite; }
+.ticker-wrapper.right { animation: marquee-right 70s linear infinite; }
+.ticker-wrapper.left { animation: marquee-left 70s linear infinite; }
 
 /* --- KATEGORİ KARTLARI --- */
 .cat-images-section { padding: 30px 5%; }
@@ -218,3 +221,81 @@ body {
 .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 20px; width: 350px; position: relative; text-align: center; }
 .close-modal { position: absolute; right: 15px; top: 10px; cursor: pointer; font-size: 24px; color: #999; }
 #popular-hero-area { scroll-margin-top: 150px; padding-top: 20px; }
+
+/* --- MARKA ŞERİDİ ÖZEL AYARLARI (RENKLİ VERSİYON) --- */
+.brand-ticker-area {
+    background: rgba(255, 255, 255, 0.9); /* Arka planı biraz daha net beyaz yaptık */
+    padding: 25px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee; /* Altına da ince çizgi ekledik, footer'dan ayrılsın */
+    margin-top: 40px; /* Üstteki içerikten biraz uzaklaşsın */
+}
+
+#brand-logos-ticker .ticker-item {
+    flex: 0 0 16vw; /* Logoların kapladığı alan */
+    height: 90px;   /* Yükseklik */
+    display: flex;
+    align-items: center;     /* Logoları dikeyde ortala */
+    justify-content: center; /* Logoları yatayda ortala */
+}
+
+#brand-logos-ticker img {
+    max-width: 85%;      /* Kutu dışına taşmasın */
+    max-height: 85%;
+    object-fit: contain; /* Orantılı sığdır */
+    transition: transform 0.3s ease; /* Sadece hareket efekti için geçiş */
+    
+    /* BURADAKİ 'filter: grayscale' ve 'opacity' SATIRLARINI KALDIRDIK */
+}
+
+#brand-logos-ticker img:hover {
+    /* Üzerine gelince renk değişimi YOK, sadece hafifçe büyüsün */
+    transform: scale(1.1); 
+}
+
+/* --- EN BEĞENİLEN ÜRÜNLER GRİD SİSTEMİ --- */
+.most-liked-section {
+    width: 90%;
+    margin: 50px auto;
+}
+
+.section-title-liked {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.most-liked-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 Ürün yan yana */
+    gap: 20px;
+}
+
+/* Kartların tasarımı genel kartlarınla uyumlu olsun */
+.most-liked-grid .product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.most-liked-grid .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.most-liked-grid .product-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+}
+
+/* Mobil uyum: Ekran küçülünce 5 yerine 2 ürün yan yana gelsin */
+@media (max-width: 992px) { .most-liked-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) { .most-liked-grid { grid-template-columns: repeat(2, 1fr); } }

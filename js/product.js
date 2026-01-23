@@ -30,7 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
             allProducts = data.products || data || [];
+            
+            // VERİLER GELDİĞİ ANDA ÇALIŞACAK FONKSİYONLAR
             initTickers();
+            loadBrandTicker(); // Marka kaydırıcıyı başlat
+            loadMostLiked();   // EN ÖNEMLİSİ: Beğenilen ürünleri burada çağırıyoruz
 
             const urlParams = new URLSearchParams(window.location.search);
             const catParam = urlParams.get("cat");
@@ -48,7 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (catParam) {
                     filterByCategory(catParam);
                 } else if (searchParam) {
-                    document.getElementById("search").value = searchParam;
+                    const searchInput = document.getElementById("search");
+                    if (searchInput) searchInput.value = searchParam;
                     performSearch();
                 } else if (popularSets.length > 0) {
                     renderHeroSet(popularSets[0]);
@@ -63,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Veri yüklenemedi:", err));
 });
 
-// --- 3. ŞERİT (TICKER) - LAZY LOADING EKLENDİ ---
+// --- 3. ŞERİT (TICKER) ---
 function initTickers() {
     const rightTicker = document.getElementById("ticker-right");
     const leftTicker = document.getElementById("ticker-left");
@@ -99,7 +104,7 @@ function filterByCategory(cat) {
     renderGeneralList(filtered, cat);
 }
 
-// --- 5. MARKA DROPDOWN İÇERİĞİ ---
+// --- 5. MARKA DROPDOWN ---
 function showBrands(category) {
     const searchCat = normalizeText(category);
     const filteredProducts = allProducts.filter(p => {
@@ -115,7 +120,6 @@ function showBrands(category) {
     const dropdown = document.getElementById(id);
     if (dropdown) {
         dropdown.innerHTML = brands.map(b => {
-            // Dosya isimlerinde "=" yerine "-" kullanarak çağırıyoruz
             let fileName = normalizeText(b).replace(/=/g, '-').replace(/\s+/g, '-');
             return `
                 <a href="javascript:void(0)" class="brand-img-link" 
@@ -127,41 +131,32 @@ function showBrands(category) {
     }
 }
 
-// --- 6. KESİN MARKA FİLTRELEME (SADECE O MARKAYI GETİRİR) ---
+// --- 6. MARKA FİLTRELEME ---
 function executeBrandSearch(brandName, categoryName) {
     const searchInput = document.getElementById("search");
     if (searchInput) searchInput.value = brandName;
-
     const sBrand = normalizeText(brandName);
     const sCat = normalizeText(categoryName);
-
     const filtered = allProducts.filter(p => {
         const pBrand = normalizeText(p.p_brand);
         const pCat = normalizeText(p.p_cat);
-        
         const isBrandMatch = (pBrand === sBrand);
         const catFirstWord = sCat.split(' ')[0]; 
         const isCatMatch = pCat.includes(catFirstWord) || catFirstWord.includes(pCat);
-        
         return isBrandMatch && isCatMatch;
     });
-
     renderGeneralList(filtered, `${categoryName} > ${brandName}`);
 }
 
-// --- 7. GENEL LİSTE OLUŞTURMA (RENDER) ---
+// --- 7. GENEL LİSTE OLUŞTURMA ---
 function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");
     if (!area) return;
-    
-    // Filtreleme anında slider durmalı
     clearInterval(sliderInterval);
-    
     area.innerHTML = `
         <h2 id="section-title" style="text-align:center; font-size: 20px; margin-bottom: 20px;">${title}</h2>
         <div class="general-grid" id="general-list"></div>
     `;
-    
     const list = document.getElementById("general-list");
     if (products.length === 0) {
         list.innerHTML = `<p style="text-align:center; grid-column: 1/-1; padding: 50px;">Ürün bulunamadı.</p>`;
@@ -174,7 +169,6 @@ function renderGeneralList(products, title) {
             </div>
         `).join('');
     }
-    
     const header = document.querySelector('.header-wrapper');
     const headerHeight = header ? header.offsetHeight : 120;
     const targetPos = area.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
@@ -183,7 +177,9 @@ function renderGeneralList(products, title) {
 
 // --- 8. ARAMA FONKSİYONLARI ---
 function performSearch() {
-    const term = normalizeText(document.getElementById("search").value);
+    const searchInput = document.getElementById("search");
+    if (!searchInput) return;
+    const term = normalizeText(searchInput.value);
     if (!term) return;
 
     const area = document.getElementById("popular-hero-area");
@@ -191,12 +187,10 @@ function performSearch() {
         window.location.href = `index.html?search=${encodeURIComponent(term)}`;
         return;
     }
-
     const filtered = allProducts.filter(p => 
         normalizeText(p.p_name).includes(term) || 
         normalizeText(p.p_brand).includes(term)
     );
-
     renderGeneralList(filtered, `"${term}" Sonuçları`);
 }
 
@@ -207,7 +201,7 @@ function setupSearch() {
     if (input) input.onkeypress = (e) => { if (e.key === 'Enter') performSearch(); };
 }
 
-// --- 9. SLIDER (POPÜLER ÜRÜNLER) ---
+// --- 9. SLIDER ---
 function renderHeroSet(products) {
     const container = document.getElementById("popular-layout");
     if (!container) return;
@@ -248,7 +242,7 @@ function moveSlider(direction) {
     });
 }
 
-// --- 10. DETAY SAYFASI VE DİĞERLERİ ---
+// --- 10. DETAY SAYFASI VE MODALLAR ---
 function goToDetail(name) { window.location.href = `detail.html?name=${encodeURIComponent(name)}`; }
 
 function loadProductDetail(name) {
@@ -301,3 +295,53 @@ function handleActionEnd(endX, targetElement) {
 
 function openContact() { document.getElementById("contact-modal").style.display = "block"; }
 function closeContact() { document.getElementById("contact-modal").style.display = "none"; }
+
+// --- 11. MARKA VE EN BEĞENİLENLER ---
+function loadBrandTicker() {
+    const brandTicker = document.getElementById('brand-logos-ticker');
+    if (!brandTicker) return;
+
+    const brands = [
+        { name: 'alaska', img: 'brands/alaska.png' },
+        { name: 'bk-jet', img: 'brands/bk-jet.png' },
+        { name: 'campin', img: 'brands/campin.png' },
+        { name: 'Clipper', img: 'brands/clipper.png' },
+        { name: 'copper', img: 'brands/copper.png' },
+        { name: 'diger', img: 'brands/diger.png' },
+        { name: 'fer', img: 'brands/fer.png' },
+        { name: 'golf', img: 'brands/golf.png' },
+        { name: 'I-Lighter', img: 'brands/i-lighter.png' },
+        { name: 'kasai', img: 'brands/kasai.png' },
+        { name: 'mry', img: 'brands/mry.png' },
+        { name: 'par', img: 'brands/par.png' },
+        { name: 'silvio monetti', img: 'brands/silvio-monetti.png' },
+        { name: 'str', img: 'brands/str.png' },
+        { name: 'tokai', img: 'brands/tokai.png' },
+        { name: 'zippo', img: 'brands/zippo.png' }
+    ];
+
+    const tripleBrands = [...brands, ...brands, ...brands];
+    brandTicker.innerHTML = tripleBrands.map(brand => `
+        <div class="ticker-item">
+            <img src="${brand.img}" alt="${brand.name}" title="${brand.name}">
+        </div>
+    `).join('');
+}
+
+function loadMostLiked() {
+    const targetImages = ["img/2.png", "img/10.png", "img/20.png", "img/23.png", "img/25.png", "img/35.png", "img/36.png", "img/37.png", "img/62.png", "img/79.png", "img/81.png", "img/83.png", "img/91.png", "img/146.png", "img/147.png"];
+    
+    const container = document.getElementById('most-liked-products');
+    if (!container || allProducts.length === 0) return;
+
+    const featured = allProducts.filter(product => targetImages.includes(product.p_img));
+    featured.sort((a, b) => targetImages.indexOf(a.p_img) - targetImages.indexOf(b.p_img));
+
+    container.innerHTML = featured.map(product => `
+        <div class="product-card" onclick="goToDetail('${product.p_name}')">
+            <img src="${product.p_img}" alt="${product.p_name}" loading="lazy">
+            <p style="color: #e80000; font-weight: bold; font-size: 12px; margin: 5px 0; text-transform:uppercase;">${product.p_brand}</p>
+            <h4 style="font-size: 14px; color: #444; margin: 0;">${product.p_name}</h4>
+        </div>
+    `).join('');
+}
