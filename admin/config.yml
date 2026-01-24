@@ -2,10 +2,8 @@ backend:
   name: git-gateway
   branch: main 
 
-media_folder: "img"
-# Yeni ürünlerin başına "img/" eklensin diye burayı "img" yapıyoruz.
-# Eğer 150 ürün zaten "img/1.png" şeklindeyse bu ayar onlarla uyumlu olacaktır.
-public_folder: "/img" 
+media_folder: "img"    # GitHub'da dosyanın fiziksel olarak gideceği klasör
+public_folder: "img"   # JSON'a yazılacak yol (Başına / koyma!)
 
 collections:
   - name: "setup"
