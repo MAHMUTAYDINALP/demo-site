@@ -1072,64 +1072,6 @@
       "p_cat": "PROMOSYON",
       "p_img": "img/admin-deneme.png",
       "p_brand": "clipper"
-    },
-    {
-      "p_pop": true,
-      "p_name": "deneme3",
-      "p_desc": "deneme 3 admin paneli testi",
-      "p_cat": "PLASTİK",
-      "p_brand": "fer",
-      "p_img": "/admin-deneme.png"
-    },
-    {
-      "p_pop": true,
-      "p_name": "deneme4",
-      "p_desc": "admin paneli deneme 4 ",
-      "p_cat": "DİĞER",
-      "p_brand": "ZİPPO",
-      "p_img": "/101.png"
-    },
-    {
-      "p_pop": false
-    },
-    {
-      "p_pop": true,
-      "p_name": "yeni deneme",
-      "p_desc": "admin paneli yeni deneme",
-      "p_cat": "PROMOSYON",
-      "p_brand": "fer",
-      "p_img": "/admin-deneme.png"
-    },
-    {
-      "p_pop": true,
-      "p_name": "deneme 5",
-      "p_desc": "admin paneli deneme 5 görsel yolu hatası",
-      "p_cat": "METAL",
-      "p_brand": "clipper",
-      "p_img": "/28.png"
-    },
-    {
-      "p_pop": true,
-      "p_name": "deneme 6",
-      "p_desc": "admin paneli deneme görsel yolu hatası",
-      "p_cat": "PROMOSYON",
-      "p_brand": "CLİPPER",
-      "p_img": "/9.png"
-    },
-    {
-      "p_pop": true,
-      "p_name": "deneme 7",
-      "p_desc": "admin paneli deneme 7 görsel yolu ",
-      "p_cat": "PROMOSYON",
-      "p_brand": "CLİPPER",
-      "p_img": "/10.png"
-    },
-    {
-      "p_pop": false,
-      "p_name": "deneme 8",
-      "p_desc": "admin paneli deneme 8 görsel yolu",
-      "p_cat": "PROMOSYON",
-      "p_img": "/10.png"
     }
   ]
 }
