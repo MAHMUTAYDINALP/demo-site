@@ -1080,6 +1080,14 @@
       "p_cat": "PLASTİK",
       "p_brand": "fer",
       "p_img": "/admin-deneme.png"
+    },
+    {
+      "p_pop": true,
+      "p_name": "deneme4",
+      "p_desc": "admin paneli deneme 4 ",
+      "p_cat": "DİĞER",
+      "p_brand": "ZİPPO",
+      "p_img": "/101.png"
     }
   ]
 }
