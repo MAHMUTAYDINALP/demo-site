@@ -1,3 +1,4 @@
+
 let allProducts = [];
 let popularSets = [];
 let currentSetIndex = 0;
@@ -217,29 +218,47 @@ function startAutoSlider() {
     sliderInterval = setInterval(() => moveSlider(1), 7000);
 }
 
-function moveSlider(direction) {
+// İkinci parametre olarak isManual ekledik
+function moveSlider(direction, touchedItem = null) {
     if (isAnimating || popularSets.length < 2) return;
     isAnimating = true;
+
     const heroItems = document.querySelectorAll('.hero-item');
     const nextIndex = (currentSetIndex + direction + popularSets.length) % popularSets.length;
     const nextSet = popularSets[nextIndex];
+
     heroItems.forEach((item, i) => {
-        const currentImg = item.querySelector('img');
-        const nextImg = document.createElement('img');
-        nextImg.src = nextSet[i].p_img;
-        nextImg.className = direction > 0 ? 'slide-left-in' : 'slide-right-in';
-        item.appendChild(nextImg);
-        if (currentImg) currentImg.className = direction > 0 ? 'slide-left-out' : 'slide-right-out';
-        setTimeout(() => {
-            if (currentImg) currentImg.remove();
-            nextImg.className = ''; 
-            item.setAttribute('data-name', nextSet[i].p_name);
-            if (i === heroItems.length - 1) {
-                currentSetIndex = nextIndex;
-                isAnimating = false;
+        // --- KRİTİK MANTIK BURADA ---
+        // Eğer bir öğeye dokunulmuşsa (touchedItem varsa), sadece O ÖĞEYİ kaydır.
+        // Eğer dokunulan bir öğe yoksa (otomatik kaymaysa), HEPSİNİ kaydır.
+        const shouldAnimate = !touchedItem || item === touchedItem;
+
+        if (shouldAnimate) {
+            const currentImg = item.querySelector('img');
+            const nextImg = document.createElement('img');
+            nextImg.src = nextSet[i].p_img;
+            
+            // Yöne göre animasyon sınıfını ekle
+            nextImg.className = direction > 0 ? 'slide-left-in' : 'slide-right-in';
+            item.appendChild(nextImg);
+
+            if (currentImg) {
+                currentImg.className = direction > 0 ? 'slide-left-out' : 'slide-right-out';
             }
-        }, 700);
+
+            setTimeout(() => {
+                if (currentImg) currentImg.remove();
+                nextImg.className = ''; 
+                item.setAttribute('data-name', nextSet[i].p_name);
+            }, 800);
+        }
     });
+
+    // Animasyon bitişini yönet
+    setTimeout(() => {
+        currentSetIndex = nextIndex;
+        isAnimating = false;
+    }, 850);
 }
 
 // --- 10. DETAY SAYFASI VE MODALLAR ---
@@ -279,16 +298,18 @@ function initManualSwipe() {
         startTime = 0;
     });
 }
-
 function handleActionEnd(endX, targetElement) {
     const duration = Date.now() - startTime;
     const diff = startX - endX;
     const absDiff = Math.abs(diff);
-    if (duration < timeThreshold && absDiff < moveThreshold) {
+
+    if (absDiff < 50 && duration < 250) {
         const heroItem = targetElement.closest('.hero-item');
         if (heroItem) goToDetail(heroItem.getAttribute('data-name'));
-    } else if (absDiff >= 50) {
-        moveSlider(diff > 0 ? 1 : -1);
+    } else if (absDiff >= 70) { 
+        // Dokunulan öğeyi (hero-item) bul ve moveSlider'a gönder
+        const touchedItem = targetElement.closest('.hero-item');
+        moveSlider(diff > 0 ? 1 : -1, touchedItem); 
     }
     startAutoSlider();
 }
