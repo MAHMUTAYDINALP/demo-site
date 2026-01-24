@@ -1115,6 +1115,14 @@
       "p_cat": "PROMOSYON",
       "p_brand": "CLİPPER",
       "p_img": "/9.png"
+    },
+    {
+      "p_pop": true,
+      "p_name": "deneme 7",
+      "p_desc": "admin paneli deneme 7 görsel yolu ",
+      "p_cat": "PROMOSYON",
+      "p_brand": "CLİPPER",
+      "p_img": "/10.png"
     }
   ]
 }
