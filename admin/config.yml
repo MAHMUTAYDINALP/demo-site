@@ -5,7 +5,7 @@ backend:
 media_folder: "img"
 # Yeni ürünlerin başına "img/" eklensin diye burayı "img" yapıyoruz.
 # Eğer 150 ürün zaten "img/1.png" şeklindeyse bu ayar onlarla uyumlu olacaktır.
-public_folder: "img" 
+public_folder: "/img" 
 
 collections:
   - name: "setup"
