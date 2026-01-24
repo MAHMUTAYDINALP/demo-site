@@ -1079,7 +1079,7 @@
       "p_desc": "deneme 3 admin paneli testi",
       "p_cat": "PLASTİK",
       "p_brand": "fer",
-      "p_img": "img/admin-deneme.png"
+      "p_img": "/admin-deneme.png"
     },
     {
       "p_pop": true,
@@ -1087,7 +1087,7 @@
       "p_desc": "admin paneli deneme 4 ",
       "p_cat": "DİĞER",
       "p_brand": "ZİPPO",
-      "p_img": "img/101.png"
+      "p_img": "/101.png"
     },
     {
       "p_pop": false
@@ -1098,7 +1098,15 @@
       "p_desc": "admin paneli yeni deneme",
       "p_cat": "PROMOSYON",
       "p_brand": "fer",
-      "p_img": "img/admin-deneme.png"
+      "p_img": "/admin-deneme.png"
+    },
+    {
+      "p_pop": true,
+      "p_name": "deneme 5",
+      "p_desc": "admin paneli deneme 5 görsel yolu hatası",
+      "p_cat": "METAL",
+      "p_brand": "clipper",
+      "p_img": "/28.png"
     }
   ]
 }
