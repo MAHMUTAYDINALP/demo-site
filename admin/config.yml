@@ -3,7 +3,7 @@ backend:
   branch: main 
 
 media_folder: "img"    # GitHub'da dosyanın fiziksel olarak gideceği klasör
-public_folder: "img/img"   # JSON'a yazılacak yol (Başına / koyma!)
+public_folder: "img/"   # JSON'a yazılacak yol (Başına / koyma!)
 
 collections:
   - name: "setup"

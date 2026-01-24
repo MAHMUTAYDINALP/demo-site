@@ -366,3 +366,17 @@ function loadMostLiked() {
         </div>
     `).join('');
 }
+
+// Resim yolunu güvenli hale getiren fonksiyon
+function getSecureImgPath(path) {
+    if (!path) return "img/logo.png"; // Resim yoksa logo bas
+    
+    // Eğer yol zaten 'img/' ile başlıyorsa dokunma
+    if (path.startsWith('img/')) return path;
+    
+    // Eğer başında '/' varsa (Örn: /28.png), slash'ı kaldır ve img/ ekle
+    if (path.startsWith('/')) return 'img' + path;
+    
+    // Hiçbiri yoksa (Örn: 28.png), direkt img/ ekle
+    return 'img/' + path;
+}
