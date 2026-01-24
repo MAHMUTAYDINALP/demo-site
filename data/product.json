@@ -1107,6 +1107,14 @@
       "p_cat": "METAL",
       "p_brand": "clipper",
       "p_img": "/28.png"
+    },
+    {
+      "p_pop": true,
+      "p_name": "deneme 6",
+      "p_desc": "admin paneli deneme görsel yolu hatası",
+      "p_cat": "PROMOSYON",
+      "p_brand": "CLİPPER",
+      "p_img": "/9.png"
     }
   ]
 }
