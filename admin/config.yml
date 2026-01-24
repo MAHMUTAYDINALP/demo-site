@@ -3,9 +3,9 @@ backend:
   branch: main 
 
 media_folder: "img"
-# public_folder'ı boş bırakıyoruz çünkü senin JSON'ında yollar zaten "img/" ile başlıyor.
-# Böylece CMS resimleri "img/img/1.png" yerine doğruca "img/1.png" şeklinde arayacak.
-public_folder: "" 
+# Yeni ürünlerin başına "img/" eklensin diye burayı "img" yapıyoruz.
+# Eğer 150 ürün zaten "img/1.png" şeklindeyse bu ayar onlarla uyumlu olacaktır.
+public_folder: "img" 
 
 collections:
   - name: "setup"
@@ -19,24 +19,22 @@ collections:
           - label: "Ürün Listesi"
             name: "products"
             widget: "list"
-            # YENİ: Bu satır sayesinde yeni ürünler listenin sonuna değil, en başına eklenir.
+            # KRİTİK AYAR: "Add" butonuna basınca yeni ürün kutusu listenin EN ÜSTÜNDE açılır.
             add_to_top: true 
             required: false
             fields:
               - { label: "Ürün Adı", name: "p_name", widget: "string", required: false }
               - { label: "Açıklama", name: "p_desc", widget: "text", required: false }
-              - label: "Kategori"
+              - { label: "Kategori"
                 name: "p_cat"
                 widget: "select"
                 options: ["PLASTİK", "PROMOSYON", "METAL", "DİĞER"]
-                required: false
+                required: false }
               - label: "Marka"
-                name: "p_brand"
-                # YENİ: Marka karmaşasını önlemek için 'select' yapısına geçtik. 
-                # Buraya yeni markalar ekleyebilirsin.
+                # YENİ: 'string' yerine 'select' yaparak "clipper" mı "CLIPPER" mı derdini bitiriyoruz.
                 widget: "select"
                 options: ["CLIPPER", "STR", "TOKAI", "MRY", "KASAI", "ALASKA", "FER", "DİĞER"]
                 required: false
               - { label: "Görsel (Dosya)", name: "p_img", widget: "image", required: false }
               - { label: "Görsel (URL)", name: "p_url", widget: "string", required: false }
-              - label: "Popüler mi?", name: "p_pop", widget: "boolean", default: false }
+              - { label: "Popüler mi?", name: "p_pop", widget: "boolean", default: false }
