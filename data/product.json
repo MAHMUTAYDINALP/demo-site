@@ -1088,6 +1088,17 @@
       "p_cat": "DİĞER",
       "p_brand": "ZİPPO",
       "p_img": "/101.png"
+    },
+    {
+      "p_pop": false
+    },
+    {
+      "p_pop": true,
+      "p_name": "yeni deneme",
+      "p_desc": "admin paneli yeni deneme",
+      "p_cat": "PROMOSYON",
+      "p_brand": "fer",
+      "p_img": "/admin-deneme.png"
     }
   ]
 }
