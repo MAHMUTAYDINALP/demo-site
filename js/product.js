@@ -107,21 +107,27 @@ function filterByCategory(cat) {
 
 // --- 5. MARKA DROPDOWN ---
 function showBrands(category) {
-    const searchCat = normalizeText(category);
+    const searchCatNormalized = normalizeText(category);
+    // Sadece o kategoriye ait ürünleri filtrele
     const filteredProducts = allProducts.filter(p => {
-        const productCat = normalizeText(p.p_cat);
-        return searchCat.includes(productCat) || productCat.includes(searchCat.split(' ')[0]);
+        const productCatNormalized = normalizeText(p.p_cat);
+        // Kategori isminin ilk kelimesine göre (Plastik, Metal vb.) eşleştirme yap
+        return productCatNormalized.includes(searchCatNormalized.split(' ')[0]);
     });
 
     const brands = [...new Set(filteredProducts.map(p => p.p_brand))];
-    let id = searchCat.includes("plastik") ? "brands-Plastik" : 
-             searchCat.includes("promosyon") ? "brands-Promosyon" : 
-             searchCat.includes("metal") ? "brands-Metal" : "brands-Diger";
+
+    // Doğru ID'ye sahip kutuyu seç (Hatanın kaynağı burasıydı)
+    let id = "";
+    if (searchCatNormalized.includes("plastik")) id = "brands-Plastik";
+    else if (searchCatNormalized.includes("promosyon")) id = "brands-Promosyon";
+    else if (searchCatNormalized.includes("metal")) id = "brands-Metal";
+    else id = "brands-Diger";
 
     const dropdown = document.getElementById(id);
     if (dropdown) {
         dropdown.innerHTML = brands.map(b => {
-            let fileName = normalizeText(b).replace(/=/g, '-').replace(/\s+/g, '-');
+            let fileName = normalizeText(b).replace(/\s+/g, '-');
             return `
                 <a href="javascript:void(0)" class="brand-img-link" 
                    onclick="event.stopPropagation(); executeBrandSearch('${b}', '${category}')">

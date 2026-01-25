@@ -1,4 +1,5 @@
 /* --- GENEL AYARLAR & SIFIRLAMA --- */
+
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -8,34 +9,40 @@ body {
     background-color: #ffffff;
 }
 
-/* --- HEADER ANA YAPI --- */
+/* --- HEADER ANA TAŞIYICI --- */
 .header-wrapper {
     position: sticky;
     top: 0;
     z-index: 1000;
     background-image: url(../arkaplan_resim/üstdivapson.png);
-    background-size: 100% 100%;
-    background-position: center;
-    border-bottom: 1px solid #ddd;
-    height: 110px; /* Yükseklik sabitlendi, kayma yapmaz */
+    background-size: 100% 100%; /* Arka plan her zaman ekranı tam kaplar */
+    height: 110px; /* Toplam yükseklik */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 100px;
 }
 
+/* 1. ÜST ALAN (Arama ve Butonun Olduğu Kısım) */
 .header-grid {
-    display: grid;
-    /* Logo: 300px | Arama: Esnek | İletişim: Otomatik */
-    grid-template-columns: 300px 1fr auto;
+    display: flex;
     align-items: center;
-    padding: 10px 40px 0 40px;
-    width: 95%;
-    margin: 0 auto;
-    gap: 15px;
-    position: relative;
+    justify-content: flex-start; /* Elemanları soldan sağa dizer */
+    padding: 0 4%;              /* Kenar payı */
+    height: 75px;
+    width: 100%;
 }
 
+/* 1. LOGO ALANI (%20) */
+.logo-area {
+    flex: 0 0 20%; /* Logonun alanı sabit %20 kalsın */
+}
+
+.hidden-home-link {
+    display: block;
+    width: 130px; 
+    height: 80px;
+    margin-left: 20%; /* Logodaki resmin konumuna göre % ile ayarla */
+    cursor: pointer;
+}
 /* --- LOGO VE ANA SAYFA BUTONU (MANUEL AYAR ALANI) --- */
 .grid-logo {
     position: relative; /* Butonun dışarı taşmasını engeller */
@@ -43,87 +50,70 @@ body {
     height: 90px;
 }
 
-.hidden-home-link {
-    position: absolute; /* Akış dışına çıkar, layout'u etkilemez */
-    background: transparent; /* Ayar yaparken rgba(255,0,0,0.2) yapıp görebilirsin */
-    cursor: pointer;
-    text-decoration: none;
 
-    /* Birebir hizalamak için buradaki değerlerle oyna: */
-    width: 120px;  /* Genişlik */
-    height: 80px;  /* Yükseklik */
-    top: 12px;      /* Yukarıdan uzaklık */
-    left: 115px;   /* Soldan uzaklık */
-}
 
 /* Mevcut logo etiketlerini kapatıyoruz */
 .logo-container, .logo { display: none !important; }
 
 /* --- ARAMA KUTUSU VE BUTONLAR --- */
+
+#search { border: none; background: transparent; width: 100%; outline: none; font-size: 14px; }
+#search-btn { border: none; background: transparent; cursor: pointer; font-size: 18px; color: #444; }
+/* 2. ARAMA KUTUSU (ORTA %45 - ESNEK) */
 .search-box {
     display: flex;
     background: #fff;
     border-radius: 25px;
-    padding: 4px 15px;
     border: 1px solid #ccc;
-    max-width: 600px;
-    width: 550px;
-    height: 25px;
-
-    /* BAĞIMSIZ HAREKET İÇİN GEREKLİ AYARLAR: */
-    position: absolute; 
-    top: 22px;  /* Yukarı-Aşağı ayarı (Artırırsan aşağı iner) */
-    left: 400px; /* Sola-Sağa ayarı (Senin logona göre manuel dene) */
+    flex: 0 0 40%;    /* Genişliğini buradan ayarla */
+    height: 50%;
+    margin-left: 2%;  /* BURASI ÖNEMLİ: Bu değeri artırırsan sağa, azaltırsan sola kayar */
+    position: relative;
 }
 
-#search { border: none; background: transparent; padding: 10px; width: 100%; outline: none; font-size: 14px; }
-#search-btn { border: none; background: transparent; cursor: pointer; font-size: 22px; color: #444; }
+/* 3. İLETİŞİM ALANI (HEMEN YANINDA - %15) */
+.contact-area {
+    flex: 0 0 10%; 
+    display: flex;
+    justify-content: flex-start; /* Aramanın hemen bitimine yaslar */
+    margin-left: 10px;           /* Arama kutusu ile buton arasındaki boşluk */
+    height: 50%;
+}
 
 .contact-btn {
     background: #e80000;
     color: #fff;
-    padding: 12px 30px;
-    border-radius: 25px;
+    padding: 7px 0;
+    width: 100%;                 /* Kendi alanı olan %15'i tam doldurur */
+    border-radius: 20px;
     border: none;
     font-weight: 700;
     cursor: pointer;
-    font-size: 14px;
-    width: 125px;
-    height: 35px;
-
-    /* BAĞIMSIZ HAREKET İÇİN GEREKLİ AYARLAR: */
-    position: absolute;
-    top: 25px;   /* Arama kutusuyla aynı seviyede olması için aynı değer yap */
-    right: 400px; /* Sağ taraftan ne kadar içeride duracağı */
+    font-size: 13px;
+    white-space: nowrap;
+    text-align: center;
 }
 
 /* --- NAVİGASYON (ŞEFFAF VE HİZALI) --- */
 .main-nav-container {
     display: flex;
     justify-content: center;
-    padding-bottom: 10px;
     background: transparent;
+    height: 35px; /* Çizginin altında kalan alan */
 }
 
 .nav-8-12 {
     display: flex;
-    width: fit-content; 
-    justify-content: center;
-    gap: 45px; /* Kategori arası mesafe */
-    position: relative;
-    border-top: 1px solid rgba(255, 255, 255, 0.4); 
-    padding: 12px 30px 0 30px; 
-    top: 20px;
+    gap: 5vw; /* Kategori arasını ekran genişliğine göre ayarlar (vw = viewport width) */
+    padding-top: 5px;
 }
 
 .nav-item {
-    position: relative;
     font-weight: 600;
-    cursor: pointer;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 15px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    padding-bottom: 20px; /* Mouse panel köprüsü alanı */
+    cursor: pointer;
 }
 
 .nav-item:hover { color: #ff0000; }
@@ -141,6 +131,7 @@ body {
 
 .brand-dropdown {
     display: none;
+    pointer-events: none; /* Mouse üzerinden geçerken yanlışlıkla tetiklenmesin */
     position: absolute;
     top: 100%;
     left: 50%;
@@ -148,16 +139,20 @@ body {
     background: white;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    z-index: 100;
+    z-index: 10;
     padding: 20px;
     min-width: 480px;
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
-    margin-top: 10px;
 }
 
-.nav-item:hover .brand-dropdown { display: flex; }
+/* Sadece üzerine gelinen kategorinin markalarını göster */
+.nav-item:hover > .brand-dropdown {
+    display: flex;
+    pointer-events: auto; /* Sadece görünürken tıklanabilir olsun */
+    z-index: 1000; /* Diğer her şeyin üstüne çıkar */
+}
 
 .brand-img-link {
     width: 80px; height: 50px;
@@ -334,4 +329,17 @@ body {
 @keyframes marquee-left { 
     0% { transform: translateX(0); } 
     100% { transform: translateX(-50%); } 
+}
+
+@media (max-width: 768px) {
+    .hero-grid {
+        grid-template-columns: 1fr; /* Yan yana değil, alt alta */
+        height: auto;               /* Sabit 450px'i iptal et, içeriğe göre uzasın */
+        min-height: 300px;
+    }
+    
+    .item-big {
+        grid-row: auto;             /* Büyük resim artık tüm satırı kaplamasın */
+        height: 250px;              /* Telefondaki yüksekliği */
+    }
 }

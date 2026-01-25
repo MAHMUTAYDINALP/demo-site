@@ -24,16 +24,20 @@
     </div>
 
     <div class="header-wrapper">
-        <header class="header-grid">
-            <a href="index.html" class="hidden-home-link" title="Ana Sayfa"></a>
+      <header class="header-grid">
+    <div class="logo-area">
+        <a href="index.html" class="hidden-home-link" title="Ana Sayfa"></a>
+    </div>
 
-            <div class="search-box">
-                <input type="text" id="search" placeholder="Model veya marka ara...">
-                <button id="search-btn" onclick="performSearch()">🔍</button>
-            </div>
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Model veya marka ara...">
+        <button id="search-btn">🔍</button>
+    </div>
 
-            <button class="contact-btn" onclick="openContact()">İletişim</button>
-        </header>
+    <div class="contact-area">
+        <button class="contact-btn" onclick="openContact()">İletişim</button>
+    </div>
+</header>
 
         <nav class="main-nav-container">
             <div class="nav-8-12">
@@ -87,16 +91,16 @@
             <div class="ticker-wrapper right" id="ticker-right"></div>
             <div class="ticker-wrapper left" id="ticker-left"></div>
         </section>
-       <section class="most-liked-section">
-    <h2 class="section-title-liked">En Beğenilen Ürünlerimiz</h2>
-    <div id="most-liked-products" class="most-liked-grid">
-        </div>
-</section>
+
+        <section class="most-liked-section">
+            <h2 class="section-title-liked">En Beğenilen Ürünlerimiz</h2>
+            <div id="most-liked-products" class="most-liked-grid"></div>
+        </section>
+
         <section class="ticker-section brand-ticker-area">
-    <h3 style="text-align: center; color: #444; margin-bottom: 20px;">Çalıştığımız Markalar</h3>
-    <div class="ticker-wrapper left" id="brand-logos-ticker">
-        </div>
-</section>
+            <h3 style="text-align: center; color: #444; margin-bottom: 20px;">Çalıştığımız Markalar</h3>
+            <div class="ticker-wrapper left" id="brand-logos-ticker"></div>
+        </section>
     </main>
 
     <footer class="main-footer">
