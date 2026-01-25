@@ -24,14 +24,18 @@
 
     <div class="header-wrapper">
         <header class="header-grid">
-            <a href="index.html" class="hidden-home-link" title="Ana Sayfa"></a>
+            <div class="logo-area">
+                <a href="index.html" class="hidden-home-link" title="Ana Sayfa"></a>
+            </div>
 
             <div class="search-box">
                 <input type="text" id="search" placeholder="Model veya marka ara...">
                 <button id="search-btn" onclick="performSearchFromDetail()">🔍</button>
             </div>
 
-            <button class="contact-btn" onclick="openContact()">İletişim</button>
+            <div class="contact-area">
+                <button class="contact-btn" onclick="openContact()">İletişim</button>
+            </div>
         </header>
 
         <nav class="main-nav-container">
@@ -55,7 +59,6 @@
             </div>
         </nav>
     </div>
-
     <main class="product-detail-container">
         <div class="detail-left">
             <img id="detail-img" src="" alt="Ürün Görseli" onerror="this.src='img/logo.png'">
@@ -77,6 +80,7 @@
             const params = new URLSearchParams(window.location.search);
             const productName = params.get("name");
             if (productName) {
+                // Not: product.js içinde loadProductDetail fonksiyonu olduğundan emin ol
                 loadProductDetail(productName);
             }
         });
