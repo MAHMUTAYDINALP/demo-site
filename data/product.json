@@ -1072,6 +1072,14 @@
       "p_cat": "PROMOSYON",
       "p_img": "img/admin-deneme.png",
       "p_brand": "clipper"
+    },
+    {
+      "p_pop": true,
+      "p_name": "deneme3",
+      "p_desc": "admin paneli deneme 3",
+      "p_cat": "PROMOSYON",
+      "p_brand": "clipper",
+      "p_img": "/10.png"
     }
   ]
 }
