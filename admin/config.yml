@@ -5,6 +5,10 @@ backend:
 media_folder: "img"
 public_folder: "img"
 
+# KRİTİK AYAR: Bu satırı ekle! 
+# Bu ayar başına otomatik "/" gelmesini engeller ve klasör ismini zorunlu kılar.
+media_folder_relative: false
+
 
 collections:
   - name: "setup"
