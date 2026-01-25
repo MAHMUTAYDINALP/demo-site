@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <base href="/img">
+  <base href="/">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yönetim Paneli</title>
@@ -27,6 +27,28 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
   <script>
+    CMS.registerEventListener({
+  name: 'preSave',
+  handler: ({ entry }) => {
+    // Admin panelindeki tüm veriyi al
+    const data = entry.get('data').toJS();
+    
+    // Eğer ürün listesi varsa içindeki resim yollarını tara
+    if (data.products) {
+      data.products = data.products.map(product => {
+        if (product.p_img && !product.p_img.startsWith('img/')) {
+          // Başına img/ ekle ve varsa öndeki slash'ı sil
+          product.p_img = 'img/' + product.p_img.replace(/^\//, '');
+        }
+        return product;
+      });
+    }
+    
+    // Düzenlenmiş veriyi geri gönder (JSON'a böyle kaydedilecek)
+    return entry.get('data').merge(data);
+  },
+});
+
     // Giriş yapıldıktan sonra admin paneline yönlendirme sağlayan küçük script
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
