@@ -1,9 +1,10 @@
 backend:
   name: git-gateway
-  branch: main 
+  branch: main
 
-media_folder: "img"    # GitHub'da dosyanın fiziksel olarak gideceği klasör
-public_folder: "./img"   # JSON'a yazılacak yol (Başına / koyma!)
+media_folder: "img"
+public_folder: "img"
+
 
 collections:
   - name: "setup"
@@ -33,6 +34,6 @@ collections:
                 widget: "select"
                 options: ["CLIPPER", "STR", "TOKAI", "MRY", "KASAI", "ALASKA", "FER", "DİĞER"]
                 required: false
-              - { label: "Görsel (Dosya)", name: "p_img", widget: "image", required: false }
+              - { label: "Görsel (Dosya)", name: "p_img", widget: "image", choose_url: false }
               - { label: "Görsel (URL)", name: "p_url", widget: "string", required: false }
               - { label: "Popüler mi?", name: "p_pop", widget: "boolean", default: false }
