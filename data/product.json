@@ -1080,6 +1080,13 @@
       "p_cat": "PROMOSYON",
       "p_brand": "clipper",
       "p_img": "/10.png"
+    },
+    {
+      "p_pop": false,
+      "p_desc": "deneme4 admin paneli ",
+      "p_name": "deneme 4 admin paneli deneme ",
+      "p_cat": "PROMOSYON",
+      "p_img": "/100.png"
     }
   ]
 }
