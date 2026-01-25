@@ -1079,28 +1079,35 @@
       "p_desc": "admin paneli deneme 3",
       "p_cat": "PROMOSYON",
       "p_brand": "clipper",
-      "p_img": "/10.png"
+      "p_img": "img/10.png"
     },
     {
       "p_pop": false,
       "p_desc": "deneme4 admin paneli ",
       "p_name": "deneme 4 admin paneli deneme ",
       "p_cat": "PROMOSYON",
-      "p_img": "/100.png"
+      "p_img": "img/100.png"
     },
     {
       "p_pop": false,
       "p_name": "deneme5",
       "p_desc": "admin paneli deneme 5 ",
       "p_cat": "PROMOSYON",
-      "p_img": "/10.png"
+      "p_img": "img/10.png"
     },
     {
       "p_pop": false,
       "p_name": "deneme 6",
       "p_desc": "admin paneli deneme 6",
       "p_cat": "PROMOSYON",
-      "p_img": "/admin-deneme.png"
+      "p_img": "img/admin-deneme.png"
+    },
+    {
+      "p_pop": false,
+      "p_name": "deneme7 ",
+      "p_desc": "admin paneli deneme 7 fonksiyon ",
+      "p_cat": "PROMOSYON",
+      "p_img": "img/11.png"
     }
   ]
 }
