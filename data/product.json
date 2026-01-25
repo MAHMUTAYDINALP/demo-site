@@ -1087,6 +1087,13 @@
       "p_name": "deneme 4 admin paneli deneme ",
       "p_cat": "PROMOSYON",
       "p_img": "/100.png"
+    },
+    {
+      "p_pop": false,
+      "p_name": "deneme5",
+      "p_desc": "admin paneli deneme 5 ",
+      "p_cat": "PROMOSYON",
+      "p_img": "/10.png"
     }
   ]
 }
