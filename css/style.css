@@ -96,10 +96,12 @@ body {
 
 /* --- NAVİGASYON (ŞEFFAF VE HİZALI) --- */
 .main-nav-container {
+    width: 50%;
     display: flex;
     justify-content: center;
     background: transparent;
-    height: 35px; /* Çizginin altında kalan alan */
+    height: 50%; /* Çizginin altında kalan alan */
+    margin-left: 25%;
 }
 
 .nav-8-12 {
