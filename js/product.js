@@ -70,54 +70,83 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --- 3. ŞERİT (TICKER) ---
+// --- 3. ŞERİT (TICKER) - 15+15 FARKLI ÜRÜN AYARI ---
 function initTickers() {
-    const rightTicker = document.getElementById("ticker-right");
-    const leftTicker = document.getElementById("ticker-left");
-    if (!rightTicker || !leftTicker) return;
+    const topTicker = document.getElementById("ticker-right"); // Üst şerit
+    const bottomTicker = document.getElementById("ticker-left"); // Alt şerit
+    
+    if (!topTicker || !bottomTicker || allProducts.length < 30) return;
 
-    const randomSet = [...allProducts].sort(() => 0.5 - Math.random()).slice(0, 12);
-    const tickerContent = randomSet.map(p => `
+    // 1. Tüm listeyi karıştır
+    const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
+
+    // 2. İlk 15 ürünü üst şerit için al
+    const setTop = shuffled.slice(0, 15);
+    
+    // 3. Sonraki 15 ürünü (15. indisten 30'a kadar) alt şerit için al
+    const setBottom = shuffled.slice(15, 30);
+
+    // Üst Şeridi Oluştur (Sola Kayar)
+    const topContent = setTop.map(p => `
         <div class="ticker-item" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_img}" loading="lazy" onerror="this.src='img/logo.png'">
-        </div>
-    `).join('') + randomSet.map(p => `
-        <div class="ticker-item" onclick="goToDetail('${p.p_name}')">
-            <img src="${p.p_img}" loading="lazy" onerror="this.src='img/logo.png'">
+            <img src="${getSecureImgPath(p.p_img)}" loading="lazy" onerror="this.src='img/logo.png'">
         </div>
     `).join('');
 
-    rightTicker.innerHTML = tickerContent;
-    leftTicker.innerHTML = tickerContent;
+    // Alt Şeridi Oluştur (Sağa Kayar)
+    const bottomContent = setBottom.map(p => `
+        <div class="ticker-item" onclick="goToDetail('${p.p_name}')">
+            <img src="${getSecureImgPath(p.p_img)}" loading="lazy" onerror="this.src='img/logo.png'">
+        </div>
+    `).join('');
+
+    // Sonsuz döngü için içerikleri ikişer kez ekliyoruz
+    topTicker.innerHTML = topContent + topContent;
+    bottomTicker.innerHTML = bottomContent + bottomContent;
 }
 
 // --- 4. KATEGORİ FİLTRELEME ---
 function filterByCategory(cat) {
-    const area = document.getElementById("popular-hero-area");
-    if (!area) {
+    const resultsArea = document.getElementById("product-list-area");
+    // Eğer detay sayfasındaysak index'e yönlendir
+    if (!resultsArea) {
         window.location.href = `index.html?cat=${encodeURIComponent(cat)}`;
         return;
     }
     const searchCatNormalized = normalizeText(cat);
     const filtered = allProducts.filter(p => {
         const productCatNormalized = normalizeText(p.p_cat);
-        return searchCatNormalized.includes(productCatNormalized) || productCatNormalized.includes(searchCatNormalized.split(' ')[0]);
+        return productCatNormalized.includes(searchCatNormalized.split(' ')[0]);
     });
     renderGeneralList(filtered, cat);
 }
 
-// --- 5. MARKA DROPDOWN ---
+// --- 5. MARKA DROPDOWN (GÜNCELLENMİŞ) ---
 function showBrands(category) {
+    // 1. ADIM: Hata Önleme - Diğer tüm açık dropdownları kapat
+    document.querySelectorAll('.brand-dropdown').forEach(div => {
+        div.style.display = 'none';
+    });
+
     const searchCatNormalized = normalizeText(category);
-    // Sadece o kategoriye ait ürünleri filtrele
+
+    // 2. ADIM: Kategoriye göre ürünleri filtrele
     const filteredProducts = allProducts.filter(p => {
         const productCatNormalized = normalizeText(p.p_cat);
-        // Kategori isminin ilk kelimesine göre (Plastik, Metal vb.) eşleştirme yap
+        // Kategori isminin ilk kelimesine göre eşleştirme (Plastik, Metal vb.)
         return productCatNormalized.includes(searchCatNormalized.split(' ')[0]);
     });
 
-    const brands = [...new Set(filteredProducts.map(p => p.p_brand))];
+    // 3. ADIM: Markaları al ve ALASKA/GOLF olanları filtrele
+    const brands = [...new Set(filteredProducts.map(p => p.p_brand))]
+        .filter(b => {
+            if (!b) return false;
+            const upperB = b.toUpperCase();
+            // Alaska ve Golf markalarının listede görünmesini engeller
+            return upperB !== 'ALASKA' && upperB !== 'GOLF';
+        });
 
-    // Doğru ID'ye sahip kutuyu seç (Hatanın kaynağı burasıydı)
+    // 4. ADIM: Doğru ID tespiti
     let id = "";
     if (searchCatNormalized.includes("plastik")) id = "brands-Plastik";
     else if (searchCatNormalized.includes("promosyon")) id = "brands-Promosyon";
@@ -126,7 +155,12 @@ function showBrands(category) {
 
     const dropdown = document.getElementById(id);
     if (dropdown) {
+        // Dropdown'u görünür yap
+        dropdown.style.display = 'flex';
+
+        // 5. ADIM: Marka logolarını HTML olarak bas
         dropdown.innerHTML = brands.map(b => {
+            // Dosya isimlerini normalize et (Boşluk yerine tire koy)
             let fileName = normalizeText(b).replace(/\s+/g, '-');
             return `
                 <a href="javascript:void(0)" class="brand-img-link" 
@@ -154,51 +188,59 @@ function executeBrandSearch(brandName, categoryName) {
     });
     renderGeneralList(filtered, `${categoryName} > ${brandName}`);
 }
-
-// --- 7. GENEL LİSTE OLUŞTURMA ---
+// --- 7. GENEL LİSTE OLUŞTURMA (PÜSKÜRTME SİSTEMİ) ---
 function renderGeneralList(products, title) {
     const area = document.getElementById("popular-hero-area");
     if (!area) return;
+
     clearInterval(sliderInterval);
+
+    // KRİTİK DÜZELTME: Sabit yüksekliği kaldırıyoruz ki aşağı doğru uzasın
+    area.style.height = "auto"; 
+    area.style.minHeight = "500px"; // Boş kalmasın diye bir taban veriyoruz
+
     area.innerHTML = `
-        <h2 id="section-title" style="text-align:center; font-size: 20px; margin-bottom: 20px;">${title}</h2>
-        <div class="general-grid" id="general-list"></div>
+        <div style="width:100%; display:flex; flex-direction:column; align-items:center; padding: 20px 0;">
+            <h2 id="section-title" style="width:90%; text-align:left; font-size: 24px; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+                ${title}
+            </h2>
+            <div class="general-grid" id="general-list"></div>
+        </div>
     `;
+
     const list = document.getElementById("general-list");
     if (products.length === 0) {
-        list.innerHTML = `<p style="text-align:center; grid-column: 1/-1; padding: 50px;">Ürün bulunamadı.</p>`;
+        list.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding: 50px;">Ürün bulunamadı.</p>`;
     } else {
         list.innerHTML = products.map(p => `
             <div class="product-card" onclick="goToDetail('${p.p_name}')">
-                <img src="${p.p_img}" loading="lazy" draggable="false" onerror="this.src='img/logo.png'">
-                <small style="color:#999; text-transform:uppercase; font-size:10px;">${p.p_brand}</small>
-                <h4 style="margin:8px 0; font-size: 14px;">${p.p_name}</h4>
+                <img src="${getSecureImgPath(p.p_img)}" loading="lazy" onerror="this.src='img/logo.png'">
+                <small style="color:#888; text-transform:uppercase; display:block; margin:5px 0;">${p.p_brand}</small>
+                <h4 style="margin:0; font-size: 15px; color: #222;">${p.p_name}</h4>
             </div>
         `).join('');
     }
-    const header = document.querySelector('.header-wrapper');
-    const headerHeight = header ? header.offsetHeight : 120;
-    const targetPos = area.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
-    window.scrollTo({ top: targetPos, behavior: 'smooth' });
-}
 
+    // Scroll ayarını biraz esnetelim
+    window.scrollTo({ top: area.offsetTop - 120, behavior: "smooth" });
+}
 // --- 8. ARAMA FONKSİYONLARI ---
 function performSearch() {
     const searchInput = document.getElementById("search");
     if (!searchInput) return;
     const term = normalizeText(searchInput.value);
-    if (!term) return;
-
-    const area = document.getElementById("popular-hero-area");
-    if (!area) {
-        window.location.href = `index.html?search=${encodeURIComponent(term)}`;
+    
+    // Eğer boş arama yapılırsa ana sayfaya dön
+    if (!term) {
+        clearSearch();
         return;
     }
+
     const filtered = allProducts.filter(p => 
         normalizeText(p.p_name).includes(term) || 
         normalizeText(p.p_brand).includes(term)
     );
-    renderGeneralList(filtered, `"${term}" Sonuçları`);
+    renderGeneralList(filtered, `"${term}" İçin Sonuçlar`);
 }
 
 function setupSearch() {
@@ -329,14 +371,13 @@ function loadBrandTicker() {
     if (!brandTicker) return;
 
     const brands = [
-        { name: 'alaska', img: 'brands/alaska.png' },
         { name: 'bk-jet', img: 'brands/bk-jet.png' },
         { name: 'campin', img: 'brands/campin.png' },
         { name: 'Clipper', img: 'brands/clipper.png' },
         { name: 'copper', img: 'brands/copper.png' },
         { name: 'diger', img: 'brands/diger.png' },
         { name: 'fer', img: 'brands/fer.png' },
-        { name: 'golf', img: 'brands/golf.png' },
+        { name: 'koko', img: 'brands/koko.png' },
         { name: 'I-Lighter', img: 'brands/i-lighter.png' },
         { name: 'kasai', img: 'brands/kasai.png' },
         { name: 'mry', img: 'brands/mry.png' },
@@ -354,21 +395,23 @@ function loadBrandTicker() {
         </div>
     `).join('');
 }
-
 function loadMostLiked() {
-    const targetImages = ["img/2.png", "img/10.png", "img/20.png", "img/23.png", "img/25.png", "img/35.png", "img/36.png", "img/37.png", "img/62.png", "img/79.png", "img/81.png", "img/83.png", "img/91.png", "img/146.png", "img/147.png"];
+    // Sabit tutmak istediğimiz resimlerin listesi
+    const targets = ["img/2.png", "img/10.png", "img/20.png","img/23.png","img/25.png", "img/35.png","img/36.png","img/37.png","img/38.png", "img/62.png", "img/79.png","img/83.png","img/91.png","img/146.png","img/147.png", "img/81.png"]; // Burayı 15 resme tamamla
     
     const container = document.getElementById('most-liked-products');
     if (!container || allProducts.length === 0) return;
 
-    const featured = allProducts.filter(product => targetImages.includes(product.p_img));
-    featured.sort((a, b) => targetImages.indexOf(a.p_img) - targetImages.indexOf(b.p_img));
+    // 1. ADIM: Filtrele (Tüm eşleşenleri bulur)
+    // 2. ADIM: Slice (Sadece ilk 15 tanesini kesip alır)
+    const featured = allProducts
+        .filter(p => targets.includes(p.p_img)) // Resim ismi eşleşenleri seç
+        .slice(0, 15);                          // KAÇ ÜRÜN OLURSA OLSUN İLK 15'İ AL
 
-    container.innerHTML = featured.map(product => `
-        <div class="product-card" onclick="goToDetail('${product.p_name}')">
-            <img src="${product.p_img}" alt="${product.p_name}" loading="lazy">
-            <p style="color: #e80000; font-weight: bold; font-size: 12px; margin: 5px 0; text-transform:uppercase;">${product.p_brand}</p>
-            <h4 style="font-size: 14px; color: #444; margin: 0;">${product.p_name}</h4>
+    container.innerHTML = featured.map(p => `
+        <div class="product-card" onclick="goToDetail('${p.p_name}')">
+            <img src="${getSecureImgPath(p.p_img)}" loading="lazy">
+            <h4 style="margin-top:10px; font-size:14px;">${p.p_name}</h4>
         </div>
     `).join('');
 }
@@ -385,4 +428,61 @@ function getSecureImgPath(path) {
     
     // Hiçbiri yoksa (Örn: 28.png), direkt img/ ekle
     return 'img/' + path;
+}
+
+// Bu fonksiyonu product.js dosyasının en dışına ekle
+function toggleUIMode(isSearch) {
+    const hero = document.getElementById('popular-hero-area'); // Slider
+    const results = document.getElementById('product-list-area'); // Yeni eklediğimiz alan
+    const liked = document.querySelector('.most-liked-section'); // En beğenilenler
+    const tickers = document.querySelectorAll('.ticker-section'); // Kayan şeritler
+    const categories = document.querySelector('.cat-images-section'); // Kategori resimleri
+
+    if (isSearch) {
+        // ARAMA MODU: Her şeyi gizle, sadece sonuçları ve kategorileri (en altta) göster
+        if(hero) hero.style.display = 'none';
+        if(liked) liked.style.display = 'none';
+        tickers.forEach(t => t.style.display = 'none');
+        
+        results.style.display = 'block'; // Sonuçları aç
+        // Sayfayı en tepeye (sonuçların başına) odakla
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        // ANA SAYFA MODU: Her şeyi geri getir
+        if(hero) hero.style.display = 'block';
+        if(liked) liked.style.display = 'block';
+        tickers.forEach(t => t.style.display = 'block');
+        results.style.display = 'none';
+    }
+}
+
+// --- YENİ: ARAMAYI TEMİZLE VE ANA SAYFAYA DÖN ---
+function clearSearch() {
+    const searchInput = document.getElementById("search");
+    if (searchInput) searchInput.value = "";
+    
+    // UI modunu "Ana Sayfa" (false) yap
+    toggleUIMode(false);
+    
+    // Sayfayı en üste çıkar
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleUIMode(isSearch) {
+    const hero = document.getElementById('popular-hero-area');
+    const results = document.getElementById('product-list-area');
+    const liked = document.querySelector('.most-liked-section');
+    const tickers = document.querySelectorAll('.ticker-section');
+
+    if (isSearch) {
+        if(hero) hero.style.display = 'none';
+        if(liked) liked.style.display = 'none';
+        tickers.forEach(t => t.style.display = 'none');
+        if(results) results.style.display = 'block';
+    } else {
+        if(hero) hero.style.display = 'block';
+        if(liked) liked.style.display = 'block';
+        tickers.forEach(t => t.style.display = 'block');
+        if(results) results.style.display = 'none';
+    }
 }

@@ -16,7 +16,8 @@ body {
     z-index: 1000;
     background-image: url(../arkaplan_resim/üstdivapson.png);
     background-size: 100% 100%; /* Arka plan her zaman ekranı tam kaplar */
-    height: 110px; /* Toplam yükseklik */
+    height: 15vh; /* Toplam yükseklik */
+    max-height: 15vh; /* Ekranın sadece %15'i header olsun */
     display: flex;
     flex-direction: column;
 }
@@ -38,8 +39,8 @@ body {
 
 .hidden-home-link {
     display: block;
-    width: 130px; 
-    height: 80px;
+    width: 8vw; 
+    height: 15vh;
     margin-left: 20%; /* Logodaki resmin konumuna göre % ile ayarla */
     cursor: pointer;
 }
@@ -107,64 +108,74 @@ body {
 .nav-8-12 {
     display: flex;
     gap: 5vw; /* Kategori arasını ekran genişliğine göre ayarlar (vw = viewport width) */
-    padding-top: 5px;
+    padding-top: -3px;
 }
 
 .nav-item {
-    font-weight: 600;
+    position: relative; /* Dropdown'un buna göre hizalanması için şart */
+    
+    padding: 10px 20px;
+    margin-top: -1.5vw;
+     font-weight: 600;
     color: #ffffff;
     font-size: 15px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     cursor: pointer;
 }
 
-.nav-item:hover { color: #ff0000; }
-
-/* Mouse aşağı inerken panelin kapanmasını engelleyen köprü alanı */
+/* Mouse aşağı inerken panelin kapanmasını engelleyen köprü (Optimize Edildi) */
 .nav-item::after {
     content: '';
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    height: 30px;
+    height: 10px; /* 30px çok fazlaydı, 10px mouse ayrılınca hemen kapanmasını sağlar */
     background: transparent;
 }
 
+.nav-item:hover { color: #ff0000; }
+
+/* Mouse aşağı inerken panelin kapanmasını engelleyen köprü alanı */
+
+
+/* 2. MARKA KUTUSU (DROPDOWN - ORTALANMIŞ) */
 .brand-dropdown {
-    display: none;
-    pointer-events: none; /* Mouse üzerinden geçerken yanlışlıkla tetiklenmesin */
+    display: none !important; /* JS'den gelebilecek çakışmaları önlemek için */
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
     background: white;
+    padding: 15px;
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    z-index: 10;
-    padding: 20px;
-    min-width: 480px;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-/* Sadece üzerine gelinen kategorinin markalarını göster */
-.nav-item:hover > .brand-dropdown {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 2000;
+    /* DİKDÖRTGEN FORMÜLÜ: Genişliği sabit tutarsak logolar alt alta dizilir */
+    width: 320px;        /* Kutunun genişliğini sabitledik (3 logo yan yana sığar) */
+    
     display: flex;
-    pointer-events: auto; /* Sadece görünürken tıklanabilir olsun */
-    z-index: 1000; /* Diğer her şeyin üstüne çıkar */
+    flex-wrap: wrap;     /* Logolar sığmayınca alt satıra geçer */
+    gap: 15px;           /* Logolar arası dikey ve yatay mesafe */
+    justify-content: center; /* Logoları kutu içinde ortalar */
+    min-width: 250px;
+    pointer-events: none; /* Kutu kapalıyken mouse etkileşimini tamamen keser */
 }
-
+/* Sadece üzerine gelinen kategorinin markalarını göster */
+/* SADECE MOUSE ÜZERİNDEYKEN AÇILIR */
+.nav-item:hover > .brand-dropdown {
+    display: flex !important;
+    pointer-events: auto; /* Görünürken etkileşime izin verir */
+}
 .brand-img-link {
-    width: 80px; height: 50px;
+    width: 150px; height: 52px;
     display: flex; align-items: center; justify-content: center;
     border: 1px solid #f0f0f0; border-radius: 5px; overflow: hidden;
 }
-.brand-img-link img { max-width: 85%; max-height: 85%; object-fit: contain; }
+.brand-img-link img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
 /* --- POPÜLER MODELLER VE SLIDER --- */
-.popular-section { width: 90%; margin: 10px auto; overflow: hidden; position: relative; }
+.popular-section { width: 90%; margin: 10px auto; overflow: hidden; position: relative;height: 56vh auto; }
 .hero-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 15px; height: 400px; }
 .item-big { grid-row: 1 / span 2; }
 .hero-item { position: relative; overflow: hidden; border-radius: 12px; background: #222; }
@@ -204,22 +215,59 @@ body {
 
 /* Şeritlerin sınıflarına bu animasyonları tekrar bağlıyoruz */
 .ticker-wrapper.right { 
-    animation: marquee-right 70s linear infinite !important; 
+    animation: marquee-right 100s linear infinite !important; 
 }
 
 .ticker-wrapper.left { 
-    animation: marquee-left 70s linear infinite !important; 
+    animation: marquee-left 100s linear infinite !important; 
 }
 
 /* --- KATEGORİ KARTLARI --- */
-.cat-images-section { padding: 10px 5%; }
-.cat-image-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 50px; }
-.cat-card { position: relative; border-radius: 15px; overflow: hidden; cursor: pointer; height: 175px; }
-.cat-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+.cat-images-section {
+    padding-top: 0 !important;  /* Kendi içindeki üst boşluğu sıfırla */
+    margin-top: 2vh !important; /* Kırmızı alanları yukarı çekerek yok eder */
+    position: relative;         /* Yukarı tırmanması için şart */
+    z-index: 5;                /* Üstteki slider'ın üstüne binmesini sağlar */
+    margin-left: 5vw;
+    
+}
+/* KATEGORİ KONTEYNIRI */
+.cat-image-grid {
+    display: grid !important;
+    width: 90vw !important;      /* Ekran genişliğinin %95'ini kaplasın */
+    margin: 0 !important; /* Üstten ve alttan ekranın %2'si kadar boşluk */
+    
+    /* 4 sütun kalsın ama her birinin alanı ekranla beraber büyüsün */
+    grid-template-columns: repeat(4, 1fr) !important; 
+    
+    /* MESAFE AYARI: Piksel yerine ekran genişliğine (vw) bağladık */
+    gap: 2vw !important;       /* Resimler arası mesafe artık ekranın %3'ü kadar */
+}
+
+/* KATEGORİ KARTLARI */
+.cat-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 0 !important;
+    /* BÜYÜTME BURADA: 18vh veya 20vh yerine 25vh yaparsak resimler DEVLEŞİR */
+    height: 23vh !important;     /* Ekran yüksekliğinin tam 4'te 1'i */
+             /* Çok ezilmesin diye bir emniyet sınırı */
+    
+    width: 100% !important;       /* Kart, grid hücresinin tamamını doldursun */
+    
+}
+
+.cat-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;           /* Resmi kesmeden kutuya tam doldurur */
+}
 .cat-label { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; padding: 10px; text-align: center; font-weight: bold; }
 
 /* --- ÜRÜN LİSTELERİ --- */
-.general-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; width: 90%; margin: 0 auto; }
+
 .product-card { background: white; border-radius: 12px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); text-align: center; cursor: pointer; transition: 0.3s; }
 .product-card img { width: 100%; height: 180px; object-fit: contain; }
 
@@ -234,12 +282,12 @@ body {
 /* --- FOOTER & MODAL --- */
 .main-footer { background: #222; color: #fff; padding: 25px 0 0 0; margin-top: 40px; text-align: center; }
 .footer-info p { margin: 8px 0; font-size: 14px; color: #ccc; }
-.developer-credit { text-align: center; padding: 10px 0 !important; background-color: #222; color: #bbb !important; border-top: 1px solid #444; }
+.developer-credit { text-align: center; padding: 1px 0 !important; background-color: #222; color: #bbb !important; border-top: 1px solid #444; }
 .dev-link { color: #982d2d !important; text-decoration: none; font-weight: bold; }
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
 .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 20px; width: 350px; position: relative; text-align: center; }
 .close-modal { position: absolute; right: 15px; top: 10px; cursor: pointer; font-size: 24px; color: #999; }
-#popular-hero-area { scroll-margin-top: 150px; padding-top: 20px; }
+#popular-hero-area { scroll-margin-top: 150px; padding-top: 20px; } 
 
 /* --- MARKA ŞERİDİ ÖZEL AYARLARI (RENKLİ VERSİYON) --- */
 .brand-ticker-area {
@@ -344,4 +392,14 @@ body {
         grid-row: auto;             /* Büyük resim artık tüm satırı kaplamasın */
         height: 250px;              /* Telefondaki yüksekliği */
     }
+}
+
+/* ARAMA VE FİLTRE SONUÇLARI İÇİN GRID AYARI */
+.general-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+    gap: 30px !important; /* Resimler arası ideal boşluk */
+    justify-content: center !important; /* Kartları merkezler */
+    width: 95% !important;
+    margin: 0 auto !important; /* Sağa dayalı olmayı engeller */
 }
