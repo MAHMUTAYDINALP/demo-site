@@ -1067,46 +1067,6 @@
     },
     {
       "p_pop": true,
-      "p_name": "deneme 2",
-      "p_desc": "deneme 2 admin paneli",
-      "p_cat": "PROMOSYON",
-      "p_img": "img/admin-deneme.png",
-      "p_brand": "clipper"
-    },
-    {
-      "p_pop": true,
-      "p_name": "deneme3",
-      "p_desc": "admin paneli deneme 3",
-      "p_cat": "PROMOSYON",
-      "p_brand": "clipper",
-      "p_img": "img/10.png"
-    },
-    {
-      "p_pop": false,
-      "p_desc": "deneme4 admin paneli ",
-      "p_name": "deneme 4 admin paneli deneme ",
-      "p_cat": "PROMOSYON",
-      "p_img": "img/100.png"
-    },
-    {
-      "p_pop": false,
-      "p_name": "deneme5",
-      "p_desc": "admin paneli deneme 5 ",
-      "p_cat": "PROMOSYON",
-      "p_img": "img/10.png"
-    },
-    {
-      "p_pop": false,
-      "p_name": "deneme 6",
-      "p_desc": "admin paneli deneme 6",
-      "p_cat": "PROMOSYON",
-      "p_img": "img/admin-deneme.png"
-    },
-    {
-      "p_pop": false
-    },
-    {
-      "p_pop": true,
       "p_name": "final versiyon deneme çakmagı",
       "p_desc": "admin paneli deneme çakmagı  \ngörsel geliyor mu \nkategori dogru mu \nmarka dogru mu",
       "p_cat": "PROMOSYON",
