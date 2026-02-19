@@ -176,9 +176,17 @@ body {
 
 /* --- POPÜLER MODELLER VE SLIDER --- */
 .popular-section { width: 90%; margin: 10px auto; overflow: hidden; position: relative;height: 56vh auto; }
-.hero-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 15px; height: 400px; }
-.item-big { grid-row: 1 / span 2; }
-.hero-item { position: relative; overflow: hidden; border-radius: 12px; background: #222; }
+.hero-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* 2 Eşit kolon */
+    grid-template-rows: 1fr;       /* Tek satır */
+    gap: 2vh;                     /* Aradaki boşluğu biraz artırdık */
+    height: 53vh;                 /* Yüksekliği ihtiyaca göre artırabilirsin */
+}
+.item-big { 
+    grid-row: auto !important; 
+}
+.hero-item { position: relative; overflow: hidden; border-radius: 12px; background: #222; height: 100%; /* İçinde bulunduğu grid hücresini tam doldurur */}
 .hero-item img { position: absolute; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
 /* KAYMA ANİMASYONLARI */

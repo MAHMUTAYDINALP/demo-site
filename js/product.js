@@ -45,10 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (popularLayout) {
                 const populars = allProducts.filter(p => p.p_pop === true);
                 popularSets = [];
-                for (let i = 0; i < populars.length; i += 3) {
-                    const set = populars.slice(i, i + 3);
-                    if(set.length === 3) popularSets.push(set);
-                }
+                for (let i = 0; i < populars.length; i += 2) {
+                     const set = populars.slice(i, i + 2);
+                    if(set.length === 2) popularSets.push(set); // Sadece tam 2'li olan setleri alır
+                    }
 
                 if (catParam) {
                     filterByCategory(catParam);
@@ -397,7 +397,7 @@ function loadBrandTicker() {
 }
 function loadMostLiked() {
     // Sabit tutmak istediğimiz resimlerin listesi
-    const targets = ["img/2.png", "img/10.png", "img/20.png","img/23.png","img/25.png", "img/35.png","img/36.png","img/37.png","img/38.png", "img/62.png", "img/79.png","img/83.png","img/91.png","img/146.png","img/147.png", "img/81.png"]; // Burayı 15 resme tamamla
+    const targets = ["img/2.webp", "img/10.webp", "img/20.webp","img/23.webp","img/25.webp", "img/35.webp","img/36.webp","img/37.webp","img/38.webp", "img/62.webp", "img/79.webp","img/83.webp","img/91.webp","img/146.webp","img/147.webp", "img/81.webp"]; // Burayı 15 resme tamamla
     
     const container = document.getElementById('most-liked-products');
     if (!container || allProducts.length === 0) return;
