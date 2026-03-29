@@ -115,10 +115,10 @@ body {
     position: relative; /* Dropdown'un buna göre hizalanması için şart */
     
     padding: 10px 20px;
-    margin-top: -1.5vw;
+    margin-top:0.1vw;
      font-weight: 600;
     color: #ffffff;
-    font-size: 15px;
+    font-size: 17px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     cursor: pointer;
 }
@@ -410,4 +410,28 @@ body {
     justify-content: center !important; /* Kartları merkezler */
     width: 95% !important;
     margin: 0 auto !important; /* Sağa dayalı olmayı engeller */
+}
+
+@media (max-width: 768px) {
+    /* Mevcut kodların altına ekle */
+
+    .nav-8-12 {
+        padding-top: 10px !important; /* Üstten biraz boşluk açar */
+        gap: 2vw !important;         /* Kategoriler arası mesafeyi mobilde daraltır */
+    }
+
+    .nav-item {
+        margin-top: 0 !important;    /* Negatif marginleri mobilde sıfırlarız */
+        padding: 5px 2px !important; /* Yazıları kutu içinde rahatlatır */
+        font-size: 11px !important;  /* Okunabilirliği korumak için boyutu sabitler */
+        display: flex;
+        flex-direction: column;      /* Yazı ve oku alt alta veya hizalı tutar */
+        align-items: center;
+    }
+
+    /* Kategori isimlerinin altındaki ok işaretini biraz aşağı iter */
+    .nav-arrow {
+        margin-top: 2px;
+        font-size: 8px;
+    }
 }
